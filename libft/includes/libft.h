@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/25 17:42:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/08/15 22:36:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlen(const char *s);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
+void				ft_swap(int *a, int *b);
+void				ft_uswap(unsigned int *a, unsigned int *b);
+void				ft_vswap(void **a, void **b);
 void				ft_bzero(void *s, size_t n);
 void				*ft_calloc(size_t count, size_t size);
 void				*ft_memchr(const void *s, int c, size_t n);
@@ -125,12 +128,14 @@ void				wrdestroy(void);
 **					PERSONNAL FUNCTIONS
 */
 void				ft_memdel(void *ap);
+void				ft_sort_integer_tab(int *tab, int size);
 void				free_all(char **strs, int j);
 int					ft_strslen(char **strs);
-char				**ft_strsjoin(char **s1, char *s2);
+int					ft_atoi_ov(const char *str);
 int					ft_putbytes(int nb);
 int					ft_get_color(int r, int g, int b);
 int					check_extention(char *s, char *ext);
+char				**ft_strsjoin(char **s1, char *s2);
 char				*select_env_path(char *av, char **env);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 12:45:19 by bmangin           #+#    #+#              #
-#    Updated: 2021/08/10 15:05:11 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/08/15 22:39:21 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,17 @@ FILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c \
 		ft_strjoin_free.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
 		ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
-		ft_toupper.c ft_check_base.c ft_atoi_base.c ft_itoa_base.c \
+		ft_toupper.c ft_check_base.c ft_atoi_base.c ft_itoa_base.c ft_swap.c \
 		ft_putnbr_base.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_strlcat.c \
 		ft_isspace.c ft_strstr.c ft_strcat.c ft_strncat.c ft_strlcat.c \
 		ft_strncpy.c ft_split_whitespaces.c ft_strcmp.c ft_len_num.c \
 		ft_putchar_len.c ft_putstr_len.c ft_hexa.c ft_memdel.c ft_utoa_base.c \
 		ft_strcpy.c ft_ulltoa_base.c ft_lstadd_back.c ft_lstadd_front.c \
 		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
-		ft_lstnew.c ft_lstsize.c ft_strtolower.c ft_putbytes.c \
-		get_next_line.c ft_strsjoin.c ft_strslen.c ft_free_all.c \
-		wrdestroy.c get_color.c check_extention.c select_env_path.c 
+		ft_lstnew.c ft_lstsize.c ft_strtolower.c ft_putbytes.c ft_uswap.c \
+		get_next_line.c ft_strsjoin.c ft_strslen.c ft_free_all.c ft_atoi_ov.c \
+		wrdestroy.c get_color.c check_extention.c select_env_path.c	ft_vswap.c \
+		ft_sort_integer_tab.c
 		 
 SRCS	= ${addprefix ${PATH_S}/, ${FILES}}
 OBJS	= ${FILES:.c=.o}

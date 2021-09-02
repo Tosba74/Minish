@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_vswap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 00:33:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/08/13 15:11:10 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/08/11 01:06:34 by bmangin           #+#    #+#             */
+/*   Updated: 2021/08/14 21:59:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **alst, t_list *new)
+void	ft_vswap(void **a, void **b)
 {
-	if (alst != NULL)
-		new->next = *alst;
-	*alst = new;
+	void	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
