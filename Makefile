@@ -19,14 +19,30 @@ NAME = minishell
 override PATH_L		:= libft
 override PATH_I		:= includes
 override PATH_S		:= srcs
-override PATH_B		:= .bin
+override PATH_O		:= .bin
+override PATH_P		:= parsing
+override PATH_E		:= engine
+override PATH_B		:= builtin
 
-FILES		= error.c main.c
+override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
+					${addprefix ${PATH_S}/, ${PATH_E}} \
+					${addprefix ${PATH_S}/, ${PATH_B}} \
+					${PATH_S}
+
+override FILES_P	:= parser.c tools_pars.c
+override FILES_E	:=
+override FILES_B	:=
+override FILES_M	:= prompt.c error.c main.c
+
+FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
+			${addprefix ${PATH_E}/, ${FILES_E}} \
+			${addprefix ${PATH_B}/, ${FILES_B}} \
+			${FILES_M}
 
 SRCS		= ${addprefix ${PATH_S}/, ${FILES}}
-OBJS		= ${addprefix ${PATH_B}/, ${notdir ${SRCS:.c=.o}}}
+OBJS		= ${addprefix ${PATH_O}/, ${notdir ${SRCS:.c=.o}}}
 
-HEADER	 	:= error.h minish.h
+HEADER	 	:= error.h tools.h minish.h
 INC			= ${addprefix ${PATH_I}/, ${HEADER}}
 
 LIBFT_NAME	= ${PATH_L}.a
@@ -40,8 +56,9 @@ INC_LFT		= ${addprefix ${LIBFT_H}/, ${LIBFT_INC}}
 # ******************************************************* #
 
 CC			:= clang
-CFLAGS		:= ${CC} -Wall -Wextra -Werror
-CFLAGS_FS	:= ${CC} -Wall -Wextra -Werror -g3 -fsanitize=address
+CCF			:= ${CC} -Wall -Wextra -Werror -g
+CF_FS		:= ${CCF} -g3 -fsanitize=address
+CF_DB		:= ${CCF} -glldb -fsanitize=address
 LLFT		:= -L${PATH_L}
 LFT			:= -lft
 INCS		:= -I${PATH_I} -I${LIBFT_H}
@@ -58,20 +75,24 @@ all:		lib ${NAME}
 lib:		crea_b
 		${MAKE} ${PATH_L}
 
-${PATH_B}/%.o:	${PATH_S}/%.c ${INC} ${INC_LFT}
-		${CFLAGS} ${INCS} -c $< -o $@
+${PATH_O}/%.o:	%.c ${INC} ${INC_LFT}
+		${CCF} ${INCS} -c $< -o $@
 
 ${NAME}:	${OBJS} ${INC} ${INC_LFT}
-		${CFLAGS} ${INCS} ${LLFT} ${OBJS} -o $@ ${LFT}
+		${CCF} ${INCS} ${LLFT} ${OBJS} -o $@ ${LFT}
 
-fs:			${SRCS} ${INC} ${INC_LFT} 
-		${CFLAGS_FS} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
+fs:			${OBJS} ${INC} ${INC_LFT} 
+		${CF_FS} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
+
+db:			${OBJS} ${INC} ${INC_LFT} 
+		${CF_DB} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
+		lldb ${NAME}
 
 crea_b :
-		${shell mkdir -p ${PATH_B}}
+		${shell mkdir -p ${PATH_O}}
 	
 clean:
-		${RM} ${PATH_B}
+		${RM} ${PATH_O}
 
 fclean:		clean
 		${MAKE} ${PATH_L} fclean
@@ -81,6 +102,8 @@ fclean:		clean
 re:			fclean all
 
 seg:		fclean lib fs
+
+lldb:		fclean lib db
 
 op:			fclean lib opti
 

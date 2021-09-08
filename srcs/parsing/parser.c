@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 02:18:03 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/08 02:57:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int	main(void)
+void	parser(char *s)
 {
-	char	*buf;
-	size_t	buf_size;
+	int		i;
+	int		j;
+	char	**tab;
 
-	buf_size = 2048;
-	buf = (char *)ft_calloc(sizeof(char), buf_size);
-	prompt();
-	while (getline(&buf, &buf_size, stdin) > 0)
+	i = -1;
+	j = -1;
+	tab = ft_split(s, 32);
+	if (!tab)
+		printf("JPE PO TD BRO!");
+	while (*tab[++i])
 	{
-		printf("buf = %s\n", buf);
-		parser(buf);
-		prompt();
+		while (tab[i][++j])
+			if (is_spec_char(tab[i][j]) != -1)
+				printf("Moue et apres ?");
 	}
-	wrfree(buf);
 }

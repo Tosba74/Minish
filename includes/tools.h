@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 02:18:03 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/08 02:26:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minish.h"
+#ifndef TOOLS_H
+# define TOOLS_H
 
-int	main(void)
+# define PARS_SHIT "$?|@&;<>/'"
+
+typedef struct s_ree
 {
-	char	*buf;
-	size_t	buf_size;
+	unsigned int	key;
+	struct s_ree	*left;
+	struct s_ree	*right;
+}	t_ree;
 
-	buf_size = 2048;
-	buf = (char *)ft_calloc(sizeof(char), buf_size);
-	prompt();
-	while (getline(&buf, &buf_size, stdin) > 0)
-	{
-		printf("buf = %s\n", buf);
-		parser(buf);
-		prompt();
-	}
-	wrfree(buf);
-}
+typedef enum s_bool
+{
+	true = 0,
+	false
+}	t_bool;
+
+#endif
