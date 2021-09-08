@@ -12,36 +12,60 @@
 
 #include "minish.h"
 
-/*
-static const t_err  *err_pars(int err)
+static const t_err	*err_pars(int err)
 {
-	static const t_err  err_p[] = {
-	{ERRNO_DEF, "\n"},
-	//{ERRNO_DEF, "\n"},
-	// ...},
+	static const t_err	err_p[] = {
+		{E2BIG, "Argument list too long\n"},
+		{EPERM, "Permission denied!\n"},
+		{ENOENT, "No such file or directory!\n"},
+		{ESRCH, "Invalid thread/process id!\n"},
+		{EAGAIN, "Insufficient resources!\n"},
+		{ENOMEM, "Insufficient memory!\n"},
+		{EACCES, "Permission denied!\n"},
+		{EINVAL, "Invalid argument!\n"},
+		{EEXIST, "File already exists!\n"},
+		{ENFILE, "File table overflow!\n"},
+		{EMFILE, "Too many open files!\n"},
+		{EDEADLK, "A deadlock has been detecte\nd!"},
+		{ENAMETOOLONG, "File name too long!\n"}
 	};
-	return (err_p[err]);
+
+	return (&err_p[err]);
 }
 
-static const t_err  *err_exec(int err)
+static const t_err	*err_exec(int err)
 {
-	static const t_err  err_e[] = {
-	{ERRNO_DEF, "\n"},
-	//{ERRNO_DEF, "\n"},
-	// ...},
+	static const t_err	err_e[] = {
+		{EPERM, "Permission denied!\n"},
+		{ENOENT, "No such file or directory!\n"},
+		{ESRCH, "Invalid thread/process id!\n"},
+		{EAGAIN, "Insufficient resources!\n"},
+		{ENOMEM, "Insufficient memory!\n"},
+		{EACCES, "Permission denied!\n"},
+		{EINVAL, "Invalid argument!\n"},
+		{EEXIST, "File already exists!\n"},
+		{ENFILE, "File table overflow!\n"},
+		{EMFILE, "Too many open files!\n"},
+		{EDEADLK, "A deadlock has been detected!\n"},
+		{ENAMETOOLONG, "File name too long!\n"}
 	};
-	return(err_e(err));
+
+	return (&err_e[err]);
 }
 
 void	ft_err(char *s, int err)
 {
+	t_err	*error;
+
+	error = NULL;
+	if (!(err / 10))
+		error = (t_err *)err_pars(err);
+	else if (err / 10)
+		error = (t_err *)err_exec(err % 10);
 	ft_putstr_fd("Error:\n", 2);
 	ft_putstr_fd(s, 2);
-    if (!(err / 10))
-	    ft_putstr_fd((char *)err_pars(err % 10), 2);
-    else if (err / 10)
-	    ft_putstr_fd((char *)err_exec(err % 10), 2);
+	ft_putstr_fd((char *)error->strerror, 2);
 	wrdestroy();
+	// perror(error->err);
 	exit(0);
 }
-*/

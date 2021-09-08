@@ -29,8 +29,8 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c tools_pars.c
-override FILES_E	:=
+override FILES_P	:= parser.c tools_pars.c init_env.c
+override FILES_E	:= exec.c
 override FILES_B	:=
 override FILES_M	:= prompt.c error.c main.c
 

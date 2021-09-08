@@ -10,6 +10,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <signal.h>
 # include <errno.h>
 
 # include "libft.h"
@@ -28,6 +29,8 @@
 | ******************************************************* |
 */
 
+void		exec_cmd(char **cmd);
+
 /*
 | ******************************************************* |
 | *****************      PARSING      ******************* |
@@ -36,6 +39,7 @@
 
 int			is_spec_char(char c);
 void		parser(char *s);
+void		init_env(t_list **lst, char **env);
 
 /*
 | ******************************************************* |

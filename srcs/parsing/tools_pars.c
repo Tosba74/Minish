@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 02:26:15 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/08 20:50:52 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	is_spec_char(char c)
 {
 	int		i;
-	char	*convert;
+	char	*spec_char;
 
 	i = -1;
-	convert = PARS_SHIT;
-	while (convert[++i])
-		if (convert[i] == c)
+	spec_char = "$?|@&;<>/'";
+	while (spec_char[++i])
+		if (spec_char[i] == c)
 			return (i);
 	return (-1);
 }

@@ -6,17 +6,31 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 02:18:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/09 01:39:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int	main(void)
+static void	init_global(t_global *g, char **env)
 {
-	char	*buf;
-	size_t	buf_size;
+	g = wrmalloc(sizeof(t_global));
+	printf("TG OK\n");
+	// init_env(g->env, env);
+	printf("env ok\n");
+	(void)env;
+}
 
+int	main(int ac, char **av, char **env)
+{
+	t_global	g;
+	char		*buf;
+	size_t		buf_size;
+
+	if (ac > 1)
+		ft_err("Arg: ", 0);
+	(void)av;
+	init_global(&g, env);
 	buf_size = 2048;
 	buf = (char *)ft_calloc(sizeof(char), buf_size);
 	prompt();

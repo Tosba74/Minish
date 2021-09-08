@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:50:46 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 01:55:04 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/09 01:12:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 typedef struct s_err
 {
 	int		err;
-	char	*next;
-}t_err;
+	char	*strerror;
+}	t_err;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 02:26:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/08 23:37:52 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,20 @@ typedef struct s_ree
 
 typedef enum s_bool
 {
-	true = 0,
-	false
+	false,
+	true
 }	t_bool;
+
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+}	t_env;
+
+typedef struct s_global
+{
+	t_list	**env;
+	t_ree	*tree;
+}	t_global;
 
 #endif
