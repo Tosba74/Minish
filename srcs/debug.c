@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 00:19:59 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 14:55:55 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/14 19:16:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-const char	*prompt(void)
+void	print_env(t_global *g, t_env **env)
 {
-	char	*prompt;
-
-	prompt = "$> ";
-	return (prompt);
+	if (g->debug == true)
+	{
+		while ((*env)->next)
+		{
+			dprint(STDERR_FILENO,"|%s| = |%s|\n", (*env)->name, (*env)->value);
+		}
+	}
 }

@@ -4,12 +4,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <string.h>
-# include <math.h>
-# include <fcntl.h>
-# include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include <errno.h>
 
@@ -40,6 +38,8 @@ void		exec_cmd(char **cmd);
 int			is_spec_char(char c);
 void		parser(char *s);
 void		init_env(t_list **lst, char **env);
+void		addback_cell_env(t_env **env, t_env *new);
+t_env		*new_cell_env(char **content);
 
 /*
 | ******************************************************* |
@@ -48,6 +48,7 @@ void		init_env(t_list **lst, char **env);
 */
 
 void		ft_err(char *s, int err);
-void		prompt(void);
+void		print_env(t_global *g, t_env **env);
+const char	*prompt(void);
 
 #endif

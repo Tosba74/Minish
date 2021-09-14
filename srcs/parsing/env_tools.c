@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 00:32:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 18:12:10 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/14 19:19:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minish.h"
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+t_env	*new_cell_env(char **content)
 {
-	t_list	*last;
+	t_env	*new;
 
-	last = ft_lstlast(*alst);
+	new = wrmalloc(sizeof(t_env));
+	new->name = content[0];
+	new->value = content[1];
+	new->next = NULL;
+	return (new);
+}
+
+static t_env	*last_cell_env(t_env *env)
+{
+	if (env == NULL)
+		return (NULL);
+	while (env->next != NULL)
+		env = env->next;
+	return (env);
+}
+
+void	addback_cell_env(t_env **env, t_env *new)
+{
+	t_env	*last;
+
+	last = last_cell_env(*env);
 	if (last != NULL)
 		last->next = new;
 	else
-		*alst = new;
-}
+		*env = new;

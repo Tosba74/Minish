@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebellon <ebellon@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 01:03:02 by ebellon          ###   ########lyon.fr   */
+/*   Updated: 2021/09/14 18:14:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 
 # define PARS_SHIT "$?|@&;<>/'"
 
-typedef struct s_ree
-{
-	unsigned int	key;
-	struct s_ree	*left;
-	struct s_ree	*right;
-}	t_ree;
-
 typedef enum s_bool
 {
 	false,
 	true
 }	t_bool;
+
+typedef struct s_story
+{
+	unsigned int	index;
+	char			*cmd;
+	struct s_story	*prev;
+	struct s_story	*next;
+}	t_story;
 
 typedef struct s_env
 {
@@ -35,43 +36,34 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct	s_job
+typedef struct s_job
 {
-	/* flags &args of job */
-	char	*job;
-	char	flags;
-	char	**av;
-	char	**envp;
-}				t_job;
+	char			*job; // user input ?
+	char			flags;
+	char			**av;
+	char			**envp;
+}	t_job;
 
-
-typedef struct	s_pipe_line
+typedef struct s_pipe
 {
-	char		*pipe_line;
-
-	/* plusieurs redirections ouvre les fichier mais ne fait que la derniere init -1*/
-	int					fd_filein;
-	int					fd_fileout;
-
-	int					pipe_fd[2];
-	t_job				*job;
-	struct	s_pipe_line	*next;
-}				t_pipe_line;
-
-
-typedef struct	s_input_tree
-{
-	char 		*user_input;
-	pid_t		pid_ar[1024];
-	size_t		nb_process;
-	t_pipe_line *lst_pipe_line;
-}				t_input_tree;
+	char			*pipe_line; // input ?
+	int				fd_in;
+	int				fd_out;
+	int				pipe_fd[2];
+	t_job			*job;
+	struct s_pipe	*next;
+}	t_pipe;
 
 typedef struct s_global
 {
-	t_list	**env;
-	t_ree	*tree;
+	char 		*input; // don't use it for exec find this in lstlast(history)!!!!
+	size_t		nb_process;
+	pid_t		pid_ar[1024];
+	t_env		*env;
+	t_env		*hidden;
+	t_story		*history;
+	t_pipe		pipe;
+	t_bool		debug;
 }	t_global;
-
 
 #endif

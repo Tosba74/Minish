@@ -6,39 +6,56 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/09 00:55:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/14 20:11:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-static t_env	*split_content(char *s)
+static char	*split_content(char *s)
 {
 	char	**tab_tmp;
-	t_env	*env;
+	int		i;
+	int		index;
+	int		stop;
+	int		size;
 
-	tab_tmp = ft_split(s, '=');
-	if (ft_strslen(tab_tmp) != 2)
-		printf("error env\n");
-	env = wrmalloc(sizeof(t_env));
-	env->name = tab_tmp[0];
-	env->value = tab_tmp[1];
-	wrfree(tab_tmp);
-	printf("%s\n", s);
-	printf("%s=%s\n", env->name, env->value);
-	return (env);
+	i = 0;
+	index = 0;
+	stop = 0;
+	tab_tmp = (char **)wrmalloc(sizeof(char *) * 2)
+	while (s[stop] != '=')
+		stop++;
+	tab_tmp[0] = wrmalloc(sizeof(char *) * (stop + 1));
+	tab_tmp[1] = wrmalloc(sizeof(char *) * (size - stop));
+	stop = 0;
+	while (s[stop++])
+	{
+		if (s[stop] == '=')
+		{
+			if (index == 0)
+			{
+				tab_tmp[index][i] = 0;
+				index++;
+				i = 0;
+			}
+		}
+		else
+			tab_tmp[index][i] = s[stop];
+	}
+	dprintf(STDERR_FILENO, "%s = %s\n", tab_tmp[0], tab_tmp[1]);
+	return (tab_tmp);
 }
 
-void	init_env(t_list **lst, char **env)
+void	init_env(t_list **env, char **envp)
 {
 	int		i;
 	int		size;
 
 	i = -1;
-	size = ft_strslen(env);
+	size = ft_strslen(envp);
 	printf("size == %d\n", size);
-	printf("%p\n", lst);
-	// *lst = ft_lstnew(split_content(env[i]));
+	printf("%p\n", env);
 	while (++i < size - 1)
-		ft_lstadd_back(lst, ft_lstnew(split_content(env[i])));
+		addback_cell_env(env, new_cell_env(split_content(envp[i])));
 }

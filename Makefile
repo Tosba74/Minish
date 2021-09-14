@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/12/11 11:23:45 by bmangin           #+#    #+#              #
-#    Updated: 2021/04/24 22:24:46y bmangin          ###   ########lyon.fr    #
+#    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
+#    Updated: 2021/09/14 19:08:02 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c tools_pars.c init_env.c
+override FILES_P	:= parser.c pars_tools.c init_env.c env_tool.c
 override FILES_E	:= exec.c
 override FILES_B	:=
-override FILES_M	:= prompt.c error.c main.c
+override FILES_M	:= prompt.c debug.c error.c main.c
 
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \
