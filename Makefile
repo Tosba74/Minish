@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/14 19:08:02 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/09/16 01:22:20 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c pars_tools.c init_env.c env_tool.c
+override FILES_P	:= parser.c pars_tools.c init_env.c env_tools.c
 override FILES_E	:= exec.c
 override FILES_B	:=
 override FILES_M	:= prompt.c debug.c error.c main.c
@@ -56,15 +56,16 @@ INC_LFT		= ${addprefix ${LIBFT_H}/, ${LIBFT_INC}}
 # ******************************************************* #
 
 CC			:= clang
-CCF			:= ${CC} -Wall -Wextra -Werror -g
+CCF			:= ${CC} -Wall -Wextra -Werror -g 
 CF_FS		:= ${CCF} -g3 -fsanitize=address
 CF_DB		:= ${CCF} -glldb -fsanitize=address
 LLFT		:= -L${PATH_L}
-LFT			:= -lft
+LFT			:= -lft -lreadline
 INCS		:= -I${PATH_I} -I${LIBFT_H}
 MAKE		:= make -C
 CP			:= cp 
 RM			:= rm -rf
+NORM		:= norminette
 
 # ******************************************************* #
 # ********************   MAKE SHIT   ******************** #
@@ -109,4 +110,8 @@ op:			fclean lib opti
 
 fast:		fclean lib speed
 
-.PHONY: all lib op opti fast speed fsanit fs clean fclean re bonus
+norm :
+			${NORM} ${SRCS}
+			${NORM} ${INC}
+			
+.PHONY: all lib fsanit fs db lldb clean fclean re bonus norm

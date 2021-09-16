@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 19:19:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/16 02:05:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,30 @@ void	addback_cell_env(t_env **env, t_env *new)
 	t_env	*last;
 
 	last = last_cell_env(*env);
+	dprintf(STDERR_FILENO, "New cell %p\n", new);
 	if (last != NULL)
+	{
 		last->next = new;
+		dprintf(STDERR_FILENO, "New cell with new %p\n", last->next);
+	}
 	else
+	{
 		*env = new;
+		dprintf(STDERR_FILENO, "Create list with new %p\n", *env);
+	}
+}
+
+int	env_size(t_env *env)
+{
+	int		count;
+
+	count = 0;
+	if (env == NULL)
+		return (0);
+	while (env != NULL)
+	{
+		env = env->next;
+		count++;
+	}
+	return (count);
+}

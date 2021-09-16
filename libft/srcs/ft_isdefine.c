@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_all.c                                      :+:      :+:    :+:   */
+/*   ft_isdefine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 21:04:53 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 01:41:12 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/15 11:39:32 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/15 18:41:39 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_all(char **strs, int size)
+int	ft_isdefine(int c)
 {
-	int	i;
-
-	i = 0;
-	while (i != size)
-		wrfree(strs[i++]);
-	wrfree(strs);
+	if (ft_iscapital(c) || ft_isdigit(c) || c == '_')
+		return (1);
+	return (0);
 }

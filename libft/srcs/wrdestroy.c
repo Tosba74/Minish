@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wrdestroy.c                                     :+:      :+:    :+:   */
+/*   wrdestroy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:22:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/16 19:24:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/16 01:18:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ void	*wrmalloc(unsigned long size)
 	if (!buffer)
 	{
 		wrdestroy();
-		ft_putstr("ERROR Malloc\n");
-		exit (1);
+		ft_putstr_fd("Insufficient memory\n", 2);
+		exit(ENOMEM);
 	}
 	new_elem = malloc(sizeof(t_list));
 	if (!new_elem)
 	{
 		free(buffer);
 		wrdestroy();
-		ft_putstr("ERROR Malloc\n");
-		exit (1);
+		ft_putstr_fd("Insufficient memory\n", 2);
+		exit(ENOMEM);
 	}
 	new_elem->content = buffer;
 	new_elem->next = 0;

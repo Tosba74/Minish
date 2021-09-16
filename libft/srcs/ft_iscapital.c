@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_all.c                                      :+:      :+:    :+:   */
+/*   ft_iscapital.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/26 21:04:53 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 01:41:12 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2020/11/04 00:44:43 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/15 11:44:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_all(char **strs, int size)
+int	ft_iscapital(int c)
 {
-	int	i;
-
-	i = 0;
-	while (i != size)
-		wrfree(strs[i++]);
-	wrfree(strs);
+	if ('A' <= c && c <= 'Z')
+		return (1);
+	return (0);
 }

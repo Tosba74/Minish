@@ -36,8 +36,9 @@ void		exec_cmd(char **cmd);
 */
 
 int			is_spec_char(char c);
+int			env_size(t_env *env);
 void		parser(char *s);
-void		init_env(t_list **lst, char **env);
+void		init_env(t_global *g, char **env);
 void		addback_cell_env(t_env **env, t_env *new);
 t_env		*new_cell_env(char **content);
 
@@ -48,7 +49,7 @@ t_env		*new_cell_env(char **content);
 */
 
 void		ft_err(char *s, int err);
-void		print_env(t_global *g, t_env **env);
+void		debug(t_global *g, int i);
 const char	*prompt(void);
 
 #endif

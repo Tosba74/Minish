@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/08/15 22:36:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/16 01:41:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <errno.h>
 
 typedef struct s_list
 {
@@ -39,6 +40,8 @@ int					ft_isspace(int c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
+int					ft_iscapital(int c);
+int					ft_isdefine(int c);
 int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_isinstr(char *str, int c);
@@ -119,17 +122,17 @@ t_list				*ft_lstlast(t_list *lst);
 */
 int					get_next_line(int fd, char **line);
 /*
-**					GARBAGE COLLECTOR WRMALLOC
+**					GARBOGE COLLECTOR
 */
 void				*wrmalloc(unsigned long size);
-int					wrfree(void *ptr);
 void				wrdestroy(void);
+int					wrfree(void *ptr);
 /*
 **					PERSONNAL FUNCTIONS
 */
 void				ft_memdel(void *ap);
 void				ft_sort_integer_tab(int *tab, int size);
-void				free_all(char **strs, int j);
+void				free_all(char **strs, int size);
 int					ft_strslen(char **strs);
 int					ft_atoi_ov(const char *str);
 int					ft_putbytes(int nb);

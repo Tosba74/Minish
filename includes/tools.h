@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 18:14:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/15 15:09:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ typedef struct s_global
 	pid_t		pid_ar[1024];
 	t_env		*env;
 	t_env		*hidden;
+	t_bool		hide_mod;
+	t_bool		debug;
 	t_story		*history;
 	t_pipe		pipe;
-	t_bool		debug;
 }	t_global;
 
 #endif

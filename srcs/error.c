@@ -16,18 +16,18 @@ static const t_err	*err_pars(int err)
 {
 	static const t_err	err_p[] = {
 		{E2BIG, "Argument list too long\n"},
-		{EPERM, "Permission denied!\n"},
-		{ENOENT, "No such file or directory!\n"},
-		{ESRCH, "Invalid thread/process id!\n"},
+		{EINVAL, "Invalid argument, Use -debug\n"},
+		{EAGAIN, "Insufficient resources!\n"},
+		{EINVAL, "Not a typewriter\n"},
+		{EFAULT, "Bad address\n"},
 		{EAGAIN, "Insufficient resources!\n"},
 		{ENOMEM, "Insufficient memory!\n"},
-		{EACCES, "Permission denied!\n"},
-		{EINVAL, "Invalid argument!\n"},
 		{EEXIST, "File already exists!\n"},
 		{ENFILE, "File table overflow!\n"},
 		{EMFILE, "Too many open files!\n"},
 		{EDEADLK, "A deadlock has been detecte\nd!"},
-		{ENAMETOOLONG, "File name too long!\n"}
+		{ENAMETOOLONG, "File name too long!\n"},
+		{EACCES, "Permission denied!\n"}
 	};
 
 	return (&err_p[err]);
@@ -36,7 +36,8 @@ static const t_err	*err_pars(int err)
 static const t_err	*err_exec(int err)
 {
 	static const t_err	err_e[] = {
-		{EPERM, "Permission denied!\n"},
+		{EPIPE, "Broken pipe\n"},
+		{ESRCH, "Invalid thread/process id!\n"},
 		{ENOENT, "No such file or directory!\n"},
 		{ESRCH, "Invalid thread/process id!\n"},
 		{EAGAIN, "Insufficient resources!\n"},
@@ -66,6 +67,5 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd((char *)error->strerror, 2);
 	wrdestroy();
-	// perror(error->err);
-	exit(0);
+	exit(error->err);
 }
