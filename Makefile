@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/16 01:22:20 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/09/16 21:45:13 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,23 +66,35 @@ MAKE		:= make -C
 CP			:= cp 
 RM			:= rm -rf
 NORM		:= norminette
+.SILENT:
+
+_BLACK	= \x1b[30m
+_R		= \x1b[31m
+_G		= \x1b[32m
+_Y		= \x1b[33m
+_B		= \x1b[34m
+_P		= \x1b[35m
+_C		= \x1b[36m
+_E		= \x1b[0m
 
 # ******************************************************* #
 # ********************   MAKE SHIT   ******************** #
 # ******************************************************* #
 
-all:		lib ${NAME}
+all:		lib ${NAME} minish
 
 lib:		crea_b
 		${MAKE} ${PATH_L}
 
 ${PATH_O}/%.o:	%.c ${INC} ${INC_LFT}
 		${CCF} ${INCS} -c $< -o $@
+		printf "\e[?35l${_Y}$< >>> ${_G}$@${_E} \e[0m%20s\r" " "
 
 ${NAME}:	${OBJS} ${INC} ${INC_LFT}
 		${CCF} ${INCS} ${LLFT} ${OBJS} -o $@ ${LFT}
+		printf "\n"
 
-fs:			${OBJS} ${INC} ${INC_LFT} 
+fs:			${OBJS} ${INC} ${INC_LFT}
 		${CF_FS} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
 
 db:			${OBJS} ${INC} ${INC_LFT} 
@@ -100,18 +112,31 @@ fclean:		clean
 		${RM} ${LIBFT}
 		${RM} ${NAME}
 
-re:			fclean all
+re:			fclean all minish
 
-seg:		fclean lib fs
+seg:		fclean lib fs minish
 
-lldb:		fclean lib db
+lldb:		fclean lib db minish
 
-op:			fclean lib opti
+op:			fclean lib opti minish
 
-fast:		fclean lib speed
+fast:		fclean lib speed minish
 
 norm :
 			${NORM} ${SRCS}
 			${NORM} ${INC}
 			
-.PHONY: all lib fsanit fs db lldb clean fclean re bonus norm
+minish:
+		printf "\n"
+		printf "\n"
+		printf "${_C}        :::   :::  :::::::::::::::    :::::::::::::::::::::: :::    ::: ${_E}\n"
+		printf "${_C}      :+:+: :+:+:     :+:    :+:+:   :+:    :+:   :+:    :+::+:    :+:  ${_E}\n"
+		printf "${_C}    +:+ +:+:+ +:+    +:+    :+:+:+  +:+    +:+   +:+       +:+    +:+   ${_E}\n"
+		printf "${_C}   +#+  +:+  +#+    +#+    +#+ +:+ +#+    +#+   +#++:++#+++#++:++#++    ${_E}\n"
+		printf "${_C}  +#+       +#+    +#+    +#+  +#+#+#    +#+          +#++#+    +#+     ${_E}\n"
+		printf "${_C} #+#       #+#    #+#    #+#   #+#+#    #+#   #+#    #+##+#    #+#      ${_E}\n"
+		printf "${_C}###       #################    ####################### ###    ###       ${_E}\n"
+		printf "${_B}                                                           is ready !!!${_E}\n"
+		printf "\n"
+	
+.PHONY: all lib fsanit fs db lldb clean fclean re bonus norm minish

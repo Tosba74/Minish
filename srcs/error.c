@@ -63,7 +63,7 @@ void	ft_err(char *s, int err)
 		error = (t_err *)err_pars(err);
 	else if (err / 10)
 		error = (t_err *)err_exec(err % 10);
-	ft_putstr_fd("Error:\n", 2);
+	ft_putstr_fd("\033[31mError:\033[0m\n", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd((char *)error->strerror, 2);
 	wrdestroy();

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/15 15:09:15 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/16 18:11:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,20 @@ typedef struct s_global
 	t_story		*history;
 	t_pipe		pipe;
 }	t_global;
+
+/*********************************************************/
+/******************   ENVIRONNEMENT   ********************/
+/*********************************************************/
+
+t_env	*new_cell_env(char **content);
+void	addback_cell_env(t_env **env, t_env *new);
+int		env_size(t_env *env);
+
+/*********************************************************/
+/********************    HISTORY    **********************/
+/*********************************************************/
+
+t_story	*new_cell_history(char *content);
+void	addback_cell_history(t_story **story, t_story *new);
 
 #endif

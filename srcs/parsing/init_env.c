@@ -6,48 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 02:03:54 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/17 09:35:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
-
-/*
-static char	*split_content(char *s)
-{
-	char	**tab_tmp;
-	int		i;
-	int		index;
-	int		stop;
-	int		size;
-
-	i = 0;
-	index = 0;
-	stop = 0;
-	tab_tmp = (char **)wrmalloc(sizeof(char *) * 2)
-	while (s[stop] != '=')
-		stop++;
-	tab_tmp[0] = wrmalloc(sizeof(char *) * (stop + 1));
-	tab_tmp[1] = wrmalloc(sizeof(char *) * (size - stop));
-	stop = 0;
-	while (s[stop++])
-	{
-		if (s[stop] == '=')
-		{
-			if (index == 0)
-			{
-				tab_tmp[index][i] = 0;
-				index++;
-				i = 0;
-			}
-		}
-		else
-			tab_tmp[index][i] = s[stop];
-	}
-	dprintf(STDERR_FILENO, "%s = %s\n", tab_tmp[0], tab_tmp[1]);
-	return (tab_tmp);
-}
-*/
 
 static char	**split_content(const char *s)
 {
@@ -56,7 +19,9 @@ static char	**split_content(const char *s)
 	char	**tab_tmp;
 
 	i = -1;
+	dprintf(2, "\033[032%s\033[0m\n", s);
 	tab_tmp = ft_split(s, '=');
+	dprintf(2, "\033[033%s=%s\033[0m\n", tab_tmp[0], tab_tmp[1]);
 	if (tab_tmp == NULL)
 		ft_err("Env: ", 2);
 	tmp = tab_tmp[0];
@@ -76,34 +41,54 @@ void	init_env(t_global *g, char **env)
 	int		i;
 	int		size;
 
-	i = 0;
+	i = -1;
 	size = ft_strslen(env);
-	printf("size == %d\n", size);
-	printf("%p\n", g->env);
-	g->env = new_cell_env(split_content(env[i]));
-	printf("%p\n", g->env);
 	while (++i < size)
-	{
-		dprintf(STDERR_FILENO, "#%d||%s\n", i, env[i]);
 		addback_cell_env(&g->env, new_cell_env(split_content(env[i])));
-	}
 }
 
-char	**envlist_to_tab(t_env *env)
+static char	*get_env_line(t_env *env)
+{
+	size_t	len1;
+	size_t	len2;
+	char	*s;
+
+	len1 = ft_strlen(env->name);
+	len2 = ft_strlen(env->value);
+	s = wrmalloc(len1 + len2 + 2);
+	ft_memcpy(s, env->name, len1);
+	ft_memcpy(s + len1, "=", 1);
+	ft_memcpy(s + len1 + 1, env->value, len2 + 1);
+	dprintf(2, "Rendu attendu =>|%s=%s|\nRenduuuU EuUh =>|%s|\n", env->name, env->value, s);
+	return (s);
+}
+
+char	**get_env_tab(t_env *env)
 {
 	int		i;
 	t_env	*cpy;
 	char	**tab;
 
-	i = 0;
+	i = -1;
 	cpy = env;
-	tab = (char **)wrmalloc(sizeof(char *) * env_size(cpy));	
-	while (cpy->next)
+	tab = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
+	while (cpy)
 	{
-		tab[i] = ft_strjoin_free(cpy->name, "=", 0);
-		tab[i] = ft_strjoin_free(tab[i], cpy->value, 1);
-		i++;
+		tab[++i] = get_env_line(cpy);
+		dprintf(2, "TAB[#%d] ======>|%s|\n", i, tab[i]);
 		cpy = cpy->next;
 	}
+	dprintf(STDERR_FILENO, "i == %d & size == %d\n", i, env_size(cpy));
+	tab[i] = NULL;
 	return (tab);
+}
+
+void	print_envp(char **env)
+{
+	int	i;
+
+	i = -1;
+	while (env[++i])
+		printf("%s\n", env[i]);
+	dprintf(STDERR_FILENO, "wc -l = %d & i = %d\n", ft_strslen(env), i);
 }

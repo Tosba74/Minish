@@ -6,8 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:03:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/12 13:03:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/16 18:14:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+void	env(t_global *g)
+{
+	print_envp(get_env_tab(g->env));
+}
