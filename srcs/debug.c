@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 21:51:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/17 16:54:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	print_env(t_global *g)
 	t_env	*cpy;
 
 	cpy = g->env;
-	dprintf(STDERR_FILENO, "\033[34m----- PRINT_ENV -----\033[0m\n");
 	if (g->env == NULL)
 		dprintf(STDERR_FILENO, "\033[34mSHIT! g->env is NULL, Bro!\033[0m\n");
 	while (cpy->next)

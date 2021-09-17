@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 22:00:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/17 16:57:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_env	*new_cell_env(char **content)
 	t_env	*new;
 
 	new = wrmalloc(sizeof(t_env));
-	dprintf(STDERR_FILENO, "\033[32m|%s||%s|\033[0m\n", content[0], content[1]);
 	new->name = content[0];
 	new->value = content[1];
 	new->next = NULL;

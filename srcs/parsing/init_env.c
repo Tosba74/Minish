@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/17 09:35:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/17 16:58:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,15 @@ static char	**split_content(const char *s)
 	char	**tab_tmp;
 
 	i = -1;
-	dprintf(2, "\033[032%s\033[0m\n", s);
 	tab_tmp = ft_split(s, '=');
-	dprintf(2, "\033[033%s=%s\033[0m\n", tab_tmp[0], tab_tmp[1]);
 	if (tab_tmp == NULL)
 		ft_err("Env: ", 2);
-	tmp = tab_tmp[0];
+	tmp = ft_strdup(tab_tmp[0]);
 	while (tmp[++i])
 		if (!ft_isprint(tab_tmp[0][i]))
 			ft_err("Env: ", 3);
 	free_all(tab_tmp, ft_strslen(tab_tmp));
-	tab_tmp = wrmalloc(sizeof(char *) * 3);
+	tab_tmp = (char **)wrmalloc(sizeof(char *) * 3);
 	tab_tmp[0] = tmp;
 	tab_tmp[1] = ft_strdup(ft_strchr(s, '=') + 1);
 	tab_tmp[2] = NULL;
@@ -59,7 +57,6 @@ static char	*get_env_line(t_env *env)
 	ft_memcpy(s, env->name, len1);
 	ft_memcpy(s + len1, "=", 1);
 	ft_memcpy(s + len1 + 1, env->value, len2 + 1);
-	dprintf(2, "Rendu attendu =>|%s=%s|\nRenduuuU EuUh =>|%s|\n", env->name, env->value, s);
 	return (s);
 }
 
@@ -75,7 +72,6 @@ char	**get_env_tab(t_env *env)
 	while (cpy)
 	{
 		tab[++i] = get_env_line(cpy);
-		dprintf(2, "TAB[#%d] ======>|%s|\n", i, tab[i]);
 		cpy = cpy->next;
 	}
 	dprintf(STDERR_FILENO, "i == %d & size == %d\n", i, env_size(cpy));
