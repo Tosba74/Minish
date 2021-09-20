@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/17 17:01:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/20 10:56:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 {
 	g = wrmalloc(sizeof(t_global));
 	g = &(t_global){0};
-	dprintf(STDERR_FILENO, "\033[32mTG OK\033[0m\n");
+	dprintf(STDERR_FILENO, "\033[32minti TG!\033[0m\n");
 	if (ac == 2)
 	{
 		if (!strncmp(av[1], "-debug", 6))
@@ -36,15 +36,40 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 			ft_err("Arg: ", 1);
 	}
 	init_env(g, env);
-	debug(g, 1);
 	debug(g, 0);
-	print_envp(env);
-	print_envp(get_env_tab(g->env));
+	debug(g, 1);
 	if (!cmp_env(get_env_tab(g->env), env))
-		dprintf(STDERR_FILENO, "\033[32mYOUPI: env ok!!\033[0m");
+		dprintf(STDERR_FILENO, "\033[32mYOUPI: env OK!!\n\033[0m");
 	else
-		dprintf(STDERR_FILENO, "\033[33menv ko\033[0m\n");
+		dprintf(STDERR_FILENO, "\033[33menv ko!!\n\033[0m\n");
 }
+
+static void	loop(t_global *g)
+{
+	int		i;
+	char	*input;
+
+	i = 0;
+	input = readline(prompt());
+	while (input)
+	{
+		addback_cell_history(&g->history, new_cell_history(input, i++));
+		parser(g);
+		input = readline(prompt());
+		debug(g, 1);
+		debug(g, 2);
+	}
+}
+	// prompt();hey
+	// g.input = readline(prompt());
+	// printf("buf= %s\n", g.input);
+	// while (!g.input)
+	// {
+		// printf("buf2= %s\n", g.input);
+		// parser(buf);
+		// prompt();
+	// }
+// }
 
 int	main(int ac, char **av, char **env)
 {
@@ -53,13 +78,6 @@ int	main(int ac, char **av, char **env)
 	if (ac > 2)
 		ft_err("Arg: ", 0);
 	init_global(&g, ac, av, env);
-	prompt();
-	g.input = readline("$> ");
-	printf("buf= %s\n", g.input);
-	while (!g.input)
-	{
-		printf("buf2= %s\n", g.input);
-		// parser(buf);
-		prompt();
-	}
+	loop(&g);
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/16 21:45:13 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/09/20 20:41:28 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,10 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c pars_tools.c init_env.c env_tools.c
+override FILES_P	:= parser.c pars_tools.c init_env.c env_tools.c \
+					history.c
 override FILES_E	:= exec.c
-override FILES_B	:=
+override FILES_B	:= b_env.c b_history.c
 override FILES_M	:= prompt.c debug.c error.c main.c
 
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
@@ -93,6 +94,7 @@ ${PATH_O}/%.o:	%.c ${INC} ${INC_LFT}
 ${NAME}:	${OBJS} ${INC} ${INC_LFT}
 		${CCF} ${INCS} ${LLFT} ${OBJS} -o $@ ${LFT}
 		printf "\n"
+		clear
 
 fs:			${OBJS} ${INC} ${INC_LFT}
 		${CF_FS} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
@@ -130,11 +132,11 @@ minish:
 		printf "\n"
 		printf "\n"
 		printf "${_C}        :::   :::  :::::::::::::::    :::::::::::::::::::::: :::    ::: ${_E}\n"
-		printf "${_C}      :+:+: :+:+:     :+:    :+:+:   :+:    :+:   :+:    :+::+:    :+:  ${_E}\n"
+		printf "${_C}      :+:+: :+:+:     :+:    :+:+:   :+:    :+:   :+:   :+: :+:    :+:  ${_E}\n"
 		printf "${_C}    +:+ +:+:+ +:+    +:+    :+:+:+  +:+    +:+   +:+       +:+    +:+   ${_E}\n"
-		printf "${_C}   +#+  +:+  +#+    +#+    +#+ +:+ +#+    +#+   +#++:++#+++#++:++#++    ${_E}\n"
-		printf "${_C}  +#+       +#+    +#+    +#+  +#+#+#    +#+          +#++#+    +#+     ${_E}\n"
-		printf "${_C} #+#       #+#    #+#    #+#   #+#+#    #+#   #+#    #+##+#    #+#      ${_E}\n"
+		printf "${_C}   +#+  +:+  +#+    +#+    +#+ +:+ +#+    +#+   +#++:++#+ +#++:++#++    ${_E}\n"
+		printf "${_C}  +#+       +#+    +#+    +#+  +#+#+#    +#+         +#+ +#+    +#+     ${_E}\n"
+		printf "${_C} #+#       #+#    #+#    #+#   #+#+#    #+#   #+#   #+# #+#    #+#      ${_E}\n"
 		printf "${_C}###       #################    ####################### ###    ###       ${_E}\n"
 		printf "${_B}                                                           is ready !!!${_E}\n"
 		printf "\n"

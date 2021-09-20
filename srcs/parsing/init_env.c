@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/17 16:58:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/18 09:12:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ char	**get_env_tab(t_env *env)
 	t_env	*cpy;
 	char	**tab;
 
-	i = -1;
+	i = 0;
 	cpy = env;
 	tab = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
 	while (cpy)
 	{
-		tab[++i] = get_env_line(cpy);
+		tab[i] = get_env_line(cpy);
 		cpy = cpy->next;
+		i++;
 	}
-	dprintf(STDERR_FILENO, "i == %d & size == %d\n", i, env_size(cpy));
 	tab[i] = NULL;
 	return (tab);
 }

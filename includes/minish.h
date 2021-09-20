@@ -19,6 +19,10 @@
 /******************      BULTIN       ********************/
 /*********************************************************/
 
+void		env(t_global *g);
+void		history(t_global *g);
+void		print_story(t_global *g);
+
 /*********************************************************/
 /******************      ENGINE       ********************/
 /*********************************************************/
@@ -30,9 +34,10 @@ void		exec_cmd(char **cmd);
 /*********************************************************/
 
 int			is_spec_char(char c);
-void		parser(char *s);
+void		parser(t_global *g);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
+char		*get_last_input(t_global *g);
 char		**get_env_tab(t_env *env);
 
 /*********************************************************/

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 18:11:34 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/18 17:35:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int		env_size(t_env *env);
 /********************    HISTORY    **********************/
 /*********************************************************/
 
-t_story	*new_cell_history(char *content);
+t_story	*new_cell_history(char *content, int index);
+t_story	*last_cell_history(t_story *story);
 void	addback_cell_history(t_story **story, t_story *new);
 
 #endif

@@ -6,25 +6,25 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 10:35:16 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 10:52:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/20 10:51:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_story	*new_cell_history(char *content)
+t_story	*new_cell_history(char *content, int index)
 {
 	t_story	*new;
 
 	new = wrmalloc(sizeof(t_story));
-	new->index = 0;
-	new->cmd = content;
+	new->index = index;
+	new->cmd = ft_strdup(content);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
 }
 
-static t_story	*last_cell_history(t_story *story)
+t_story	*last_cell_history(t_story *story)
 {
 	if (story == NULL)
 		return (NULL);
@@ -44,9 +44,17 @@ void	addback_cell_history(t_story **story, t_story *new)
 {
 	t_story	*last;
 
-	last = last_cell_story(*story);
+	last = last_cell_history(*story);
 	if (last != NULL)
 		link_cell_history(last, new);
 	else
 		*story = new;
+}
+
+char	*get_last_input(t_global *g)
+{
+	t_story		*story;
+
+	story = last_cell_history(g->history);
+	return (story->cmd);
 }

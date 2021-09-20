@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 00:19:59 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/14 14:55:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/18 09:15:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ const char	*prompt(void)
 {
 	char	*prompt;
 
-	prompt = "$> ";
+	prompt = "\033[36m$\033[0m\033[34m>\033[0m ";
 	return (prompt);
 }
