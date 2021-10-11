@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/25 00:29:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/11 16:14:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,22 +67,66 @@
 // 	return (teub);
 // }
 
-void	dispath_jobs(t_global *g)
-{
-	int		i;
-	char	**jobs;
+// void	dispath_jobs(t_global *g)
+// {
+// 	int		i;
+// 	char	**jobs;
 
-	i = 0;
-	jobs = ft_split(get_last_input(g), '|');
-	if (jobs)
+// 	i = 0;
+// 	jobs = ft_split(get_last_input(g), '|');
+// 	if (jobs)
+// 	{
+// 		dprintf(STDERR_FILENO, "T'es la ?\n");
+// 		while (jobs[i])
+// 		{
+// 			dprintf(STDERR_FILENO, "teub[%d] = |%s|\n", i, jobs[i]);
+// 			addback_cell_pipe(&g->pipe, new_cell_pipe(skip_space(jobs[i])));
+// 			i++;
+// 		}
+// 	}
+// }
+
+int	add_var_env(t_global *g, char *input)
+{
+	(void)g;
+	(void)input;
+	dprintf(2, "\nOOOOOooooohhhHHHH\n");
+	return (0);
+}
+
+int	token_cote(t_global *g, char *input)
+{
+	(void)g;
+	(void)input;
+	// int		i;
+	// char	c;
+
+	// i = 0;
+	// c = input[0];
+	// while (input[++i])
+	// {
+	// 	if (input[i] == c)
+					
+	// }
+	dprintf(2, "\nAAAAAaaaaahhhHHHH\n");
+	return (0);
+}
+
+void	lexer(t_global *g)
+{
+	char	*input;
+	int		i;
+
+	input = get_last_input(g);
+	i = -1;
+	while (input[++i])
 	{
-		dprintf(STDERR_FILENO, "T'es la ?\n");
-		while (jobs[i])
-		{
-			dprintf(STDERR_FILENO, "teub[%d] = |%s|\n", i, jobs[i]);
-			addback_cell_pipe(&g->pipe, new_cell_pipe(skip_space(jobs[i])));
-			i++;
-		}
+		if (is_spec_char(input[i]) == 0)
+			i += add_var_env(g, input + i);
+		else if (is_spec_char(input[i]) == 1 || is_spec_char(input[i]) == 2)
+			i += token_cote(g, input + i);
+		else
+			ft_putchar(input[i]);
 	}
 }
 
@@ -94,7 +138,8 @@ void	parser(t_global *g)
 	i = -1;
 	tmp = NULL;
 	// tmp = find_double_cote(g->pipe->pipe_line);
-	dispath_jobs(g);
+	lexer(g);
+	// dispath_jobs(g);
 	// debug(g, 0);
 	// debug(g, 1);
 	// debug(g, 2);

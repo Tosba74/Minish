@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/28 13:47:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/11 15:48:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,6 @@ static void	loop(t_global *g)
 		add_history(input);
 		addback_cell_history(&g->history, new_cell_history(input, i++));
 		parser(g);
-		// debug(g, 0);
-		// debug(g, 1);
-		// debug(g, 2);
-		// debug(g, 3);
 		debug(g, 4);
 		is_up(g, input);
 		is_bultins(g, input);
