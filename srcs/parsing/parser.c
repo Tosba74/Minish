@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/11 16:14:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/11 17:51:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,62 @@
 // 	}
 // }
 
+void	create_token(char *input, int len)
+{
+	int	i;
+
+	i = 0;
+	while (++i < len)
+		printf("\033[32m%c\033[0m", input[i]);
+}
+
+void	create_token_envname(char *input, int len)
+{
+	int	i;
+
+	i = 0;
+	while (++i < len)
+		printf("\033[32m%c\033[0m", input[i]);
+}
+
+void	create_token_envalue(char *input, int len)
+{
+	int	i;
+
+	i = 0;
+	while (++i < len)
+		printf("\033[32m%c\033[0m", input[i]);
+}
+
 int	add_var_env(t_global *g, char *input)
 {
 	(void)g;
-	(void)input;
+	int		i;
+	char	c;
+	char 	name;
+
+	i = 0;
+	c = input[0];
+	while (ft_iscapital(input[i]))
+	{
+		
+		
+		create_token(input, i);	
+		return (i);
+	}
+	}
+	dprintf(2, "\nAAAAAaaaaahhhHHHH\n");
+	return (0);
+}
+
+void	lexer(t_global *g)
+{
+	char	*input;
+	int		i;
+
+	input = get_last_input(g);
+	i = -1;
+	while (input[++i])
 	dprintf(2, "\nOOOOOooooohhhHHHH\n");
 	return (0);
 }
@@ -98,16 +150,19 @@ int	token_cote(t_global *g, char *input)
 {
 	(void)g;
 	(void)input;
-	// int		i;
-	// char	c;
+	int		i;
+	char	c;
 
-	// i = 0;
-	// c = input[0];
-	// while (input[++i])
-	// {
-	// 	if (input[i] == c)
-					
-	// }
+	i = 0;
+	c = input[0];
+	while (input[++i])
+	{
+		if (input[i] == c)
+		{
+			create_token(input, i);	
+			return (i);
+		}
+	}
 	dprintf(2, "\nAAAAAaaaaahhhHHHH\n");
 	return (0);
 }
