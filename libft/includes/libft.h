@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/16 01:41:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <string.h>
+# include <stdbool.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -131,7 +131,7 @@ int					wrfree(void *ptr);
 **					PERSONNAL FUNCTIONS
 */
 void				ft_memdel(void *ap);
-void				ft_sort_integer_tab(int *tab, int size);
+void				ft_sort_integer_teub(int *teub, int size);
 void				free_all(char **strs, int size);
 int					ft_strslen(char **strs);
 int					ft_atoi_ov(const char *str);
@@ -139,6 +139,7 @@ int					ft_putbytes(int nb);
 int					ft_get_color(int r, int g, int b);
 int					check_extention(char *s, char *ext);
 char				**ft_strsjoin(char **s1, char *s2);
+char				*skip_space(char *s);
 char				*select_env_path(char *av, char **env);
 
 #endif

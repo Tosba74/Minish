@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 02:35:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/25 20:36:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/20 22:31:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,52 +63,16 @@ char	*select_env_path(char *av, char **env)
 {
 	char	*road;
 	char	**tmp;
+	char	**road_exec;
 
 	road = NULL;
 	tmp = ft_split(av, ' ');
 	if (tmp)
 	{
-		road = choose_good_path(extract_path(env), tmp[0]);
+		road_exec = extract_path(env);
+		if (road_exec)
+			road = choose_good_path(road_exec, tmp[0]);
 		wrfree (tmp);
 	}
 	return (road);
 }
-
-/*
-char	*select_env_path(char *av, char **env)
-{
-	int	i;
-	int	fd_tmp;
-	char	*s;
-	char	*tmp;
-	char	*tab_cmd;
-	char	**tab;
-
-	i = -1;
-	s = NULL;
-	while (env[++i])
-	{
-		if (!ft_strncmp("PATH=", env[i], 5))
-			tab = ft_split(env[i], ':');
-	}
-	tab_cmd = ft_split(av , ' ');
-	if (ft_strslen(tab_cmd) == 3)
-	
-		
-
-	i = -1;
-	while (tab[++i])
-	{
-		tmp = ft_strjoin(tab[i], av);
-		fd_tmp = open(tmp, O_RDONLY | S_IRUSR | S_IRGRP | S_IROTH);
-		if (fd_tmp > 0)
-		{
-			close(fd_tmp);
-			return (tmp);
-		}
-		free (tmp);
-		i++;
-	}
-	return (NULL);
-}
-*/

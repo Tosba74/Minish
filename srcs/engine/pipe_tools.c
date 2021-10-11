@@ -1,61 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_tools.c                                        :+:      :+:    :+:   */
+/*   pipe_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/22 17:45:17 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/22 17:46:27 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_env	*new_cell_env(char **content)
+t_pipe	*new_cell_pipe(char *content)
 {
-	t_env	*new;
+	t_pipe	*new;
 
-	new = wrmalloc(sizeof(t_env));
-	new->name = ft_strdup(content[0]);
-	new->value = ft_strdup(content[1]);
+	new = wrmalloc(sizeof(t_pipe));
+	new->pipe_line = ft_strdup(content);
+	new->fd_in = 0;
+	new->fd_out = 1;
+	new->job = wrmalloc(sizeof(t_job));
 	new->next = NULL;
 	return (new);
 }
 
-static t_env	*last_cell_env(t_env *env)
+static t_pipe	*last_cell_pipe(t_pipe *pipe)
 {
-	if (env == NULL)
+	if (pipe == NULL)
 		return (NULL);
-	while (env->next != NULL)
-		env = env->next;
-	return (env);
+	while (pipe->next != NULL)
+		pipe = pipe->next;
+	return (pipe);
 }
 
-void	addback_cell_env(t_env **env, t_env *new)
+void	addback_cell_pipe(t_pipe **pipe, t_pipe *new)
 {
-	t_env	*last;
+	t_pipe	*last;
 
-	last = last_cell_env(*env);
+	last = last_cell_pipe(*pipe);
 	if (last != NULL)
 		last->next = new;
 	else
-		*env = new;
+		*pipe = new;
 }
 
-int	env_size(t_env *env)
+int	counter_pipe(char *s)
 {
-	int		count;
-	t_env	*cpy;
+	int	i;
+	int	count;
 
+	i = 0;
 	count = 0;
-	cpy = env;
-	if (cpy == NULL)
-		return (0);
-	while (cpy != NULL)
-	{
-		cpy = cpy->next;
-		count++;
-	}
+	while (s[i++])
+		if (s[i] == '|')
+			count++;
 	return (count);
 }

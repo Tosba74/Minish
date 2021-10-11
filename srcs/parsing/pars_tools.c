@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_pars.c                                       :+:      :+:    :+:   */
+/*   pars_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 20:50:52 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/22 19:00:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,17 @@ int	is_spec_char(char c)
 		if (spec_char[i] == c)
 			return (i);
 	return (-1);
+}
+
+int	count_this_char(char *s, char c)
+{
+	int	i;
+	int	counter;
+
+	i = 0;
+	counter = 0;
+	while (s[++i])
+		if (s[i] == c)
+			counter++;
+	return (counter);
 }

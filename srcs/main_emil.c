@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:31:45 by ebellon           #+#    #+#             */
-/*   Updated: 2021/09/14 17:50:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft/libft.h"
 
 
-void ft_free_chartab(char **strs)
+void ft_free_charteub(char **strs)
 {
 	int	i;
 
@@ -107,14 +107,14 @@ void	pipe_line_parser(t_input_tree *tree)
 	{
 		while (pipe_line[i])
 			set_pipe_line(tree, pipe_line[i++]);
-		ft_free_chartab(pipe_line);
+		ft_free_charteub(pipe_line);
 	}
 }
 
 t_input_tree	*input_tree_parser(char *input)
 {
 	t_input_tree	*tree;
-	
+
 	tree = malloc(sizeof(t_input_tree));
 	if (!tree || !input)
 	{

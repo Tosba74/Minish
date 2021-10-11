@@ -6,11 +6,31 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/08 21:54:52 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/24 23:28:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+void	is_up(t_global *g, char *s)
+{
+	if (!ft_strcmp(s, "^[[A"))
+		dprintf(STDERR_FILENO, "%s\n", "En Haut");
+	if (!ft_strcmp(s, "^[[B"))
+		dprintf(STDERR_FILENO, "%s\n", "En Bas");
+	if (!ft_strcmp(s, "history"))
+		history(g);
+}
+
+void	is_bultins(t_global *g, char *s)
+{
+	if (!ft_strcmp(s, "env"))
+		env(g);
+	if (!ft_strcmp(s, "pwd"))
+		pwd(g);
+	if (!ft_strcmp(s, "history"))
+		history(g);
+}
 
 void	exec_cmd(char **cmd)
 {

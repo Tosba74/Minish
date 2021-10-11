@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/20 20:41:28 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/09/28 13:43:21 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ override PATH_S		:= srcs
 override PATH_O		:= .bin
 override PATH_P		:= parsing
 override PATH_E		:= engine
-override PATH_B		:= builtin
+override PATH_B		:= builtins
 
 override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_E}} \
@@ -31,9 +31,10 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 
 override FILES_P	:= parser.c pars_tools.c init_env.c env_tools.c \
 					history.c
-override FILES_E	:= exec.c
-override FILES_B	:= b_env.c b_history.c
-override FILES_M	:= prompt.c debug.c error.c main.c
+override FILES_E	:= exec.c pipe_tools.c
+override FILES_B	:= b_env.c b_history.c b_echo.c b_cd.c b_exit.c \
+					b_export.c b_pwd.c b_unset.c
+override FILES_M	:= prompt.c debug.c debug_tools.c error.c main.c
 
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \
@@ -67,6 +68,11 @@ MAKE		:= make -C
 CP			:= cp 
 RM			:= rm -rf
 NORM		:= norminette
+
+# ******************************************************* #
+# *********************   COLOR!!   ********************* #
+# ******************************************************* #
+
 .SILENT:
 
 _BLACK	= \x1b[30m

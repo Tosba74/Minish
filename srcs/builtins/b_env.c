@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_integer_tab.c                              :+:      :+:    :+:   */
+/*   b_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/11 15:41:03 by bmangin           #+#    #+#             */
-/*   Updated: 2021/08/11 17:41:08 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/12 13:03:08 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minish.h"
 
-void	ft_sort_integer_tab(int *tab, int size)
+void	env(t_global *g)
 {
-	int	i;
-
-	i = 0;
-	while (i < size - 1)
-	{
-		if (tab[i] > tab[i + 1])
-		{
-			ft_swap(&tab[i], &tab[i + 1]);
-			i = 0;
-		}
-		else
-			i++;
-	}
+	print_envp(get_env_teub(g->env));
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 19:10:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/04/29 18:57:01 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ static int	ft_nb_words(char const *s)
 	return (nb);
 }
 
-static char	**ft_free_all(char **tab, int t)
+static char	**ft_free_all(char **teub, int t)
 {
 	int	i;
 
 	i = 0;
 	while (i != t)
-		wrfree(tab[i++]);
-	wrfree(tab);
-	return (tab);
+		wrfree(teub[i++]);
+	wrfree(teub);
+	return (teub);
 }
 
 static char	*ft_new_words(char const *s, int *index)
@@ -72,23 +72,23 @@ char	**ft_split_whitespaces(char const *s)
 	int		i;
 	int		t;
 	int		nb_words;
-	char	**tab;
+	char	**teub;
 
 	i = 0;
 	t = -1;
 	nb_words = ft_nb_words(s);
-	tab = wrmalloc(sizeof(char *) * (nb_words + 1));
+	teub = wrmalloc(sizeof(char *) * (nb_words + 1));
 	while (++t < nb_words)
 	{
 		while (s[i] && ft_isspace(s[i]))
 			i++;
 		if (!ft_isspace(s[i]))
 		{
-			tab[t] = ft_new_words(s, &i);
-			if (!(tab[t]))
-				return (ft_free_all(tab, t));
+			teub[t] = ft_new_words(s, &i);
+			if (!(teub[t]))
+				return (ft_free_all(teub, t));
 		}
 	}
-	tab[t] = NULL;
-	return (tab);
+	teub[t] = NULL;
+	return (teub);
 }

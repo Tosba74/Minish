@@ -11,15 +11,19 @@
 # include <signal.h>
 # include <errno.h>
 
+# include <curses.h>
+# include <term.h>
+
 # include "libft.h"
 # include "error.h"
 # include "tools.h"
 
 /*********************************************************/
-/******************      BULTIN       ********************/
+/******************      bultins       ********************/
 /*********************************************************/
 
 void		env(t_global *g);
+void		pwd(t_global *g);
 void		history(t_global *g);
 void		print_story(t_global *g);
 
@@ -28,17 +32,23 @@ void		print_story(t_global *g);
 /*********************************************************/
 
 void		exec_cmd(char **cmd);
+void		is_up(t_global *g, char *s);
+void		is_bultins(t_global *g, char *s);
+t_pipe		*new_cell_pipe(char *content);
+void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
+int			counter_pipe(char *s);
 
 /*********************************************************/
 /******************      PARSING      ********************/
 /*********************************************************/
 
 int			is_spec_char(char c);
+int			count_this_char(char *s, char c);
 void		parser(t_global *g);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
 char		*get_last_input(t_global *g);
-char		**get_env_tab(t_env *env);
+char		**get_env_teub(t_env *env);
 
 /*********************************************************/
 /******************       MAIN        ********************/
@@ -46,6 +56,11 @@ char		**get_env_tab(t_env *env);
 
 void		ft_err(char *s, int err);
 void		debug(t_global *g, int i);
+void		print_env(t_global *g);
+void		print_env_teub(t_global *g);
+void		print_hidden(t_global *g);
+void		print_story(t_global *g);
+void		print_pipestruct(t_global *g);
 const char	*prompt(void);
 
 #endif

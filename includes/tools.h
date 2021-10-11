@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/18 17:35:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/09/25 00:16:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 
 # define PARS_SHIT "$?|@&;<>/'"
 
-typedef enum s_bool
-{
-	false,
-	true
-}	t_bool;
+# include <stdbool.h>
 
 typedef struct s_story
 {
@@ -61,10 +57,10 @@ typedef struct s_global
 	pid_t		pid_ar[1024];
 	t_env		*env;
 	t_env		*hidden;
-	t_bool		hide_mod;
-	t_bool		debug;
+	bool		hide_mod;
+	bool		debug;
 	t_story		*history;
-	t_pipe		pipe;
+	t_pipe		*pipe;
 }	t_global;
 
 /*********************************************************/

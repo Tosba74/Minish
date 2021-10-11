@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   b_pwd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/08 01:50:46 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/24 23:31:30 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/09/20 22:14:25 by bmangin           #+#    #+#             */
+/*   Updated: 2021/09/21 14:25:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "minish.h"
 
-# define FIN -1
-# define ERRNO_DEF 0
-
-typedef struct s_err
+void	pwd(t_global *g)
 {
-	int		err;
-	char	*strerror;
-}	t_err;
+	t_env	*cpy;
 
-#endif
+	cpy = g->env;
+	while (cpy)
+	{
+		dprintf(STDERR_FILENO, "\033[32m%s = %s\033[0m\n", cpy->name, cpy->value);
+		if (!ft_strcmp(cpy->name, "PWD"))
+			printf("%s\n", cpy->value);
+		cpy = cpy->next;
+	}
+}
