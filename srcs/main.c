@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/11 15:48:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/12 13:55:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 		if (!ft_strncmp(av[1], "-debug", 6))
 			g->debug = true;
 		else
-			ft_err("Arg: ", 1);
+		{
+			ft_err(g, "Arg: ", 1);
+			exit (g->err);
+		}
 	}
 	init_env(g, env);
 	debug(g, 0);
@@ -63,15 +66,17 @@ static void	loop(t_global *g)
 		input = readline(prompt());
 	}
 }
-// "^[[A" == fleche du haut
-// "^[[B" == fleche du bas
+
 int	main(int ac, char **av, char **env)
 {
 	t_global	g;
 
 	g = (t_global){0};
 	if (ac > 2)
-		ft_err("Arg: ", 0);
+	{
+		ft_err(&g, "Arg: ", 0);
+		exit(g.err);
+	}
 	init_global(&g, ac, av, env);
 	loop(&g);
 	return (0);

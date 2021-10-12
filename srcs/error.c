@@ -19,6 +19,7 @@ static const t_err	*err_pars(int err)
 		{EINVAL, "Invalid argument, Use -debug\n"},
 		{EAGAIN, "Insufficient resources!\n"},
 		{EINVAL, "Not a typewriter\n"},
+		{EINVAL, "Cote isn't closed\n"},
 		{EFAULT, "Bad address\n"},
 		{ENOSYS, "Function not implemented\n"},
 		{EAGAIN, "Insufficient resources!\n"},
@@ -55,7 +56,7 @@ static const t_err	*err_exec(int err)
 	return (&err_e[err]);
 }
 
-void	ft_err(char *s, int err)
+void	ft_err(t_global *g, char *s, int err)
 {
 	t_err	*error;
 
@@ -68,5 +69,6 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd((char *)error->strerror, 2);
 	wrdestroy();
-	exit(error->err);
+	g->err = error->err;
+	// exit(error->err);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/25 00:16:50 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/12 13:43:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_global
 	bool		debug;
 	t_story		*history;
 	t_pipe		*pipe;
+	int			err;
 }	t_global;
 
 /*********************************************************/
