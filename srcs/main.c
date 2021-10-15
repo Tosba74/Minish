@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/12 13:55:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/14 12:45:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 		}
 	}
 	init_env(g, env);
-	debug(g, 0);
-	debug(g, 1);
+	// debug(g, 0);
+	// debug(g, 1);
 	if (!cmp_env(get_env_teub(g->env), env))
 		dprintf(STDERR_FILENO, "\033[32mYOUPI: env OK!!\n\033[0m");
 	else
@@ -59,9 +59,9 @@ static void	loop(t_global *g)
 		add_history(input);
 		addback_cell_history(&g->history, new_cell_history(input, i++));
 		parser(g);
-		debug(g, 4);
-		is_up(g, input);
+		debug(g, 5);
 		is_bultins(g, input);
+		clear_tok(g->tok);
 		wrfree(input);
 		input = readline(prompt());
 	}

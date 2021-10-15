@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 12:45:19 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/24 23:41:13 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/10/13 13:15:40 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,8 @@ _E		= \x1b[0m
 
 all :		crea_b ${NAME} 
 
-${PATH_O}/%.o : ${PATH_S}/%.c	${INC}
-	${CC} ${FLAGS} -I ${PATH_I} -o $@ -c $<
+${PATH_O}/%.o : ${PATH_S}/%.c ${INC}
+	${CC} ${FLAGS} -I${PATH_I} -o $@ -c $<
 	printf "\e[?35l${_Y}$< >>> ${_G}$@${_E} \e[0m%20s\r" " "
 
 ${NAME}	:	${BIN}

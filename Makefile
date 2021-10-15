@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/09/28 13:43:21 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/10/14 12:43:33 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,9 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c pars_tools.c init_env.c env_tools.c \
-					history.c
+override FILES_P	:= parser.c lexer.c init_env.c \
+					pars_tools.c env_tools.c history.c \
+					tokenizator.c
 override FILES_E	:= exec.c pipe_tools.c
 override FILES_B	:= b_env.c b_history.c b_echo.c b_cd.c b_exit.c \
 					b_export.c b_pwd.c b_unset.c
@@ -44,7 +45,7 @@ FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 SRCS		= ${addprefix ${PATH_S}/, ${FILES}}
 OBJS		= ${addprefix ${PATH_O}/, ${notdir ${SRCS:.c=.o}}}
 
-HEADER	 	:= error.h tools.h minish.h
+HEADER	 	:= error.h tools.h minish.h 
 INC			= ${addprefix ${PATH_I}/, ${HEADER}}
 
 LIBFT_NAME	= ${PATH_L}.a

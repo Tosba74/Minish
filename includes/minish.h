@@ -31,8 +31,7 @@ void		print_story(t_global *g);
 /******************      ENGINE       ********************/
 /*********************************************************/
 
-void		exec_cmd(char **cmd);
-void		is_up(t_global *g, char *s);
+void		exec_cmd(t_global *g, char **cmd);
 void		is_bultins(t_global *g, char *s);
 t_pipe		*new_cell_pipe(char *content);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
@@ -61,7 +60,7 @@ void		print_env(t_global *g);
 void		print_env_teub(t_global *g);
 void		print_hidden(t_global *g);
 void		print_story(t_global *g);
-void		print_pipestruct(t_global *g);
+void		print_token(t_global *g);
 const char	*prompt(void);
 
 #endif

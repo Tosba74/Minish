@@ -6,24 +6,24 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/12 14:01:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/14 13:04:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-void	create_token(char *input, int len)
+int	pipe_tok(t_global *g, char *input)
 {
-	int		i;
-	char	*tmp;
+	(void)g;
+	(void)input;
+	return (1);
+}
 
-	i = -1;
-	tmp = wrmalloc(sizeof(char) * (len - 1));
-	input++;
-	while (++i < len - 1)
-		tmp[i] = input[i];
-	tmp[i] = 0;
-	printf("\033[32m|%s|\033[0m", tmp);
+int	redir_tok(t_global *g, char *input)
+{
+	(void)g;
+	(void)input;
+	return (1);
 }
 
 void	create_token_envname(char *input, int len)
@@ -44,63 +44,46 @@ void	create_token_envalue(char *input, int len)
 		printf("\033[32m%c\033[0m", input[i]);
 }
 
-int	add_var_env(t_global *g, char *input)
+int	add_tok_var(t_global *g, char *input)
 {
-	(void)g;
-	// int		i;
-	char	c;
-	// char 	name;
+	int		i;
 
-	// i = 0;
-	c = input[0];
-	// while (ft_iscapital(input[i]))
-	// {
-		// return (i);
-	// }
-	// }
-	dprintf(2, "\nAAAAAaaaaahhhHHHH\n");
+	i = 1;
+	input++;
+	if (input[i] == '\0')
+	{
+		ft_putchar('$');
+		return (i);
+	}
+	if (input[i] == '?')
+	{
+		printf("comment jreturn l'ancien process?\n");
+		i++;
+		return (2);
+	}
+	while (ft_isdefine(input[i]))
+		i++;
+	(void)g;
 	return (0);
 }
 
-int	token_cote(t_global *g, char *input)
+int	tok_cote(t_global *g, char *input)
 {
-	(void)g;
 	int		i;
 	char	c;
 
 	i = 0;
 	c = input[0];
+	input++;
 	while (input[++i])
 	{
 		if (input[i] == c)
 		{
-			create_token(input, i);	
+			addback_cell_tok(&g->tok,
+				new_cell_tok(ft_substr(input, 0, i), STR));
 			return (i);
 		}
 	}
 	ft_err(g, "Cote: ", 3);
-	return (0);
+	return (1);
 }
-
-void	lexer(t_global *g)
-{
-	char	*input;
-	int		i;
-
-	input = get_last_input(g);
-	i = -1;
-	while (input[++i])
-	{
-		if (is_spec_char(input[i]) == -1)
-			ft_putchar(input[i]);
-		else
-		{
-			if (is_spec_char(input[i]) == 0)
-				i += add_var_env(g, input + i);
-			else if (is_spec_char(input[i]) == 1 || is_spec_char(input[i]) == 2)
-				i += token_cote(g, input + i);
-		}
-	}
-	ft_putchar('\n');
-}
-

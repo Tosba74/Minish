@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 20:46:07 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/14 13:06:25 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,17 @@ void	print_story(t_global *g)
 	}
 }
 
-void	print_pipestruct(t_global *g)
+void	print_token(t_global *g)
 {
-	t_pipe	*pipe_line;
-	int		i;
+	t_token	*cpy;
 
-	pipe_line = g->pipe;
-	while (pipe_line)
+	cpy = g->tok;
+	if (!cpy)
+		dprintf(STDERR_FILENO, "\033[31mg->token is NULL, Bro!\033[0m\n");
+	while (cpy != NULL)
 	{
-		i = -1;
-		dprintf(STDERR_FILENO, "%s\n", pipe_line->pipe_line);
-		dprintf(STDERR_FILENO, "|%d|%d|\n", pipe_line->fd_in, pipe_line->fd_out);
-		dprintf(STDERR_FILENO, "%s\n", pipe_line->job->job);
-		dprintf(STDERR_FILENO, "%c\n", pipe_line->job->flags);
-		while (pipe_line->job->av[++i])
-			dprintf(STDERR_FILENO, "\t* %s\n", pipe_line->job->av[i]);
-		pipe_line = pipe_line->next;
+		dprintf(STDERR_FILENO, "\033[033| V=|%s|  |type = %d|\n| next = %p\n",
+			cpy->value, cpy->type, cpy->next);
+		cpy = cpy->next;
 	}
 }

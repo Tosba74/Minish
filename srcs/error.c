@@ -68,7 +68,7 @@ void	ft_err(t_global *g, char *s, int err)
 	ft_putstr_fd("\033[31mError:\033[0m\n", 2);
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd((char *)error->strerror, 2);
-	wrdestroy();
 	g->err = error->err;
+	// wrdestroy();
 	// exit(error->err);
 }

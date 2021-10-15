@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/12 13:43:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 02:35:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,30 @@
 # define PARS_SHIT "$?|@&;<>/'"
 
 # include <stdbool.h>
+
+typedef enum e_type
+{
+	FILE,
+	DIR,
+	ARG,
+	OPT,
+	CMD,
+	BUILTIN,
+	REDIR,
+	PIPE,
+	VAR,
+	SPACE,
+	TAB,
+	EOINPUT
+}	t_type;
+
+typedef struct s_token
+{
+	char			*value;
+	t_type			type;
+	struct s_token	*prev;
+	struct s_token	*next;
+}					t_token;
 
 typedef struct s_story
 {
@@ -57,6 +81,7 @@ typedef struct s_global
 	pid_t		pid_ar[1024];
 	t_env		*env;
 	t_env		*hidden;
+	t_token		*tok;
 	bool		hide_mod;
 	bool		debug;
 	t_story		*history;
@@ -79,5 +104,19 @@ int		env_size(t_env *env);
 t_story	*new_cell_history(char *content, int index);
 t_story	*last_cell_history(t_story *story);
 void	addback_cell_history(t_story **story, t_story *new);
+
+/*********************************************************/
+/*******************   TOKENIZATOR   *********************/
+/*********************************************************/
+
+t_token	*new_cell_tok(char *content, t_type t);
+t_token	*last_cell_tok(t_token *tok);
+void	addback_cell_tok(t_token **tok, t_token *new);
+void	clear_tok(t_token *tok);
+int		add_tok_var(t_global *g, char *input);
+int		tok_cote(t_global *g, char *input);
+int		pipe_tok(t_global *g, char *input);
+int		redir_tok(t_global *g, char *input);
+int		create_tok(t_global *g, char *input);
 
 #endif
