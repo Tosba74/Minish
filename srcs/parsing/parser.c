@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 12:58:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 05:40:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	create_tok(t_global *g, char *input)
 {
-	int		(*pf_tok[6])(t_global *g, char *input);
+	int		(*pf_tok[8])(t_global *g, char *input);
 
-	pf_tok[0] = &add_tok_var;
-	pf_tok[1] = &tok_cote;
-	pf_tok[2] = &tok_cote;
-	pf_tok[3] = &pipe_tok;
+	pf_tok[0] = &var_tok;
+	pf_tok[1] = &quote_tok;
+	pf_tok[2] = &quote_tok;
+	pf_tok[3] = &space_tok;
 	pf_tok[4] = &redir_tok;
 	pf_tok[5] = &redir_tok;
+	pf_tok[6] = &pipe_tok;
+	pf_tok[7] = &egal_tok;
 	return (pf_tok[is_spec_char(*input)](g, input));
 }
 

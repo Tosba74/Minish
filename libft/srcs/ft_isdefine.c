@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:39:32 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/15 18:41:39 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 03:54:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isdefine(int c)
 {
-	if (ft_iscapital(c) || ft_isdigit(c) || c == '_')
+	if (ft_isalnum(c) || c == '_')
 		return (1);
 	return (0);
 }

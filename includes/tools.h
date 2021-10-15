@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/15 02:35:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 03:07:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
 
 typedef enum e_type
 {
-	FILE,
+	FILES,
 	DIR,
 	ARG,
 	OPT,
 	CMD,
 	BUILTIN,
 	REDIR,
-	PIPE,
+	QUOTE,
 	VAR,
+	PIPE,
 	SPACE,
 	TAB,
 	EOINPUT
@@ -113,8 +114,9 @@ t_token	*new_cell_tok(char *content, t_type t);
 t_token	*last_cell_tok(t_token *tok);
 void	addback_cell_tok(t_token **tok, t_token *new);
 void	clear_tok(t_token *tok);
-int		add_tok_var(t_global *g, char *input);
-int		tok_cote(t_global *g, char *input);
+int		var_tok(t_global *g, char *input);
+int		quote_tok(t_global *g, char *input);
+int		space_tok(t_global *g, char *input);
 int		pipe_tok(t_global *g, char *input);
 int		redir_tok(t_global *g, char *input);
 int		create_tok(t_global *g, char *input);

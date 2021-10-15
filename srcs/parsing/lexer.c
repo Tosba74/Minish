@@ -6,18 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 13:04:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 04:38:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
-
-int	pipe_tok(t_global *g, char *input)
-{
-	(void)g;
-	(void)input;
-	return (1);
-}
 
 int	redir_tok(t_global *g, char *input)
 {
@@ -26,34 +19,16 @@ int	redir_tok(t_global *g, char *input)
 	return (1);
 }
 
-void	create_token_envname(char *input, int len)
-{
-	int	i;
-
-	i = 0;
-	while (++i < len)
-		printf("\033[32m%c\033[0m", input[i]);
-}
-
-void	create_token_envalue(char *input, int len)
-{
-	int	i;
-
-	i = 0;
-	while (++i < len)
-		printf("\033[32m%c\033[0m", input[i]);
-}
-
-int	add_tok_var(t_global *g, char *input)
+int	var_tok(t_global *g, char *input)
 {
 	int		i;
 
-	i = 1;
+	i = 0;
 	input++;
 	if (input[i] == '\0')
 	{
 		ft_putchar('$');
-		return (i);
+		return (1);
 	}
 	if (input[i] == '?')
 	{
@@ -63,14 +38,51 @@ int	add_tok_var(t_global *g, char *input)
 	}
 	while (ft_isdefine(input[i]))
 		i++;
+	
 	(void)g;
 	return (0);
 }
 
-int	tok_cote(t_global *g, char *input)
+int	egal_tok(t_global *g, char *input)
+{
+	(void)g;
+	(void)input;
+}
+
+int	pipe_tok(t_global *g, char *input)
+{
+	t_tok	*tmp;
+
+	tmp = last_cell_tok(g->tok);
+	if (tmp->type == SPACE)
+		tmp->type = PIPE;
+	if (tmp->prev->type == PIPE)
+		ft_err(g, "Syntax: ", 5);
+	(void)g;
+	(void)input;
+	return (1);
+}
+
+int	space_tok(t_global *g, char *input)
+{
+	int		i;
+	t_tok	*last;
+
+	i = -1;
+	last = last_cell_tok(g->tok);
+	while (input[++i])
+		if (input[i] != ' ')
+			break ;
+	if (last)
+	addback_cell_tok(&g->tok, new_cell_tok(NULL, SPACE));
+	return (i);
+}
+
+int	quote_tok(t_global *g, char *input)
 {
 	int		i;
 	char	c;
+	char	*s;
 
 	i = 0;
 	c = input[0];
@@ -80,10 +92,10 @@ int	tok_cote(t_global *g, char *input)
 		if (input[i] == c)
 		{
 			addback_cell_tok(&g->tok,
-				new_cell_tok(ft_substr(input, 0, i), STR));
+				new_cell_tok(ft_strdup(input, 0, i), QUOTE));
 			return (i);
 		}
 	}
-	ft_err(g, "Cote: ", 3);
+	ft_err(g, "quote: ", 3);
 	return (1);
 }

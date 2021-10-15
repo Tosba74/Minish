@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 10:35:16 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/20 10:51:50 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 02:45:17 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_story	*new_cell_history(char *content, int index)
 
 	new = wrmalloc(sizeof(t_story));
 	new->index = index;
-	new->cmd = ft_strdup(content);
+	new->cmd = skip_space(content);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

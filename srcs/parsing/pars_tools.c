@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 12:54:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 04:03:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_spec_char(char c)
 	char	*spec_char;
 
 	i = -1;
-	spec_char = "$\"'|?<>/@&";
+	spec_char = "$\"'<> |=?/@&";
 	while (spec_char[++i])
 		if (spec_char[i] == c)
 			return (i);

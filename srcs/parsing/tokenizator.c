@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 12:51:00 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/15 04:02:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_token	*new_cell_tok(char *content, t_type t)
 	t_token	*tok;
 
 	tok = wrmalloc(sizeof(t_token));
-	tok->value = ft_strdup(content);
+	tok->value = content;
 	tok->type = t;
 	tok->prev = NULL;
 	tok->next = NULL;
@@ -49,16 +49,18 @@ void	addback_cell_tok(t_token **tok, t_token *new)
 
 void clear_tok(t_token *tok)
 {
-	tok = last_cell_tok(tok);
-	while (tok)
+	t_token	*actu;
+	t_token	*last;
+
+	actu = tok;
+	last = actu->next;
+	while (last)
 	{
-		wrfree(tok->value);
-		if (!tok->prev)
-			wrfree(tok);
-		else
-		{
-			tok = tok->prev;
-			wrfree(tok->next);
-		}
+		ft_memdel(actu->value);
+		ft_memdel(actu);
+		actu = actu->next;
+		last = actu->next;
 	}
+	ft_memdel(actu->value);
+	ft_memdel(actu);
 }
