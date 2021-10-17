@@ -6,53 +6,66 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/15 05:40:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 19:28:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int	create_tok(t_global *g, char *input)
+int	tokenizator(t_token **tok, char *input)
 {
-	int		(*pf_tok[8])(t_global *g, char *input);
+	int		(*pf_tok[8])(t_token **tok, char *input);
 
-	pf_tok[0] = &var_tok;
-	pf_tok[1] = &quote_tok;
-	pf_tok[2] = &quote_tok;
-	pf_tok[3] = &space_tok;
-	pf_tok[4] = &redir_tok;
-	pf_tok[5] = &redir_tok;
-	pf_tok[6] = &pipe_tok;
-	pf_tok[7] = &egal_tok;
-	return (pf_tok[is_spec_char(*input)](g, input));
+	pf_tok[0] = quote_tok;
+	pf_tok[1] = quote_tok;
+	pf_tok[2] = var_tok;
+	pf_tok[3] = pipe_tok;
+	pf_tok[4] = pipe_tok;
+	pf_tok[5] = space_tok;
+	pf_tok[6] = redir_tok;
+	pf_tok[7] = redir_tok;
+	return (pf_tok[is_spec_char(*input)](tok, input));
 }
 
-void	lexer(t_global *g)
+void	lexer(t_token **tok, char *input)
 {
-	char	*input;
+	char	*tmp;
 	int		i;
+	int		j;
 
-	input = get_last_input(g);
-	i = -1;
-	while (input[++i])
+	tmp = NULL;
+	i = 0;
+	while (input[i])
 	{
 		if (is_spec_char(input[i]) != -1)
-			i += create_tok(g, input + i);
+			i += tokenizator(tok, input + i);
 		else
-			ft_putchar(input[i]);
+		{
+			j = i;
+			while (input[i] && is_spec_char(input[i]) == -1)
+				i++;
+			addback_cell_tok(tok,
+				new_cell_tok(ft_substr(input, j, i - j), ARG));
+		}
 	}
-	ft_putchar('\n');
 }
 
-void	complet_pipeline(t_global *g)
+void	complet_pipeline(t_global *g, t_token *tok)
 {
-	print_token(g);
+	(void)g;
+	print_token(tok);
 }
 
 void	parser(t_global *g)
 {
-	lexer(g);
-	complet_pipeline(g);
+	t_token	*tok;
+	char	*input;
+
+	tok = NULL;
+	input = get_last_input(g);
+	lexer(&tok, input);
+	complet_pipeline(g, tok);
+	clear_tok(tok);
 }
 	// debug(g, 5);
 	// dispath_jobs(g);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/15 03:01:39 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 09:45:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	loop(t_global *g)
 		parser(g);
 		debug(g, 5);
 		is_bultins(g, input);
-		clear_tok(g->tok);
 		wrfree(input);
 		input = readline(prompt());
 	}

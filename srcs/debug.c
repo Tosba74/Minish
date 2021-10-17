@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/13 15:08:52 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 19:13:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,13 @@ static void	print_pipestruct(t_global *g)
 
 void	debug(t_global *g, int i)
 {
-	void	(*pf[6])(t_global *g);
+	void	(*pf[5])(t_global *g);
 
 	pf[0] = &print_env;
 	pf[1] = &print_env_teub;
 	pf[2] = &print_hidden;
 	pf[3] = &print_story;
 	pf[4] = &print_pipestruct;
-	pf[5] = &print_token;
 	if (g->debug == true)
 	{
 		printf("debug activate\n");

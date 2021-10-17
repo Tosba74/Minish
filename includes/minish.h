@@ -19,7 +19,7 @@
 # include "tools.h"
 
 /*********************************************************/
-/******************      bultins       ********************/
+/******************      BUILTIN      ********************/
 /*********************************************************/
 
 void		env(t_global *g);
@@ -43,7 +43,7 @@ int			counter_pipe(char *s);
 
 int			is_spec_char(char c);
 int			count_this_char(char *s, char c);
-void		lexer(t_global *g);
+void		lexer(t_token **tok, char *input);
 void		parser(t_global *g);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
@@ -60,7 +60,7 @@ void		print_env(t_global *g);
 void		print_env_teub(t_global *g);
 void		print_hidden(t_global *g);
 void		print_story(t_global *g);
-void		print_token(t_global *g);
+void		print_token(t_token *tok);
 const char	*prompt(void);
 
 #endif

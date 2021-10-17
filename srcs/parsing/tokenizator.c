@@ -6,61 +6,92 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/15 04:02:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 19:26:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_token	*new_cell_tok(char *content, t_type t)
+int	quote_tok(t_token **tok, char *input)
 {
-	t_token	*tok;
+	int		i;
+	char	c;
 
-	tok = wrmalloc(sizeof(t_token));
-	tok->value = content;
-	tok->type = t;
-	tok->prev = NULL;
-	tok->next = NULL;
-	return (tok);
-}
-
-t_token	*last_cell_tok(t_token *tok)
-{
-	if (tok == NULL)
-		return (NULL);
-	while (tok->next != NULL)
-		tok = tok->next;
-	return (tok);
-}
-
-void	addback_cell_tok(t_token **tok, t_token *new)
-{
-	t_token	*last;
-
-	last = last_cell_tok(*tok);
-	if (!last)
-		*tok = new;
-	else
+	i = 0;
+	c = input[0];
+	while (input[++i])
 	{
-		last->next = new;
-		new->prev = last;
+		if (input[i] == c)
+		{
+			if (c == '\'')
+				addback_cell_tok(tok,
+					new_cell_tok(ft_substr(input, 1, i - 1), QUOTE));
+			else if (c == '"')
+				addback_cell_tok(tok,
+					new_cell_tok(ft_substr(input, 1, i - 1), DQUOTE));
+			return (i + 1);
+		}
 	}
+	addback_cell_tok(tok,
+		new_cell_tok("NULL", ERROR));
+	// ft_err(g, "quote: ", 3);
+	return (1);
 }
 
-void clear_tok(t_token *tok)
+int	var_tok(t_token **tok, char *input)
 {
-	t_token	*actu;
-	t_token	*last;
+	int		i;
+	char	*tmp;
 
-	actu = tok;
-	last = actu->next;
-	while (last)
+	i = -1;
+	tmp = NULL;
+	while (input[++i] && !is_spec_char(input[i]))
+		tmp[i] = input[i];
+	tmp[i] = 0;
+	addback_cell_tok(tok,
+		new_cell_tok(ft_strdup(tmp), VAR));
+	return (i);
+}
+
+int	pipe_tok(t_token **tok, char *input)
+{
+	if (input[0] == '|')
 	{
-		ft_memdel(actu->value);
-		ft_memdel(actu);
-		actu = actu->next;
-		last = actu->next;
+		addback_cell_tok(tok,
+			new_cell_tok(ft_strdup("|"), PIPE));
 	}
-	ft_memdel(actu->value);
-	ft_memdel(actu);
+	else if (input[0] == '=')
+	{
+		addback_cell_tok(tok,
+			new_cell_tok(ft_strdup("="), EGAL));
+	}
+	return (1);
+}
+
+int	space_tok(t_token **tok, char *input)
+{
+	int		i;
+
+	i = -1;
+	while (input[++i])
+		if (!ft_isspace(input[i]))
+			break ;
+	addback_cell_tok(tok,
+		new_cell_tok(ft_strdup(" "), SPACE));
+	return (i);
+}
+
+int	redir_tok(t_token **tok, char *input)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	tmp = NULL;
+	while (input[++i] && input[i] == '>' && input[i] == '<')
+		tmp[i] = input[i];
+	tmp[i] = 0;
+	addback_cell_tok(tok,
+		new_cell_tok(ft_strdup(tmp), REDIR));
+	return (i + 1);
 }

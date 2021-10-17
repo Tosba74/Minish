@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 20:46:07 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 13:06:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 18:11:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,24 @@ void	print_story(t_global *g)
 	}
 }
 
-void	print_token(t_global *g)
+void	print_token(t_token *tok)
 {
 	t_token	*cpy;
 
-	cpy = g->tok;
+	cpy = tok;
 	if (!cpy)
 		dprintf(STDERR_FILENO, "\033[31mg->token is NULL, Bro!\033[0m\n");
 	while (cpy != NULL)
 	{
-		dprintf(STDERR_FILENO, "\033[033| V=|%s|  |type = %d|\n| next = %p\n",
-			cpy->value, cpy->type, cpy->next);
+		if (cpy->type < 1)
+			dprintf(STDERR_FILENO, "\033[32m%s|\033[0m", cpy->value);
+		else if (cpy->type < 6)
+			dprintf(STDERR_FILENO, "\033[34m%s|\033[0m", cpy->value);
+		else if (cpy->type == 6 || cpy->type == 7)
+			dprintf(STDERR_FILENO, "\033[36m%s|\033[0m", cpy->value);
+		else
+			dprintf(STDERR_FILENO, "\033[31m%s|\033[0m", cpy->value);
 		cpy = cpy->next;
 	}
+	ft_putchar('\n');
 }

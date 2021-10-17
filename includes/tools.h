@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/15 03:07:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/17 19:22:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,20 @@
 
 typedef enum e_type
 {
+	ARG,
 	FILES,
 	DIR,
-	ARG,
-	OPT,
 	CMD,
 	BUILTIN,
-	REDIR,
+	OPT,
 	QUOTE,
+	DQUOTE,
 	VAR,
+	EGAL,
+	REDIR,
 	PIPE,
 	SPACE,
-	TAB,
+	ERROR,
 	EOINPUT
 }	t_type;
 
@@ -94,31 +96,33 @@ typedef struct s_global
 /******************   ENVIRONNEMENT   ********************/
 /*********************************************************/
 
-t_env	*new_cell_env(char **content);
-void	addback_cell_env(t_env **env, t_env *new);
-int		env_size(t_env *env);
+t_env		*new_cell_env(char **content);
+void		addback_cell_env(t_env **env, t_env *new);
+int			env_size(t_env *env);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
 /*********************************************************/
 
-t_story	*new_cell_history(char *content, int index);
-t_story	*last_cell_history(t_story *story);
-void	addback_cell_history(t_story **story, t_story *new);
+t_story		*new_cell_history(char *content, int index);
+t_story		*last_cell_history(t_story *story);
+void		addback_cell_history(t_story **story, t_story *new);
 
 /*********************************************************/
 /*******************   TOKENIZATOR   *********************/
 /*********************************************************/
 
-t_token	*new_cell_tok(char *content, t_type t);
-t_token	*last_cell_tok(t_token *tok);
-void	addback_cell_tok(t_token **tok, t_token *new);
-void	clear_tok(t_token *tok);
-int		var_tok(t_global *g, char *input);
-int		quote_tok(t_global *g, char *input);
-int		space_tok(t_global *g, char *input);
-int		pipe_tok(t_global *g, char *input);
-int		redir_tok(t_global *g, char *input);
-int		create_tok(t_global *g, char *input);
+t_token		*new_cell_tok(char *content, t_type t);
+t_token		*last_cell_tok(t_token *tok);
+void		addback_cell_tok(t_token **tok, t_token *new);
+void		clear_tok(t_token *tok);
+int			var_tok(t_token **tok, char *input);
+int			quote_tok(t_token **tok, char *input);
+int			space_tok(t_token **tok, char *input);
+int			redir_tok(t_token **tok, char *input);
+int			pipe_tok(t_token **tok, char *input);
+int			option_tok(t_token **tok, char *input);
+int			egal_tok(t_token **tok, char *input);
+int			tokenizator(t_token **tok, char *input);
 
 #endif
