@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/10/16 23:43:14 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/10/20 21:18:47 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,12 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c lexer.c init_env.c \
-					pars_tools.c env_tools.c history.c \
-					tokenizator.c token_tools.c
-override FILES_E	:= exec.c pipe_tools.c
+override FILES_P	:= parser.c lexer.c pars_tools.c history.c \
+					tokenizator.c token_tools.c pipe_tools.c
+override FILES_E	:= exec.c 
 override FILES_B	:= b_env.c b_history.c b_echo.c b_cd.c b_exit.c \
 					b_export.c b_pwd.c b_unset.c
-override FILES_M	:= prompt.c debug.c debug_tools.c error.c main.c
+override FILES_M	:= init_env.c env_tools.c debug.c debug_tools.c error.c main.c
 
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \

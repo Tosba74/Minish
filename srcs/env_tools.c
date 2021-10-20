@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/22 17:45:17 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 19:29:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ int	env_size(t_env *env)
 		count++;
 	}
 	return (count);
+}
+
+void	print_envp(char **env)
+{
+	int	i;
+
+	i = -1;
+	while (env[++i])
+		printf("%s\n", env[i]);
 }

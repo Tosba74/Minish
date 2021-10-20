@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 16:19:47 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 21:08:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_type
 	OPT,
 	QUOTE,
 	DQUOTE,
-	VAR,
+	DOLLAR,
 	EGAL,
 	REDIR,
 	PIPE,
@@ -92,6 +92,17 @@ typedef struct s_global
 }	t_global;
 
 /*********************************************************/
+/********************     DEBUG     **********************/
+/*********************************************************/
+
+void		print_env(void);
+void		print_env_teub(void);
+void		print_hidden(void);
+void		print_story(void);
+void		print_pipestruct(void);
+void		print_token(t_token *tok);
+
+/*********************************************************/
 /******************   ENVIRONNEMENT   ********************/
 /*********************************************************/
 
@@ -111,9 +122,9 @@ void		addback_cell_history(t_story **story, t_story *new);
 /********************     PIPE     ***********************/
 /*********************************************************/
 
-t_pipe	*new_cell_pipe(char *content);
-void	addback_cell_pipe(t_pipe **pipe, t_pipe *new);
-int	count_cell_pipe(t_pipe *pipe);
+t_pipe		*new_cell_pipe(char *content);
+void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
+int			count_cell_pipe(t_pipe *pipe);
 
 /*********************************************************/
 /*******************   TOKENIZATOR   *********************/
@@ -124,13 +135,13 @@ t_token		*last_cell_tok(t_token *tok);
 void		addback_cell_tok(t_token **tok, t_token *new);
 void		clear_tok(t_token *tok);
 int			find_error(t_token *tok);
-int			var_tok(t_token **tok, char *input);
+int			dollar_tok(t_token **tok, char *input);
 int			quote_tok(t_token **tok, char *input);
 int			space_tok(t_token **tok, char *input);
 int			redir_tok(t_token **tok, char *input);
 int			pipe_tok(t_token **tok, char *input);
+int			egal_tok(t_token **tok, char *input);
 int			option_tok(t_token **tok, char *input);
 int			egal_tok(t_token **tok, char *input);
-int			tokenizator(t_token **tok, char *input);
 
 #endif

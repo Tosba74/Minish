@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/12 13:49:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 19:29:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-static char	**split_content(t_global *g, const char *s)
+static char	**split_content(const char *s)
 {
 	int		i;
 	char	*tmp;
@@ -21,11 +21,11 @@ static char	**split_content(t_global *g, const char *s)
 	i = -1;
 	teub_tmp = ft_split(s, '=');
 	if (teub_tmp == NULL)
-		ft_err(g, "Env: ", 2);
+		ft_err("Env: ", 2);
 	tmp = ft_strdup(teub_tmp[0]);
 	while (tmp[++i])
 		if (!ft_isprint(teub_tmp[0][i]))
-			ft_err(g, "Env: ", 3);
+			ft_err("Env: ", 3);
 	free_all(teub_tmp, ft_strslen(teub_tmp));
 	teub_tmp = (char **)wrmalloc(sizeof(char *) * 3);
 	teub_tmp[0] = tmp;
@@ -42,7 +42,7 @@ void	init_env(t_global *g, char **env)
 	i = -1;
 	size = ft_strslen(env);
 	while (++i < size)
-		addback_cell_env(&g->env, new_cell_env(split_content(g, env[i])));
+		addback_cell_env(&g->env, new_cell_env(split_content(env[i])));
 }
 
 static char	*get_env_line(t_env *env)
@@ -77,13 +77,4 @@ char	**get_env_teub(t_env *env)
 	}
 	teub[i] = NULL;
 	return (teub);
-}
-
-void	print_envp(char **env)
-{
-	int	i;
-
-	i = -1;
-	while (env[++i])
-		printf("%s\n", env[i]);
 }

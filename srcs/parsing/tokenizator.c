@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/18 15:46:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 21:20:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,15 @@ int	quote_tok(t_token **tok, char *input)
 	}
 	addback_cell_tok(tok,
 		new_cell_tok("NULL", ERROR));
-	// ft_err(g, "quote: ", 3);
 	return (1);
 }
 
-int	var_tok(t_token **tok, char *input)
+int	egal_tok(t_token **tok, char *input)
 {
-	int		i;
-	char	*tmp;
-
-	i = -1;
-	tmp = NULL;
-	while (input[++i] && !is_spec_char(input[i]))
-		tmp[i] = input[i];
-	tmp[i] = 0;
+	(void)input;
 	addback_cell_tok(tok,
-		new_cell_tok(ft_strdup(tmp), VAR));
-	return (i);
+		new_cell_tok(ft_strdup("="), EGAL));
+	return (1);
 }
 
 int	pipe_tok(t_token **tok, char *input)
@@ -59,8 +51,8 @@ int	pipe_tok(t_token **tok, char *input)
 	t_token	*last;
 
 	last = last_cell_tok(*tok);
-	i = 1;
-	if (input[0] == '|')
+	i = 0;
+	if (input[i] == '|')
 	{
 		if (last->type == SPACE)
 		{
@@ -73,11 +65,8 @@ int	pipe_tok(t_token **tok, char *input)
 			if (!ft_isspace(input[i]))
 				break ;
 	}
-	else if (input[0] == '=')
-	{
-		addback_cell_tok(tok,
-			new_cell_tok(ft_strdup("="), EGAL));
-	}
+	while (input[++i] && input[i] == ' ')
+		;
 	return (i);
 }
 

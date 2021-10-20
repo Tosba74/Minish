@@ -6,24 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 11:26:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 17:47:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
-
-int	is_spec_char(char c)
-{
-	int		i;
-	char	*spec_char;
-
-	i = -1;
-	spec_char = "\"'$=| <>";
-	while (spec_char[++i])
-		if (spec_char[i] == c)
-			return (i);
-	return (-1);
-}
 
 int	is_builtin(char *s)
 {
