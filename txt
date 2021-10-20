@@ -1,4 +1,3 @@
-prompt.c
 b_cd.c
 b_echo.c
 b_env.c
@@ -8,6 +7,7 @@ b_history.c
 b_pwd.c
 b_unset.c
 exec.c
+
 pipe_tools.c
 history.c
 lexer.c
@@ -15,7 +15,6 @@ pars_tools.c
 parser.c
 token_tools.c
 tokenizator.c
-
 error.c
 debug.c
 debug_tools.c

@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/10/20 21:18:47 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/10/20 22:24:27 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 
 override FILES_P	:= parser.c lexer.c pars_tools.c history.c \
 					tokenizator.c token_tools.c pipe_tools.c
-override FILES_E	:= exec.c 
+override FILES_E	:= exec.c exec_tools.c 
 override FILES_B	:= b_env.c b_history.c b_echo.c b_cd.c b_exit.c \
 					b_export.c b_pwd.c b_unset.c
 override FILES_M	:= init_env.c env_tools.c debug.c debug_tools.c error.c main.c

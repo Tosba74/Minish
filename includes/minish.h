@@ -39,8 +39,7 @@ void		history(void);
 
 int			exec(void);
 int			is_builtin(char *s);
-void		exec_cmd(t_global *g, char **cmd);
-void		is_bultins(t_global *g, char *s);
+void		dup_close(int src, int dst, char *s);
 
 /*********************************************************/
 /******************      PARSING      ********************/

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:17:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 23:14:36 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,40 @@ void	egal_exp(t_token *tok)
 	content[1] = NULL;
 	while (before && before->type != EGAL)
 		before = before->next;
-	if (before->type == EGAL)
+	if (before && before->type == EGAL)
 	{
+		// printf("La! ya un egal!\n");
 		after = before->next;
 		before = before->prev;
+		printf("av=%sap=%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
 		addback_cell_env(&g_g->hidden, new_cell_env(content));
-		tok = before->prev;
-		if (!tok)
-			tok = after->next;
-		else
+	}
+}
+
+char	*search_in_env(char *var)
+{
+	t_env	*tmp;
+
+	if (g_g->hidden)
+	{
+		tmp = g_g->hidden;
+		while (tmp)
 		{
-			tok->next = after->next;
-			after->next->prev = tok;
+			if (!ft_strcmp(tmp->name, var))
+				return (tmp->value);
+			tmp = tmp->next;
 		}
 	}
+	tmp = g_g->env;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, var))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return ("");
 }
 
 void	dollar_exp(t_token *tok)
@@ -58,15 +76,22 @@ void	dollar_exp(t_token *tok)
 	t_token	*name;
 
 	name = tok;
-	while (name->type != DOLLAR)
+	while (name && name->type != DOLLAR)
 		name = name->next;
+	if (name->type == DOLLAR)
+	{
+		name->type = ARG;
+		name->value = ft_strdup(search_in_env(name->value));
+	}
 }
+// 
 
 void	complet_pipeline(t_global *g, t_token *tok)
 {
 	print_token(tok);
 	// check_expansion(g, tok);
 	egal_exp(tok);
+	print_token(tok);
 	dollar_exp(tok);
 	printf("ENVPATH tu bug?:\n");
 	printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
@@ -80,6 +105,7 @@ void	parser(void)
 
 	tok = NULL;
 	input = get_last_input(g_g);
+	printf("%s\n", input);
 	lexer(&tok, input);
 	if (!find_error(tok))
 		ft_err("Syntax :", 5);

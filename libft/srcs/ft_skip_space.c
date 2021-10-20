@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 18:20:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/17 09:44:34 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 23:18:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*skip_space(char *s)
 	char			*buf;
 
 	i = 0;
-	while (s[i] == ' ' && s[i] == '\t')
+	while (s[i] && s[i] == ' ')
 		i++;
 	stop = ft_strlen(s);
-	while (s[--stop] == ' ' && s[stop] == '\t')
+	while (s[--stop] && s[stop] == ' ')
 		;
 	len = (size_t)stop - i + 1;
 	buf = NULL;
