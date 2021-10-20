@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 02:35:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/20 22:31:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/18 15:41:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static char	*choose_good_path(char **road_exec, char *av)
 		}
 		wrfree (tmp);
 	}
+	while (road_exec[i--])
+		wrfree(road_exec[i]);
 	wrfree(road_exec);
 	return (NULL);
 }

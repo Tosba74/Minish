@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/17 09:45:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 11:31:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 {
 	g = wrmalloc(sizeof(t_global));
 	g = &(t_global){0};
+	g->envp = env;
 	dprintf(STDERR_FILENO, "\033[32minti TG!\033[0m\n");
 	if (ac == 2)
 	{
@@ -60,7 +61,7 @@ static void	loop(t_global *g)
 		addback_cell_history(&g->history, new_cell_history(input, i++));
 		parser(g);
 		debug(g, 5);
-		is_bultins(g, input);
+		// is_bultins(g, input);
 		wrfree(input);
 		input = readline(prompt());
 	}
@@ -78,5 +79,6 @@ int	main(int ac, char **av, char **env)
 	}
 	init_global(&g, ac, av, env);
 	loop(&g);
+	wrdestroy();
 	return (0);
 }

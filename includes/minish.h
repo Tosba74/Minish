@@ -24,6 +24,7 @@
 
 void		env(t_global *g);
 void		pwd(t_global *g);
+void		do_echo(t_job *j);
 void		history(t_global *g);
 void		print_story(t_global *g);
 
@@ -33,6 +34,7 @@ void		print_story(t_global *g);
 
 void		exec_cmd(t_global *g, char **cmd);
 void		is_bultins(t_global *g, char *s);
+int			is_builtin(char *s);
 t_pipe		*new_cell_pipe(char *content);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			counter_pipe(char *s);

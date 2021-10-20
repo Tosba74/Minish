@@ -39,7 +39,10 @@ static const t_err	*err_exec(int err)
 {
 	static const t_err	err_e[] = {
 		{EPIPE, "Broken pipe\n"},
-		{ESRCH, "Invalid thread/process id!\n"},
+		{ENOEXEC, "Exec format error\n"},
+		{ECHILD, "No child processes"},
+		{127, "command not found\n"},
+		{EBADF, "Bad file descriptor\n"},
 		{ENOENT, "No such file or directory!\n"},
 		{ESRCH, "Invalid thread/process id!\n"},
 		{EAGAIN, "Insufficient resources!\n"},

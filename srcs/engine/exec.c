@@ -6,44 +6,113 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/14 12:40:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/20 16:20:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-void	is_bultins(t_global *g, char *s)
+void	dup_close(t_global *g, int src, int dst, char *s)
 {
-	if (!ft_strcmp(s, "env"))
-		env(g);
-	else if (!ft_strcmp(s, "pwd"))
-		pwd(g);
-	else if (!ft_strcmp(s, "history"))
-		history(g);
+	if (dup2(src, dst) < 0)
+		ft_err(g, s, 14);
+	if (close (src) < 0)
+		ft_err(g, s, 14);
 }
 
-void	exec_cmd(t_global *g, char **cmd)
+static int	waiting_pid(t_global *g)
 {
-	int		wrstatus;
-	pid_t	pid;
+	int	i;
+	int	ret;
+	int	wstatus;
 
-	wrstatus = 0;
-	pid = fork();
-	if (pid == -1)
-		ft_err(g, "Fork :", 10);
-	else if (pid > 0)
+	i = -1;
+	while (++i < (int)g->nb_proc)
 	{
-		// On block le processus parent jusqu'a ce que l'enfant termine puis
-		// on kill le processus enfant
-		waitpid(pid, &wrstatus, 0);
-		kill(pid, SIGTERM);
+		waitpid(g->pid_ar[i], &wstatus, 0);
+		if (WIFEXITED(wstatus))
+			ret = (unsigned char)WEXITSTATUS(wstatus);
+	}
+	return (ret);
+}
+
+static void	child_process(t_global *g, bool in, bool out, const int prev)
+{
+	if (in)
+		dup_close(g, prev, STDIN_FILENO, "Pipefd[0]");
+	else
+		dup_close(g, g->pipe->fd_in, STDIN_FILENO, "fd_in");
+	if (out)
+		dup_close(g, g->pipe->pipe_fd[1], STDOUT_FILENO, "Pipefd[1]");
+	else
+		dup_close(g, g->pipe->fd_out, STDOUT_FILENO, "fd_out");
+	execve(g->pipe->job->job, g->pipe->job->av, g->envp);
+	ft_err(g, "EXECVE ERROR: ", 12);
+}
+
+static void	daddy_process(t_global *g, bool in, bool out, const int prev)
+{
+	if (in)
+	{
+		if (close(prev) < 0)
+			ft_err(g, "Pipefd[0]", 8);
 	}
 	else
 	{
-		(void)cmd;
-		// Le processus enfant execute la commande ou exit si execve echoue
-		// if (execve(select_env_path(cmd[0]), cmd, NULL) == -1)
-		// 	perror("shell");
-		// exit(EXIT_FAILURE);
+		if (close(g->pipe->fd_in) < 0)
+			ft_err(g, "fd_in", 8);
 	}
+	if (out)
+	{
+		if (close(g->pipe->pipe_fd[1]) < 0)
+			ft_err(g, "Pipefd[1]", 8);
+	}
+	else
+	{
+		if (close(g->pipe->fd_out) < 0)
+			ft_err(g, "fd_out", 8);
+	}
+}
+
+static void	exec_jobs(t_global *g, bool in, bool out)
+{
+	const int	prev_in = g->pipe->pipe_fd[0];
+	pid_t		pid;
+
+	if (out)
+		if (pipe(g->pipe->pipe_fd) < 0)
+			ft_err(g, "ExecJobs: ", 10);
+	pid = fork();
+	if (pid < 0)
+		ft_err(g, "ExecJobs: ", 11);
+	if (pid == 0)
+		child_process(g, in, out, prev_in);
+	else
+	{
+		g->pid_ar[g->nb_proc++] = pid;
+		daddy_process(g, in, out, prev_in);
+	}
+}
+
+int	exec(t_global *g)
+{
+	int		i;
+	bool	in;
+	bool	out;
+
+	i = -1;
+	in = true;
+	out = true;
+	while (++i < count_cell_pipe(g->pipe))
+	{
+		g->envp = get_env_teub(g->env);
+		if (g->pipe->fd_in != 0)
+			in = false;
+		if (g->pipe->fd_out != 1)
+			out = false;
+		if (!g->pipe->job->job || !g->pipe->job->av)
+			ft_err(g, "Command: ", 13);
+		exec_jobs(g, in, out);
+	}
+	return (waiting_pid(g));
 }
