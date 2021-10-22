@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:08:21 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 12:18:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		print_token(t_token *tok);
 
 t_env		*new_cell_env(char **content);
 void		addback_cell_env(t_env **env, t_env *new);
-int			env_size(t_env *env);
+int			env_size(t_env **env);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -123,6 +123,7 @@ void		addback_cell_history(t_story **story, t_story *new);
 /*********************************************************/
 
 t_pipe		*new_cell_pipe(char *content);
+t_pipe		*last_cell_pipe(t_pipe *pipe);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			count_cell_pipe(t_pipe *pipe);
 

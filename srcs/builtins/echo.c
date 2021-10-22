@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   b_echo.c                                           :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:11:48 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 16:21:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 11:33:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	no_return(char *str)
 	return (1);
 }
 
-void		do_echo(t_job *j)
+int		do_echo(t_job *j)
 {
 	int	index;
 	int	opt_flag;
@@ -102,4 +102,5 @@ void		do_echo(t_job *j)
 	}
 	if (!j->av[index] && !opt_flag)
 		ft_putstr("\n");
+	return (0);
 }

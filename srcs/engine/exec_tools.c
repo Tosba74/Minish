@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 23:06:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 10:15:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	dup_close(int src, int dst, char *s)
 	if (close (src) < 0)
 		ft_err(s, 14);
 }
-
 
 static char	**extract_path(char **env)
 {

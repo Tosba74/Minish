@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:05:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 12:11:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static void	init_global(int ac, char **av, char **env)
 	debug(1);
 }
 
+void	init_pipe_bluff(char *input)
+{
+	t_pipe	*tmp;
+
+	addback_cell_pipe(&g_g->pipe, new_cell_pipe(input));
+	tmp = last_cell_pipe(g_g->pipe);
+	tmp->job->job = input; 
+	tmp->job->av = ft_split(input, ' ');
+
+}
+
 static void	loop(void)
 {
 	int		i;
@@ -52,7 +63,8 @@ static void	loop(void)
 		add_history(input);
 		addback_cell_history(&g_g->history, new_cell_history(input, i++));
 		parser();
-		debug(5);
+		// debug(5);
+		init_pipe_bluff("ls");
 		exec();
 		// is_bultins(g, input);
 		wrfree(input);

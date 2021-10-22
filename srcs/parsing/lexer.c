@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:17:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 11:09:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	dollar_tok(t_token **tok, char *input)
 	while (input[++i] && !is_spec_char(input[i]))
 		tmp[i] = input[i];
 	tmp[i] = 0;
+	printf("tmp = %s\n", tmp);
 	addback_cell_tok(tok,
 		new_cell_tok(ft_strdup(tmp), DOLLAR));
 	return (i);

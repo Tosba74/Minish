@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 19:29:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 12:17:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@ void	init_env(t_global *g, char **env)
 {
 	int		i;
 	int		size;
+	t_env	*tmp;
 
 	i = -1;
 	size = ft_strslen(env);
 	while (++i < size)
 		addback_cell_env(&g->env, new_cell_env(split_content(env[i])));
+	tmp = g->env;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->name, "PATH", 4))
+			tmp->value = ft_strjoin_free("./.bin:", tmp->value, 2);
+		tmp = tmp->next;
+	}
 }
 
 static char	*get_env_line(t_env *env)
@@ -68,7 +76,7 @@ char	**get_env_teub(t_env *env)
 
 	i = 0;
 	cpy = env;
-	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
+	teub = (char **)wrmalloc(sizeof(char *) * env_size(&cpy) + 1);
 	while (cpy)
 	{
 		teub[i] = get_env_line(cpy);

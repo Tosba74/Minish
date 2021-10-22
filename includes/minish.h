@@ -30,7 +30,7 @@ t_global	*g_g;
 
 void		env(t_global *g);
 void		pwd(t_global *g);
-void		do_echo(t_job *j);
+int			do_echo(t_job *j);
 void		history(void);
 
 /*********************************************************/

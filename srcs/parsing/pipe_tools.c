@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 15:27:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 12:08:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_pipe	*new_cell_pipe(char *content)
 	return (new);
 }
 
-static t_pipe	*last_cell_pipe(t_pipe *pipe)
+t_pipe	*last_cell_pipe(t_pipe *pipe)
 {
 	if (pipe == NULL)
 		return (NULL);
@@ -50,7 +50,9 @@ int	count_cell_pipe(t_pipe *pipe)
 	int		count;
 
 	count = 0;
-	while (pipe != NULL)
+	if (!pipe)
+		return (count);
+	while (pipe)
 	{
 		pipe = pipe->next;
 		count++;

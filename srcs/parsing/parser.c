@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 23:14:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 12:12:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	egal_exp(t_token *tok)
 		// printf("La! ya un egal!\n");
 		after = before->next;
 		before = before->prev;
-		printf("av=%sap=%s\n", before->value, after->value);
+		printf("av>%sap>%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
 		addback_cell_env(&g_g->hidden, new_cell_env(content));
@@ -78,23 +78,25 @@ void	dollar_exp(t_token *tok)
 	name = tok;
 	while (name && name->type != DOLLAR)
 		name = name->next;
-	if (name->type == DOLLAR)
+	if (name && name->type == DOLLAR)
 	{
 		name->type = ARG;
-		name->value = ft_strdup(search_in_env(name->value));
+		name->value = ft_strdup(search_in_env(name->value + 1));
 	}
 }
 // 
 
 void	complet_pipeline(t_global *g, t_token *tok)
 {
-	print_token(tok);
+	(void)g;
+	// print_token(tok);
 	// check_expansion(g, tok);
 	egal_exp(tok);
-	print_token(tok);
+	// print_hidden();
+	// print_token(tok);
 	dollar_exp(tok);
 	printf("ENVPATH tu bug?:\n");
-	printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
+	// printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
 }
 
 
@@ -105,7 +107,6 @@ void	parser(void)
 
 	tok = NULL;
 	input = get_last_input(g_g);
-	printf("%s\n", input);
 	lexer(&tok, input);
 	if (!find_error(tok))
 		ft_err("Syntax :", 5);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 23:03:52 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/22 14:35:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	exec_jobs(t_pipe *p, bool in, bool out)
 	}
 }
 
-int	exec()
+int	exec(void)
 {
 	int		i;
 	bool	in;
