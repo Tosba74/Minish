@@ -6,11 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 16:24:10 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 17:05:29 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+t_global *g_g;
 
 static const char	*prompt(void)
 {
@@ -22,7 +24,6 @@ static const char	*prompt(void)
 
 static void	init_global(int ac, char **av, char **env)
 {
-	g_g = wrmalloc(sizeof(t_global));
 	g_g = &(t_global){0};
 	g_g->envp = env;
 	if (ac == 2)
@@ -51,11 +52,11 @@ void	init_pipe_bluff(char *input)
 }
 
 /*
-static void reinit()
-{
-	
-}
-*/
+   static void reinit()
+   {
+
+   }
+   */
 
 static void	loop(void)
 {
@@ -82,7 +83,7 @@ int	main(int ac, char **av, char **env)
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);
-		exit(g_g->err);
+		exit(1);
 	}
 	init_global(ac, av, env);
 	loop();
