@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:20:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 15:36:49 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	pipe_tok(t_token **tok, char *input)
 	i = 0;
 	if (input[i] == '|')
 	{
-		if (last->type == SPACE)
+		if (last->type == SPC)
 		{
 			ft_memdel(last->value);
 			ft_memdel(last);
@@ -79,7 +79,7 @@ int	space_tok(t_token **tok, char *input)
 		if (!ft_isspace(input[i]))
 			break ;
 	addback_cell_tok(tok,
-		new_cell_tok(ft_strdup(" "), SPACE));
+		new_cell_tok(ft_strdup(" "), SPC));
 	return (i);
 }
 

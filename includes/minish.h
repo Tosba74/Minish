@@ -22,7 +22,21 @@
 /*******************      GLOBAL      ********************/
 /*********************************************************/
 
-t_global	*g_g;
+typedef struct s_global
+{
+	size_t		nb_proc;
+	pid_t		pid_ar[1024];
+	t_env		*env;
+	t_env		*hidden;
+	char		**envp;
+	bool		hide_mod;
+	bool		debug;
+	t_story		*history;
+	t_pipe		*pipe;
+	int			err;
+}	t_global;
+
+static t_global	*g_g;
 
 /*********************************************************/
 /******************      BUILTIN      ********************/

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 17:13:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 15:44:06 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_type
 	EGAL,
 	REDIR,
 	PIPE,
-	SPACE,
+	SPC,
 	ERROR,
 	EOINPUT
 }	t_type;
@@ -77,19 +77,6 @@ typedef struct s_pipe
 	struct s_pipe	*next;
 }	t_pipe;
 
-typedef struct s_global
-{
-	size_t		nb_proc;
-	pid_t		pid_ar[1024];
-	t_env		*env;
-	t_env		*hidden;
-	char		**envp;
-	bool		hide_mod;
-	bool		debug;
-	t_story		*history;
-	t_pipe		*pipe;
-	int			err;
-}	t_global;
 
 /*********************************************************/
 /********************     DEBUG     **********************/

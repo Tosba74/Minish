@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 11:09:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 16:22:07 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,9 @@ static int	tokenizator(t_token **tok, char *input)
 
 void	lexer(t_token **tok, char *input)
 {
-	char	*tmp;
 	int		i;
 	int		j;
 
-	tmp = NULL;
 	i = 0;
 	while (input[i])
 	{
