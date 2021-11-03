@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 17:47:50 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:16:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_builtin(char *s)
 	return (-1);
 }
 
-int	find_error(t_token *tok)
+char	*find_error(t_token *tok)
 {
 	t_token	*cpy;
 
@@ -41,10 +41,10 @@ int	find_error(t_token *tok)
 	while (cpy)
 	{
 		if (cpy->type == ERROR)
-			return (0);
+			return (ft_strjoin(cpy->value, " :"));
 		cpy = cpy->next;
 	}
-	return (1);
+	return (NULL);
 }
 
 int	count_this_char(char *s, char c)

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:17:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:38:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,17 @@ void	addback_cell_env(t_env **env, t_env *new)
 		*env = new;
 }
 
-int	env_size(t_env **env)
+int	env_size(t_env *env)
 {
 	int		count;
 	t_env	*cpy;
 
 	count = 0;
-	cpy = *env;
-	if (!cpy)
-		return (0);
+	cpy = env;
 	while (cpy)
 	{
-		cpy = cpy->next;
 		count++;
+		cpy = cpy->next;
 	}
 	return (count);
 }

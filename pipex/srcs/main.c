@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 04:40:14 by bmangin           #+#    #+#             */
-/*   Updated: 2021/08/17 18:15:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:26:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_fd(t_pipex *p, char *file1, char *file2)
 	if (p->fd_in > 0)
 	{
 		close(p->fd_in);
-		ft_err("File opening:\n", 0);
+		ft_err("File opening", 0);
 	}
 	close(p->fd_in);
 	p->fd_in = open(file1, O_RDONLY);
@@ -44,6 +44,6 @@ int	main(int ac, char **av, char **env)
 	if (ac > 4)
 		return (pipex(ac, av, env));
 	else
-		ft_err("Command: ", 2);
+		ft_err("Command", 2);
 	return (0);
 }

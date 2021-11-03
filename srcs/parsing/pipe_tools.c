@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:08:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 16:37:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_pipe	*new_cell_pipe(char *content)
 
 	new = wrmalloc(sizeof(t_pipe));
 	new->pipe_line = ft_strdup(content);
-	new->fd_in = 0;
-	new->fd_out = 1;
+	new->fd_in = STDIN_FILENO;
+	new->fd_out = STDOUT_FILENO;
 	new->job = wrmalloc(sizeof(t_job));
 	new->next = NULL;
 	return (new);

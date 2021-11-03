@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:12:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 17:53:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,16 @@ void	dollar_exp(t_token *tok)
 void	complet_pipeline(t_global *g, t_token *tok)
 {
 	(void)g;
-	// print_token(tok);
 	// check_expansion(g, tok);
+	print_token(tok);
 	egal_exp(tok);
-	// print_hidden();
-	// print_token(tok);
 	dollar_exp(tok);
-	printf("ENVPATH tu bug?:\n");
+	join_cell_tok(&tok);
+	print_token(tok);
+	// print_hidden();
+	// printf("ENVPATH tu bug?:\n");
 	// printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
 }
-
 
 void	parser(void)
 {
@@ -108,9 +108,12 @@ void	parser(void)
 	tok = NULL;
 	input = get_last_input(g_g);
 	lexer(&tok, input);
-	if (!find_error(tok))
-		ft_err("Syntax :", 5);
-	complet_pipeline(g_g, tok);
+	if (find_error(tok))
+		ft_err(find_error(tok), 5);
+	else
+	{
+		complet_pipeline(g_g, tok);
+	}
 	clear_tok(tok);
 }
 	// debug(5);

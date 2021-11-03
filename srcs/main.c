@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:11:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 16:59:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	init_global(int ac, char **av, char **env)
 			g_g->debug = true;
 		else
 		{
-			ft_err("Arg: ", 1);
+			ft_err("Arg", 1);
 			exit (g_g->err);
 		}
 	}
@@ -48,8 +48,14 @@ void	init_pipe_bluff(char *input)
 	tmp = last_cell_pipe(g_g->pipe);
 	tmp->job->job = input; 
 	tmp->job->av = ft_split(input, ' ');
-
 }
+
+/*
+static void reinit()
+{
+	
+}
+*/
 
 static void	loop(void)
 {
@@ -63,9 +69,8 @@ static void	loop(void)
 		add_history(input);
 		addback_cell_history(&g_g->history, new_cell_history(input, i++));
 		parser();
-		// debug(5);
-		init_pipe_bluff("ls");
-		exec();
+		// init_pipe_bluff("ls");
+		// exec();
 		// is_bultins(g, input);
 		wrfree(input);
 		input = readline(prompt());
@@ -76,7 +81,7 @@ int	main(int ac, char **av, char **env)
 {
 	if (ac > 2)
 	{
-		ft_err("Arg: ", 0);
+		ft_err("Arg", 0);
 		exit(g_g->err);
 	}
 	init_global(ac, av, env);

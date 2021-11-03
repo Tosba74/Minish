@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:17:43 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:37:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static char	**split_content(const char *s)
 	i = -1;
 	teub_tmp = ft_split(s, '=');
 	if (teub_tmp == NULL)
-		ft_err("Env: ", 2);
+		ft_err("Env", 2);
 	tmp = ft_strdup(teub_tmp[0]);
 	while (tmp[++i])
 		if (!ft_isprint(teub_tmp[0][i]))
-			ft_err("Env: ", 3);
+			ft_err("Env", 3);
 	free_all(teub_tmp, ft_strslen(teub_tmp));
 	teub_tmp = (char **)wrmalloc(sizeof(char *) * 3);
 	teub_tmp[0] = tmp;
@@ -76,7 +76,7 @@ char	**get_env_teub(t_env *env)
 
 	i = 0;
 	cpy = env;
-	teub = (char **)wrmalloc(sizeof(char *) * env_size(&cpy) + 1);
+	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
 	while (cpy)
 	{
 		teub[i] = get_env_line(cpy);

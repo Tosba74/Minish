@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 18:15:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/08/17 18:15:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 15:26:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	child_process(t_pipex *p, const int prev)
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
 	execve(p->cmd, p->av, p->env);
-	ft_err("EXECVE ERROR: ", 5);
+	ft_err("EXECVE ERROR", 5);
 }
 
 static void	daddy_process(t_pipex *p, const int prev)
@@ -52,7 +52,7 @@ static void	daddy_process(t_pipex *p, const int prev)
 	else
 	{
 		if (close(p->fd_in) < 0)
-			ft_err("fd_in", 8);
+			ft_err("Fd_in", 8);
 	}
 	if (p->out)
 	{
@@ -62,7 +62,7 @@ static void	daddy_process(t_pipex *p, const int prev)
 	else
 	{
 		if (close(p->fd_out) < 0)
-			ft_err("fd_out", 8);
+			ft_err("Fd_out", 8);
 	}
 }
 
@@ -73,10 +73,10 @@ static void	exec_jobs(t_pipex *p)
 
 	if (p->out)
 		if (pipe(p->pipefd) < 0)
-			ft_err("ExecJobs: ", 3);
+			ft_err("ExecJobs", 3);
 	pid = fork();
 	if (pid < 0)
-		ft_err("ExecJobs: ", 4);
+		ft_err("ExecJobs", 4);
 	if (pid == 0)
 		child_process(p, prev_in);
 	else

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 14:35:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 16:42:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	child_process(t_pipe *p, bool in, bool out, const int prev)
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
 	execve(p->job->job, p->job->av, g_g->envp);
-	ft_err("EXECVE ERROR: ", 12);
+	ft_err("EXECVE ERROR", 12);
 }
 
 static void	daddy_process(t_pipe *p, bool in, bool out, const int prev)
@@ -73,10 +73,10 @@ static void	exec_jobs(t_pipe *p, bool in, bool out)
 
 	if (out)
 		if (pipe(p->pipe_fd) < 0)
-			ft_err("ExecJobs: ", 10);
+			ft_err("ExecJobs", 10);
 	pid = fork();
 	if (pid < 0)
-		ft_err("ExecJobs: ", 11);
+		ft_err("ExecJobs", 11);
 	if (pid == 0)
 		child_process(p, in, out, prev_in);
 	else
@@ -99,13 +99,14 @@ int	exec(void)
 	cpy = g_g->pipe;
 	while (++i < count_cell_pipe(cpy))
 	{
-		g_g->envp = get_env_teub(g_g->env);
+		dprintf(STDERR_FILENO, "i => %d nb_proc => %zu\n", i, g_g->nb_proc);
+		// g_g->envp = get_env_teub(g_g->env);
 		if (cpy->fd_in != 0)
 			in = false;
 		if (cpy->fd_out != 1)
 			out = false;
 		if (!cpy->job->job || !cpy->job->av)
-			ft_err("Command: ", 13);
+			ft_err("Command", 13);
 		exec_jobs(cpy, in, out);
 		cpy = cpy->next;
 	}

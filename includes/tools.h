@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 12:18:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 17:13:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 typedef enum e_type
 {
 	ARG,
+	QUOTE,
+	DQUOTE,
 	FILES,
 	DIR,
 	CMD,
 	BUILTIN,
 	OPT,
-	QUOTE,
-	DQUOTE,
 	DOLLAR,
 	EGAL,
 	REDIR,
@@ -108,7 +108,7 @@ void		print_token(t_token *tok);
 
 t_env		*new_cell_env(char **content);
 void		addback_cell_env(t_env **env, t_env *new);
-int			env_size(t_env **env);
+int			env_size(t_env *env);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -134,8 +134,9 @@ int			count_cell_pipe(t_pipe *pipe);
 t_token		*new_cell_tok(char *content, t_type t);
 t_token		*last_cell_tok(t_token *tok);
 void		addback_cell_tok(t_token **tok, t_token *new);
+void		join_cell_tok(t_token **tok);
 void		clear_tok(t_token *tok);
-int			find_error(t_token *tok);
+char		*find_error(t_token *tok);
 int			dollar_tok(t_token **tok, char *input);
 int			quote_tok(t_token **tok, char *input);
 int			space_tok(t_token **tok, char *input);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/17 15:47:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/10/24 17:59:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,28 @@ void	addback_cell_tok(t_token **tok, t_token *new)
 	{
 		last->next = new;
 		new->prev = last;
+	}
+}
+
+void	join_cell_tok(t_token **tok)
+{
+	t_token *tmp;
+	t_token *cpy;
+
+	while ((*tok))
+	{
+		if ((*tok)->type == ARG && (*tok)->next && ((*tok)->next->type <= 2))
+		{
+			tmp = (*tok)->next;
+			if (!tmp && !tmp->value)
+				(*tok)->value = ft_strjoin_free((*tok)->value, tmp->value, 3);
+			(*tok)->next = tmp->next;
+			wrfree(tmp);
+			if ((*tok)->next)
+				(*tok)->next->prev = (*tok);
+		}
+		else
+			(*tok) = (*tok)->next;
 	}
 }
 
