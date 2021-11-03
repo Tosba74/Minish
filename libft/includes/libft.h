@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 15:24:31 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,6 @@ t_list				*ft_lstnew(void *content);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstlast(t_list *lst);
-/*
-**					GNL
-*/
-int					get_next_line(int fd, char **line);
 /*
 **					GARBOGE COLLECTOR
 */
