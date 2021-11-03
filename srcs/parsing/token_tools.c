@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 17:59:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 15:13:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	addback_cell_tok(t_token **tok, t_token *new)
 void	join_cell_tok(t_token **tok)
 {
 	t_token *tmp;
-	t_token *cpy;
 
 	while ((*tok))
 	{
