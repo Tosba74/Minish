@@ -65,7 +65,7 @@ void		lexer(t_token **tok, char *input);
 void		parser(void);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
-char		*get_last_input(t_global *g);
+char		*get_last_input(void);
 char		**get_env_teub(t_env *env);
 
 /*********************************************************/

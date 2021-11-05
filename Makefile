@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/03 16:22:30 by astucky          ###   ########lyon.fr    #
+#    Updated: 2021/11/03 17:24:27 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ override FILES_E	:= exec.c exec_tools.c
 override FILES_B	:= b_env.c b_history.c echo.c b_cd.c b_exit.c \
 					b_export.c b_pwd.c b_unset.c
 override FILES_M	:= signaux.c debug.c debug_tools.c error.c main.c \
-					init_env.c env_tools.c
+					init_env.c env_tools.c 
  
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \

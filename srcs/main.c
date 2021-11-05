@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 17:05:29 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 17:31:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_global *g_g;
+t_global	*g_g;
 
 static const char	*prompt(void)
 {
@@ -26,6 +26,7 @@ static void	init_global(int ac, char **av, char **env)
 {
 	g_g = &(t_global){0};
 	g_g->envp = env;
+	g_g->debug = false;
 	if (ac == 2)
 	{
 		if (!ft_strncmp(av[1], "-debug", 6))
@@ -37,8 +38,8 @@ static void	init_global(int ac, char **av, char **env)
 		}
 	}
 	init_env(g_g, env);
-	debug(0);
-	debug(1);
+	// debug(0);
+	// debug(1);
 }
 
 void	init_pipe_bluff(char *input)
@@ -50,13 +51,6 @@ void	init_pipe_bluff(char *input)
 	tmp->job->job = input; 
 	tmp->job->av = ft_split(input, ' ');
 }
-
-/*
-   static void reinit()
-   {
-
-   }
-   */
 
 static void	loop(void)
 {

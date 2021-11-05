@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 17:53:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/03 16:53:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	parser(void)
 	char	*input;
 
 	tok = NULL;
-	input = get_last_input(g_g);
+	input = get_last_input();
 	lexer(&tok, input);
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
