@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 18:20:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 23:18:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/05 17:28:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*skip_space(char *s)
 	buf = NULL;
 	if (len > 0)
 		buf = ft_substr(s, i, len);
+	wrfree(s);
 	return (buf);
 }

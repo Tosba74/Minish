@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 16:53:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/05 17:37:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,20 +100,16 @@ void	complet_pipeline(t_global *g, t_token *tok)
 	// printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
 }
 
-void	parser(void)
+void	parser(char *input)
 {
 	t_token	*tok;
-	char	*input;
 
 	tok = NULL;
-	input = get_last_input();
 	lexer(&tok, input);
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
 	else
-	{
 		complet_pipeline(g_g, tok);
-	}
 	clear_tok(tok);
 }
 	// debug(5);

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 15:36:49 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/05 16:32:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ int	pipe_tok(t_token **tok, char *input)
 	i = 0;
 	if (input[i] == '|')
 	{
-		if (last->type == SPC)
+		if (last->type == PIPE)
+			ft_err("Double pipe", 5);
+		else if (last->type == SPC)
 		{
 			ft_memdel(last->value);
 			ft_memdel(last);

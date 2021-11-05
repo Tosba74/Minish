@@ -62,7 +62,7 @@ void		dup_close(int src, int dst, char *s);
 int			is_spec_char(char c);
 int			count_this_char(char *s, char c);
 void		lexer(t_token **tok, char *input);
-void		parser(void);
+void		parser(char *s);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
