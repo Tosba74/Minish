@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 16:42:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 18:51:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	exec(void)
 	while (++i < count_cell_pipe(cpy))
 	{
 		dprintf(STDERR_FILENO, "i => %d nb_proc => %zu\n", i, g_g->nb_proc);
-		// g_g->envp = get_env_teub(g_g->env);
+		g_g->envp = get_env_teub(g_g->env);
 		if (cpy->fd_in != 0)
 			in = false;
 		if (cpy->fd_out != 1)

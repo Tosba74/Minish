@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 15:44:06 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 18:36:35 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ t_pipe		*new_cell_pipe(char *content);
 t_pipe		*last_cell_pipe(t_pipe *pipe);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			count_cell_pipe(t_pipe *pipe);
+void		free_pipeline(void);
 
 /*********************************************************/
 /*******************   TOKENIZATOR   *********************/

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 16:37:15 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 18:38:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,19 @@ int	count_cell_pipe(t_pipe *pipe)
 		count++;
 	}
 	return (count);
+}
+
+void	free_pipeline(void)
+{
+	t_pipe	*p;
+
+	if (!g_g->pipe)
+		return ;
+	while (g_g->pipe)
+	{
+		p = g_g->pipe;
+		g_g->pipe = g_g->pipe->next;
+		wrfree(p->pipe_line);
+		wrfree(p);
+	}
 }

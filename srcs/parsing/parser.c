@@ -6,23 +6,23 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/05 17:37:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 19:59:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
+	/*
 void	check_expansion(t_token *tok)
 {
-	/*
 	void	(*pf_exp[3])(t_global *g, t_token *token);
 
 	pf_exp[0] = dollar_exp;
 	pf_exp[1] = egal_exp;
 	pf_exp[2] = pipe_exp;
-	*/
 	(void)tok;
 }
+	*/
 
 void	egal_exp(t_token *tok)
 {
@@ -85,10 +85,34 @@ void	dollar_exp(t_token *tok)
 	}
 }
 // 
-
-void	complet_pipeline(t_global *g, t_token *tok)
+char	*join_all_tok(t_token *tok)
 {
-	(void)g;
+	char	*s;
+
+	if (!tok)
+		return (NULL);
+	if( !tok->next)
+		return (tok->value);
+	s = ft_strjoin_free(tok->value, tok->next->value, 1);
+	tok = tok->next;
+	while (tok->next)
+	{
+		if (tok->next->type == PIPE)
+			return (s);
+		s = ft_strjoin_free(s, tok->next->value, 3);
+		tok = tok->next;
+	}
+	return (s);
+}
+
+void	complet_pipeline(t_token *tok)
+{
+	addback_cell_pipe(&g_g->pipe, new_cell_pipe(join_all_tok(tok)));
+	printf("%s\n", g_g->pipe->pipe_line);
+}
+
+void	check_expansion(t_token *tok)
+{
 	// check_expansion(g, tok);
 	print_token(tok);
 	egal_exp(tok);
@@ -103,14 +127,24 @@ void	complet_pipeline(t_global *g, t_token *tok)
 void	parser(char *input)
 {
 	t_token	*tok;
+	char	*s;
 
 	tok = NULL;
-	lexer(&tok, input);
+	s = get_last_input();
+	(void)input;
+	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
+	// lexer(&tok, input);
+	lexer(&tok, s);
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
 	else
-		complet_pipeline(g_g, tok);
+	{
+		check_expansion(tok);
+		if (is_builtin(tok->value))
+		complet_pipeline(tok);
+	}
 	clear_tok(tok);
+	free_pipeline();
 }
 	// debug(5);
 	// dispath_jobs(g);

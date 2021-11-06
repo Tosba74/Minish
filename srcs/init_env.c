@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 15:37:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 16:51:49 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_env(t_global *g, char **env)
 {
 	int		i;
 	int		size;
+	char	*str;
 	t_env	*tmp;
 
 	i = -1;
@@ -47,8 +48,15 @@ void	init_env(t_global *g, char **env)
 	tmp = g->env;
 	while (tmp)
 	{
+		if (!ft_strncmp(tmp->name, "PWD", 3))
+			str = ft_strjoin_free(tmp->value, "/bin:", 0);
+		tmp = tmp->next;
+	}
+	tmp = g->env;
+	while (tmp)
+	{
 		if (!ft_strncmp(tmp->name, "PATH", 4))
-			tmp->value = ft_strjoin_free("./.bin:", tmp->value, 2);
+			tmp->value = ft_strjoin_free(str, tmp->value, 3);
 		tmp = tmp->next;
 	}
 }

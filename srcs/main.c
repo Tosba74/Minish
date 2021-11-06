@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/05 17:32:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/06 17:05:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_global	*g_g;
+t_global	*g_g = &(t_global){0};
 
 static const char	*prompt(void)
 {
@@ -24,7 +24,6 @@ static const char	*prompt(void)
 
 static void	init_global(int ac, char **av, char **env)
 {
-	g_g = &(t_global){0};
 	g_g->envp = env;
 	g_g->debug = false;
 	if (ac == 2)
@@ -38,8 +37,9 @@ static void	init_global(int ac, char **av, char **env)
 		}
 	}
 	init_env(g_g, env);
-	// debug(0);
-	// debug(1);
+	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
+	debug(0);
+	debug(1);
 }
 
 void	init_pipe_bluff(char *input)
@@ -62,9 +62,10 @@ static void	loop(void)
 	while (input)
 	{
 		add_history(input);
+		addback_cell_history(&g_g->history, new_cell_history(skip_space(input), i++));
 		parser(skip_space(input));
 		// init_pipe_bluff("ls");
-		// exec();
+		exec();
 		// is_bultins(g, input);
 		wrfree(input);
 		input = readline(prompt());
