@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 12:45:19 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/03 15:24:51 by astucky          ###   ########lyon.fr    #
+#    Updated: 2021/11/08 17:39:45 by astucky          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,11 +97,11 @@ crea_b :
 
 clean : 
 	${RM} ${PATH_O}
-	echo "${_P}$@ ${_E}${_R}ecrase directory bin !${_E}"
+	echo "${_P}$@ ${_E}${_R}erase directory bin !${_E}"
 
 fclean :	clean
 	${RM} ${NAME}
-	echo "${_P}$@ ${_E}${_R}ecrase all !!!${_E}"
+	echo "${_P}$@ ${_E}${_R}erase all !!!${_E}"
 
 libft:	
 		echo "\n"

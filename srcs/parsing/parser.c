@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/06 19:59:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/08 21:22:30 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void	parser(char *input)
 	{
 		check_expansion(tok);
 		if (is_builtin(tok->value))
-		complet_pipeline(tok);
+			complet_pipeline(tok);
 	}
 	clear_tok(tok);
 	free_pipeline();

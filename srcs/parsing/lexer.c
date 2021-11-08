@@ -6,12 +6,12 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/05 17:34:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/08 21:22:27 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
-
+/*
 int	dollar_tok(t_token **tok, char *input)
 {
 	int		i;
@@ -25,6 +25,29 @@ int	dollar_tok(t_token **tok, char *input)
 	printf("tmp = %s\n", tmp);
 	addback_cell_tok(tok,
 		new_cell_tok(ft_strdup(tmp), DOLLAR));
+	return (i);
+}
+*/
+int	dollar_tok(t_token **tok, char *input)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (input[i] && !is_spec_char(input[i]))
+		i++;
+	tmp = malloc(sizeof(char) * i);
+	if (!tmp)
+		ft_err("Malloc error", 1);
+	i = 1;
+	while (input[i] && !is_spec_char(input[i]))
+	{
+		tmp[i - 1] = input[i];
+		i++;
+	}
+	tmp[i] = 0;
+	addback_cell_tok(tok, new_cell_tok(ft_strdup(search_in_env(tmp)), ARG));
+	free(tmp);
 	return (i);
 }
 

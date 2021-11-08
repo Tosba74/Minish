@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/06 17:05:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/08 21:22:29 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,15 @@ static void	loop(void)
 	input = readline(prompt());
 	while (input)
 	{
-		add_history(input);
-		addback_cell_history(&g_g->history, new_cell_history(skip_space(input), i++));
-		parser(skip_space(input));
-		// init_pipe_bluff("ls");
-		exec();
-		// is_bultins(g, input);
+		if (input[0])
+		{
+			add_history(input);
+			addback_cell_history(&g_g->history, new_cell_history(skip_space(input), i++));
+			parser(skip_space(input));
+			// init_pipe_bluff("ls");
+			exec();
+			// is_bultins(g, input);
+		}
 		wrfree(input);
 		input = readline(prompt());
 	}
