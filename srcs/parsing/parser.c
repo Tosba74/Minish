@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/08 21:22:30 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/08 22:18:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*join_all_tok(t_token *tok)
 
 	if (!tok)
 		return (NULL);
-	if( !tok->next)
+	if (!tok->next)
 		return (tok->value);
 	s = ft_strjoin_free(tok->value, tok->next->value, 1);
 	tok = tok->next;
