@@ -51,8 +51,9 @@ void		history(void);
 /******************      ENGINE       ********************/
 /*********************************************************/
 
-int			exec(void);
+int			exec(t_pipe *pipe);
 int			is_builtin(char *s);
+void		simple_cmd(t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
 
 /*********************************************************/
@@ -63,7 +64,7 @@ int			is_spec_char(char c);
 char		*search_in_env(char *var);
 int			count_this_char(char *s, char c);
 void		lexer(t_token **tok, char *input);
-void		parser(char *s);
+void		parser(t_pipe *pipe);
 void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
