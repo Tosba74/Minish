@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/08 22:18:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/09 12:40:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	dollar_exp(t_token *tok)
 		name->value = ft_strdup(search_in_env(name->value + 1));
 	}
 }
-// 
+
 char	*join_all_tok(t_token *tok)
 {
 	char	*s;
@@ -113,7 +113,6 @@ void	complet_pipeline(t_token *tok)
 
 void	check_expansion(t_token *tok)
 {
-	// check_expansion(g, tok);
 	print_token(tok);
 	egal_exp(tok);
 	dollar_exp(tok);
@@ -124,27 +123,25 @@ void	check_expansion(t_token *tok)
 	// printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
 }
 
-void	parser(char *input)
+void	parser(t_pipe *pipe)
 {
 	t_token	*tok;
 	char	*s;
 
 	tok = NULL;
 	s = get_last_input();
-	(void)input;
 	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
 	// lexer(&tok, input);
 	lexer(&tok, s);
+	(void)pipe;
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
 	else
 	{
 		check_expansion(tok);
-		if (is_builtin(tok->value))
-			complet_pipeline(tok);
+		complet_pipeline(tok);
 	}
 	clear_tok(tok);
-	free_pipeline();
 }
 	// debug(5);
 	// dispath_jobs(g);
