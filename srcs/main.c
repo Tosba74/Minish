@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/08 22:19:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/09 11:17:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ static void	loop(void)
 		wrfree(input);
 		input = readline(prompt());
 	}
+}
+
+t_global *get_global(void)
+{
+	static t_global g;
+
+	return (g);
 }
 
 int	main(int ac, char **av, char **env)
