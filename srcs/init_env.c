@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/06 16:51:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 15:07:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,10 @@ void	init_env(t_global *g, char **env)
 	i = -1;
 	size = ft_strslen(env);
 	while (++i < size)
-		addback_cell_env(&g->env, new_cell_env(split_content(env[i])));
-	tmp = g->env;
-	while (tmp)
 	{
-		if (!ft_strncmp(tmp->name, "PWD", 3))
-			str = ft_strjoin_free(tmp->value, "/bin:", 0);
-		tmp = tmp->next;
-	}
-	tmp = g->env;
-	while (tmp)
-	{
-		if (!ft_strncmp(tmp->name, "PATH", 4))
-			tmp->value = ft_strjoin_free(str, tmp->value, 3);
-		tmp = tmp->next;
+		addback_cell_env(&g->env, new_cell_env(split_content(env[i], PRINT)));
+		addback_cell_env(&get_var_env(),
+			new_cell_env(split_content(env[i], PRINT)));
 	}
 }
 
@@ -87,7 +77,8 @@ char	**get_env_teub(t_env *env)
 	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
 	while (cpy)
 	{
-		teub[i] = get_env_line(cpy);
+		if (cpy->print == PRINT)
+			teub[i] = get_env_line(cpy);
 		cpy = cpy->next;
 		i++;
 	}

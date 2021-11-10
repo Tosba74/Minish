@@ -6,19 +6,20 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/24 15:38:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 15:02:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-t_env	*new_cell_env(char **content)
+t_env	*new_cell_env(char **content, t_print print)
 {
 	t_env	*new;
 
 	new = wrmalloc(sizeof(t_env));
 	new->name = ft_strdup(content[0]);
 	new->value = ft_strdup(content[1]);
+	new->print = print;
 	new->next = NULL;
 	return (new);
 }
