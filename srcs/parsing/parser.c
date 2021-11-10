@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/09 12:40:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/09 20:03:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ void	parser(t_pipe *pipe)
 	tok = NULL;
 	s = get_last_input();
 	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
-	// lexer(&tok, input);
 	lexer(&tok, s);
 	(void)pipe;
 	if (find_error(tok))

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/09 14:05:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/09 19:59:17 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_global *get_global(void)
 	static t_global g;
 
 	return (&g);
-
 }
 
 int	main(int ac, char **av, char **env)
