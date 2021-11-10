@@ -69,7 +69,6 @@ void		init_env(t_global *g, char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
 char		**get_env_teub(t_env *env);
-t_env		*get_var_env(void)
 
 /*********************************************************/
 /******************       MAIN        ********************/

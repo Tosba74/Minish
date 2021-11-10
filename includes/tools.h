@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:05:24 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 15:15:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void		print_token(t_token *tok);
 /******************   ENVIRONNEMENT   ********************/
 /*********************************************************/
 
+t_env		**get_var_env(void);
 t_env		*new_cell_env(char **content, t_print print);
 void		addback_cell_env(t_env **env, t_env *new);
 int			env_size(t_env *env);

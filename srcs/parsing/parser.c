@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/09 20:03:43 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 15:15:49 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	egal_exp(t_token *tok)
 		printf("av>%sap>%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
-		addback_cell_env(&g_g->hidden, new_cell_env(content));
+		addback_cell_env(&g_g->hidden, new_cell_env(content, PAPRINT));
+		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 	}
 }
 
