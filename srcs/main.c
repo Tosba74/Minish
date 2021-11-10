@@ -6,26 +6,29 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 18:11:27 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 21:24:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-g_debug = false;
-t_global	*g_g = &(t_global){0};
+bool	g_debug = false;
+int		g_err = 0;
+// t_global	*g_g = &(t_global){0};
 
 static const char	*prompt(void)
 {
 	char	*prompt;
 
-	prompt = "\033[36m$\033[0m\033[34m>\033[0m ";
+	if (g_err == 0)
+		prompt = "\033[36m$\033[0m\033[34m>\033[0m ";
+	else
+		prompt = "\033[31m$\033[0m\033[33m>\033[0m ";
 	return (prompt);
 }
 
-static void	init_global(int ac, char **av, char **env)
+static void	init_global(t_global *g, int ac, char **av, char **env)
 {
-	g_g->envp = env;
 	g_debug = false;
 	if (ac == 2)
 	{
@@ -34,7 +37,7 @@ static void	init_global(int ac, char **av, char **env)
 		else
 		{
 			ft_err("Arg", 1);
-			exit (g_g->err);
+			exit (g->err);
 		}
 	}
 	init_env(env);
@@ -42,6 +45,7 @@ static void	init_global(int ac, char **av, char **env)
 	debug(1);
 }
 
+/*
 void	init_pipe_bluff(char *input)
 {
 	t_pipe	*tmp;
@@ -51,9 +55,9 @@ void	init_pipe_bluff(char *input)
 	tmp->job->job = input;
 	tmp->job->av = ft_split(input, ' ');
 }
+*/
 
-
-static void	loop(void)
+static void	loop(t_global *g)
 {
 	int		i;
 	char	*input;
@@ -67,13 +71,14 @@ static void	loop(void)
 		if (input[0])
 		{
 			add_history(input);
-			addback_cell_history(&g_g->history,
+			addback_cell_history(get_history(),
 				new_cell_history(skip_space(input), i++));
 			parser(pipe);
-			if (count_cell_pipe(pipe) == 1)
-				simple_cmd(pipe);
-			else
-				exec(pipe);
+			(void)g;
+			// if (count_cell_pipe(pipe) == 1)
+				// simple_cmd(pipe);
+			// else
+				// exec(g, pipe);
 		}
 		clear_pipeline(pipe);
 		wrfree(input);
@@ -83,13 +88,16 @@ static void	loop(void)
 
 int	main(int ac, char **av, char **env)
 {
+	t_global	g;
+
+	g = (t_global){};; 
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);
 		exit(1);
 	}
-	init_global(ac, av, env);
-	loop();
+	init_global(&g, ac, av, env);
+	loop(&g);
 	wrdestroy();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/09 12:40:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 21:20:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	child_process(t_pipe *p, bool in, bool out, const int prev)
 		dup_close(p->pipe_fd[1], STDOUT_FILENO, "Pipefd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
-	execve(p->job->job, p->job->av, g_g->envp);
+	execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
 	ft_err("EXECVE ERROR", 12);
 }
 
@@ -66,7 +66,7 @@ static void	daddy_process(t_pipe *p, bool in, bool out, const int prev)
 	}
 }
 
-static void	exec_jobs(t_pipe *p, bool in, bool out)
+static void	exec_jobs(t_global *g, t_pipe *p, bool in, bool out)
 {
 	const int	prev_in = p->pipe_fd[0];
 	pid_t		pid;
@@ -81,35 +81,34 @@ static void	exec_jobs(t_pipe *p, bool in, bool out)
 		child_process(p, in, out, prev_in);
 	else
 	{
-		g_g->pid_ar[g_g->nb_proc++] = pid;
+		g->pid_ar[g->nb_proc++] = pid;
 		daddy_process(p, in, out, prev_in);
 	}
 }
 
-int	exec(t_pipe *pipe)
+int	exec(t_global *g, t_pipe *pipe)
 {
 	int		i;
 	bool	in;
 	bool	out;
 	t_pipe	*cpy;
 
-	(void)pipe;
 	i = -1;
 	in = true;
 	out = true;
-	cpy = g_g->pipe;
+	cpy = pipe;
 	while (++i < count_cell_pipe(cpy))
 	{
-		dprintf(STDERR_FILENO, "i => %d nb_proc => %zu\n", i, g_g->nb_proc);
-		g_g->envp = get_env_teub(g_g->env);
+		dprintf(STDERR_FILENO, "i => %d nb_proc => %zu\n", i, g->nb_proc);
+		g->env = get_env_teub(*get_var_env(), 1);
 		if (cpy->fd_in != 0)
 			in = false;
 		if (cpy->fd_out != 1)
 			out = false;
 		if (!cpy->job->job || !cpy->job->av)
 			ft_err("Command", 13);
-		exec_jobs(cpy, in, out);
+		exec_jobs(g, cpy, in, out);
 		cpy = cpy->next;
 	}
-	return (waiting_pid(g_g));
+	return (waiting_pid(g));
 }

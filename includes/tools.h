@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:15:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 21:15:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void		print_env(void);
 void		print_env_teub(void);
 void		print_hidden(void);
 void		print_story(void);
-void		print_pipestruct(void);
+void		print_pipestruct(t_pipe *p);
 void		print_token(t_token *tok);
 
 /*********************************************************/
@@ -102,7 +102,7 @@ void		print_token(t_token *tok);
 t_env		**get_var_env(void);
 t_env		*new_cell_env(char **content, t_print print);
 void		addback_cell_env(t_env **env, t_env *new);
-int			env_size(t_env *env);
+int			env_size(t_env *env, int print);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -111,6 +111,7 @@ int			env_size(t_env *env);
 t_story		*new_cell_history(char *content, int index);
 t_story		*last_cell_history(t_story *story);
 void		addback_cell_history(t_story **story, t_story *new);
+t_story		**get_history(void);
 
 /*********************************************************/
 /********************     PIPE     ***********************/

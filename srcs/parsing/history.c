@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 10:35:16 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 16:53:30 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 21:18:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ char	*get_last_input(void)
 {
 	t_story		*story;
 
-	story = last_cell_history(g_g->history);
+	story = last_cell_history(*get_history());
 	return (story->cmd);
+}
+
+t_story	**get_history(void)
+{
+	static t_story	*story;
+
+	return (&story);
 }

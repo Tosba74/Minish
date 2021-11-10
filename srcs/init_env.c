@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 17:07:30 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 20:43:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ static char	*get_env_line(t_env *env)
 
 	len1 = ft_strlen(env->name);
 	len2 = ft_strlen(env->value);
-	s = wrmalloc(len1 + len2 + 2);
+	s = wrmalloc(sizeof(char) * len1 + 1 + len2 + 1);
 	ft_memcpy(s, env->name, len1);
 	ft_memcpy(s + len1, "=", 1);
 	ft_memcpy(s + len1 + 1, env->value, len2 + 1);
 	return (s);
 }
 
-char	**get_env_teub(t_env *env)
+char	**get_env_teub(t_env *env, int print)
 {
 	int		i;
 	t_env	*cpy;
@@ -71,10 +71,10 @@ char	**get_env_teub(t_env *env)
 
 	i = 0;
 	cpy = env;
-	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy) + 1);
+	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy, print) + 1);
 	while (cpy)
 	{
-		if (cpy->print == PRINT)
+		if ((int)cpy->print < print)
 			teub[i] = get_env_line(cpy);
 		cpy = cpy->next;
 		i++;

@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <readline/readline.h>
@@ -26,18 +27,13 @@ typedef struct s_global
 {
 	size_t		nb_proc;
 	pid_t		pid_ar[1024];
-	t_env		*env;
-	t_env		*hidden;
-	char		**envp;
-	bool		hide_mod;
-	bool		debug;
-	t_story		*history;
-	t_pipe		*pipe;
+	char 		**env;
 	int			err;
 }	t_global;
 
-extern t_global	*g_g;
+// extern t_global	*g_g;
 extern bool		g_debug;
+extern int		g_err;
 
 /*********************************************************/
 /******************      BUILTIN      ********************/
@@ -52,7 +48,7 @@ void		history(void);
 /******************      ENGINE       ********************/
 /*********************************************************/
 
-int			exec(t_pipe *pipe);
+int			exec(t_global *g, t_pipe *pipe);
 int			is_builtin(char *s);
 void		simple_cmd(t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
@@ -69,7 +65,7 @@ void		parser(t_pipe *pipe);
 void		init_env(char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
-char		**get_env_teub(t_env *env);
+char		**get_env_teub(t_env *env, int print);
 
 /*********************************************************/
 /******************       MAIN        ********************/

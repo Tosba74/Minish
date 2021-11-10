@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 17:11:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 18:44:35 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ char	*join_all_tok(t_token *tok)
 	return (s);
 }
 
-void	complet_pipeline(t_token *tok)
+void	complet_pipeline(t_pipe *pipe, t_token *tok)
 {
-	addback_cell_pipe(&g_g->pipe, new_cell_pipe(join_all_tok(tok)));
-	printf("%s\n", g_g->pipe->pipe_line);
+	addback_cell_pipe(&pipe, new_cell_pipe(join_all_tok(tok)));
+	printf("%s\n", 	pipe->pipe_line);
 }
 
 void	check_expansion(t_token *tok)
@@ -121,25 +121,12 @@ void	parser(t_pipe *pipe)
 	tok = NULL;
 	s = get_last_input();
 	lexer(&tok, s);
-	(void)pipe;
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
 	else
 	{
 		check_expansion(tok);
-		complet_pipeline(tok);
+		complet_pipeline(pipe, tok);
 	}
 	clear_tok(tok);
 }
-	// debug(5);
-	// dispath_jobs(g);
-	// debug(0);
-	// debug(1);
-	// debug(2);
-	// debug(3);
-	// debug(4);
-	// teub = split(s, " ");
-	// printf("teub[0] = %s\n teub[1] = %s\n", teub[0], teub [1]);
-	// printf("CMD NOW = %s\n", s);
-	// exec_cmd(teub);
-// }

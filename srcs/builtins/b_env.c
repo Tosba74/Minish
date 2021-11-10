@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:03:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 20:31:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	env(t_global *g)
 {
-	print_envp(get_env_teub(g->env));
+	(void)g;
+	print_envp(get_env_teub(*get_var_env(), 1));
 }

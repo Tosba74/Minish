@@ -72,7 +72,7 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd((char *)error->strerror, 2);
-	g_g->err = error->err;
+	g_err = error->err;
 	// wrdestroy();
 	// exit(error->err);
 }

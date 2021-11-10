@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 17:00:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 20:44:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	addback_cell_env(t_env **env, t_env *new)
 		*env = new;
 }
 
-int	env_size(t_env *env)
+int	env_size(t_env *env, int i)
 {
 	int		count;
 	t_env	*cpy;
@@ -53,22 +53,14 @@ int	env_size(t_env *env)
 	cpy = env;
 	while (cpy)
 	{
-		count++;
+		if ((int)cpy->print < i)
+			count++;
 		cpy = cpy->next;
 	}
 	return (count);
 }
 
-void	print_envp(char **env)
-{
-	int	i;
-
-	i = -1;
-	while (env[++i])
-		printf("%s\n", env[i]);
-}
-
-t_env **get_var_env(void)
+t_env	**get_var_env(void)
 {
 	static t_env	*env;
 
