@@ -6,14 +6,14 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 17:25:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 18:11:27 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
+g_debug = false;
 t_global	*g_g = &(t_global){0};
-bool g_debug = false;
 
 static const char	*prompt(void)
 {
@@ -48,7 +48,7 @@ void	init_pipe_bluff(char *input)
 
 	addback_cell_pipe(&g_g->pipe, new_cell_pipe(input));
 	tmp = last_cell_pipe(g_g->pipe);
-	tmp->job->job = input; 
+	tmp->job->job = input;
 	tmp->job->av = ft_split(input, ' ');
 }
 
