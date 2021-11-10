@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:07:01 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:07:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,17 @@ static char	**split_content(const char *s)
 	return (teub_tmp);
 }
 
-void	init_env(t_global *g, char **env)
+void	init_env(char **env)
 {
 	int		i;
 	int		size;
-	char	*str;
-	t_env	*tmp;
 
 	i = -1;
 	size = ft_strslen(env);
 	while (++i < size)
 	{
-		addback_cell_env(&g->env, new_cell_env(split_content(env[i], PRINT)));
-		addback_cell_env(&get_var_env(),
-			new_cell_env(split_content(env[i], PRINT)));
+		addback_cell_env(get_var_env(),
+			new_cell_env(split_content(env[i]), PRINT));
 	}
 }
 

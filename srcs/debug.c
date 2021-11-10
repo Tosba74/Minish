@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 16:44:28 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:25:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	debug(int i)
 	pf[2] = print_hidden;
 	pf[3] = print_story;
 	pf[4] = print_pipestruct;
-	if (g_g->debug == true)
+	if (g_debug == true)
 	{
 		printf("debug activate\n");
 		pf[i]();

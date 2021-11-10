@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:15:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:00:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,11 @@ void	print_envp(char **env)
 	i = -1;
 	while (env[++i])
 		printf("%s\n", env[i]);
+}
+
+t_env **get_var_env(void)
+{
+	static t_env	*env;
+
+	return (&env);
 }

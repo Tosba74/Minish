@@ -6,13 +6,14 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:15:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:25:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
 t_global	*g_g = &(t_global){0};
+bool g_debug = false;
 
 static const char	*prompt(void)
 {
@@ -25,19 +26,18 @@ static const char	*prompt(void)
 static void	init_global(int ac, char **av, char **env)
 {
 	g_g->envp = env;
-	g_g->debug = false;
+	g_debug = false;
 	if (ac == 2)
 	{
 		if (!ft_strncmp(av[1], "-debug", 6))
-			g_g->debug = true;
+			g_debug = true;
 		else
 		{
 			ft_err("Arg", 1);
 			exit (g_g->err);
 		}
 	}
-	init_env(g_g, env);
-	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
+	init_env(env);
 	debug(0);
 	debug(1);
 }
@@ -79,13 +79,6 @@ static void	loop(void)
 		wrfree(input);
 		input = readline(prompt());
 	}
-}
-
-t_env **get_var_env(void)
-{
-	static t_env	*env;
-
-	return (&env);
 }
 
 int	main(int ac, char **av, char **env)

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 15:15:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:11:14 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	egal_exp(t_token *tok)
 		printf("av>%sap>%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
-		addback_cell_env(&g_g->hidden, new_cell_env(content, PAPRINT));
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 	}
 }
@@ -52,17 +51,7 @@ char	*search_in_env(char *var)
 {
 	t_env	*tmp;
 
-	if (g_g->hidden)
-	{
-		tmp = g_g->hidden;
-		while (tmp)
-		{
-			if (!ft_strcmp(tmp->name, var))
-				return (tmp->value);
-			tmp = tmp->next;
-		}
-	}
-	tmp = g_g->env;
+	tmp = *get_var_env();
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->name, var))
@@ -131,7 +120,6 @@ void	parser(t_pipe *pipe)
 
 	tok = NULL;
 	s = get_last_input();
-	printf("lst env = %p lst hide = %p\n",g_g->env, g_g->hidden);
 	lexer(&tok, s);
 	(void)pipe;
 	if (find_error(tok))

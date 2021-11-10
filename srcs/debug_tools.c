@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 20:46:07 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:34:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 17:10:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ void	print_env(void)
 {
 	t_env	*cpy;
 
-	cpy = g_g->env;
-	if (g_g->env == NULL)
+	cpy = *get_var_env();
+	if (cpy == NULL)
 		dprintf(STDERR_FILENO, "\033[32mSHIT! g_g->env is NULL, Bro!\033[0m\n");
 	while (cpy->next)
 	{
-		dprintf(STDERR_FILENO, "\033[32m|%s| = |%s|\033[0m\n",
-			cpy->name, cpy->value);
+		if (cpy->print == PRINT)
+			dprintf(STDERR_FILENO, "\033[32m|%s| = |%s|\033[0m\n",
+				cpy->name, cpy->value);
+		else
+			dprintf(STDERR_FILENO, "\033[33m|%s| = |%s|\033[0m\n",
+				cpy->name, cpy->value);
+
 		cpy = cpy->next;
 	}
 }

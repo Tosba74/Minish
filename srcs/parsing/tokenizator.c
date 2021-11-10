@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/05 20:20:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 16:51:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	pipe_tok(t_token **tok, char *input)
 			if (!ft_isspace(input[i]))
 				break ;
 	}
-	// while (input[++i] && input[i] == ' ')
-		// ;
 	return (i);
 }
 
