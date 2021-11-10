@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 21:24:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/10 21:36:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	g_debug = false;
 int		g_err = 0;
-// t_global	*g_g = &(t_global){0};
 
 static const char	*prompt(void)
 {

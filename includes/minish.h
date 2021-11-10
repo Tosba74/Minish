@@ -31,7 +31,6 @@ typedef struct s_global
 	int			err;
 }	t_global;
 
-// extern t_global	*g_g;
 extern bool		g_debug;
 extern int		g_err;
 
