@@ -28,7 +28,6 @@ typedef struct s_global
 	size_t		nb_proc;
 	pid_t		pid_ar[1024];
 	char 		**env;
-	int			err;
 }	t_global;
 
 extern bool		g_debug;
