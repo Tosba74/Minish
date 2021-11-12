@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 09:56:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 14:57:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ static void	loop(t_global *g)
 			addback_cell_history(get_history(),
 				new_cell_history(skip_space(input), i++));
 			parser(pipe);
-			// (void)g;
+			(void)g;
 			// if (count_cell_pipe(pipe) == 1)
 				// simple_cmd(pipe);
 			// else
 				// exec(g, pipe);
-			exec(g, pipe);
+			// exec(g, pipe);
 		}
 		clear_pipeline(pipe);
 		wrfree(input);

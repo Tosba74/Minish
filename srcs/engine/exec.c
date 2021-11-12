@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 10:34:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 14:56:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ int	exec(t_global *g, t_pipe *pipe)
 	while (++i < count_cell_pipe(cpy))
 	{
 		dprintf(STDERR_FILENO, "i => %d nb_proc => %zu\n", i, g->nb_proc);
-		if (is_built([]))
-			is_built = true;
+		// if (is_built(av[1]))
+		// 	is_built = true;
 		g->env = get_env_teub(*get_var_env(), 1);
 		if (cpy->fd_in != 0)
 			in = false;

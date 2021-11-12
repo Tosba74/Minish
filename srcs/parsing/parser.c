@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 18:44:35 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 15:00:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ void	egal_exp(t_token *tok)
 
 char	*search_in_env(char *var)
 {
-	t_env	*tmp;
+	t_env	*env;
 
-	tmp = *get_var_env();
-	while (tmp)
+	env = *get_var_env();
+	while (env)
 	{
-		if (!ft_strcmp(tmp->name, var))
-			return (tmp->value);
-		tmp = tmp->next;
+		if (!ft_strcmp(env->name, var))
+			return (env->value);
+		env = env->next;
 	}
 	return ("");
 }
