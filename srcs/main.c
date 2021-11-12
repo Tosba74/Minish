@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 16:55:38 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 18:41:15 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static char	*create_prompt(void)
 	char	*pwd;
 
 	pwd = search_in_env("PWD");
-	prompt = malloc(sizeof(char) * (ft_strlen(pwd) + ft_strlen(" \033[36m$\033[0m\033[34m>\033[0m ") + 1));
-	if (!prompt)
-		ft_err("malloc error", 1);
+	prompt = wrmalloc(sizeof(char) * (ft_strlen(pwd) + ft_strlen(" \033[36m$\033[0m\033[34m>\033[0m ") + 1));
 	ft_strcpy(prompt, pwd);
 	if (g_err == 0)
 		ft_strcat(prompt, " \033[36m$\033[0m\033[34m>\033[0m ");
@@ -73,7 +71,7 @@ static void	loop(t_global *g)
 	i = 0;
 	prompt = create_prompt();
 	input = readline(prompt);
-	free(prompt);
+	wrfree(prompt);
 	while (input)
 	{
 		pipe = &(t_pipe){0};
@@ -94,7 +92,7 @@ static void	loop(t_global *g)
 		wrfree(input);
 		prompt = create_prompt();
 		input = readline(prompt);
-		free(prompt);
+		wrfree(prompt);
 	}
 }
 

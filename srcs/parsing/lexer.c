@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/08 21:22:27 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 18:41:31 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	dollar_tok(t_token **tok, char *input)
 	i = 0;
 	while (input[i] && !is_spec_char(input[i]))
 		i++;
-	tmp = malloc(sizeof(char) * i);
-	if (!tmp)
-		ft_err("Malloc error", 1);
+	tmp = wrmalloc(sizeof(char) * i);
 	i = 1;
 	while (input[i] && !is_spec_char(input[i]))
 	{
@@ -47,7 +45,7 @@ int	dollar_tok(t_token **tok, char *input)
 	}
 	tmp[i] = 0;
 	addback_cell_tok(tok, new_cell_tok(ft_strdup(search_in_env(tmp)), ARG));
-	free(tmp);
+	wrfree(tmp);
 	return (i);
 }
 

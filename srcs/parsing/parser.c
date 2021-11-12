@@ -6,7 +6,7 @@
 /*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/12 16:11:13 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 18:36:35 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void	parser(t_pipe *pipe)
 
 	tok = NULL;
 	s = get_last_input();
+	s = dollar(s);
 	lexer(&tok, s);
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
@@ -128,5 +129,6 @@ void	parser(t_pipe *pipe)
 		check_expansion(tok);
 		complet_pipeline(pipe, tok);
 	}
+	wrfree(s);
 	clear_tok(tok);
 }
