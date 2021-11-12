@@ -6,23 +6,29 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 14:57:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 16:55:38 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
 bool	g_debug = false;
-int		g_err = 0;
+int		g_err = 5;
 
-static const char	*prompt(void)
+static char	*create_prompt(void)
 {
 	char	*prompt;
+	char	*pwd;
 
+	pwd = search_in_env("PWD");
+	prompt = malloc(sizeof(char) * (ft_strlen(pwd) + ft_strlen(" \033[36m$\033[0m\033[34m>\033[0m ") + 1));
+	if (!prompt)
+		ft_err("malloc error", 1);
+	ft_strcpy(prompt, pwd);
 	if (g_err == 0)
-		prompt = "\033[36m$\033[0m\033[34m>\033[0m ";
+		ft_strcat(prompt, " \033[36m$\033[0m\033[34m>\033[0m ");
 	else
-		prompt = "\033[31m$\033[0m\033[33m>\033[0m ";
+		ft_strcat(prompt, " \033[31m$\033[0m\033[33m>\033[0m ");
 	return (prompt);
 }
 
@@ -62,9 +68,12 @@ static void	loop(t_global *g)
 	int		i;
 	char	*input;
 	t_pipe	*pipe;
+	char	*prompt;
 
 	i = 0;
-	input = readline(prompt());
+	prompt = create_prompt();
+	input = readline(prompt);
+	free(prompt);
 	while (input)
 	{
 		pipe = &(t_pipe){0};
@@ -83,7 +92,9 @@ static void	loop(t_global *g)
 		}
 		clear_pipeline(pipe);
 		wrfree(input);
-		input = readline(prompt());
+		prompt = create_prompt();
+		input = readline(prompt);
+		free(prompt);
 	}
 }
 

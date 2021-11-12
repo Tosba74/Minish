@@ -6,8 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/20 22:12:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/12 16:53:23 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+int	do_cd(t_job *j)
+{
+	return (int)j;
+}
