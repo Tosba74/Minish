@@ -6,7 +6,7 @@
 /*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/12 16:10:40 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/13 17:05:33 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		dup_close(int src, int dst, char *s);
 /*********************************************************/
 
 int			is_spec_char(char c);
+char		*dollar(char *s);
 char		*search_in_env(char *var);
 int			count_this_char(char *s, char c);
 void		lexer(t_token **tok, char *input);

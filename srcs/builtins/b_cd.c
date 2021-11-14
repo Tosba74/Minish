@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 16:53:23 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/13 17:08:48 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 int	do_cd(t_job *j)
 {
-	return (int)j;
+	(void)j;
+	return (2);
 }
