@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/12 16:11:13 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 02:10:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	egal_exp(t_token *tok)
 	t_token	*after;
 
 	before = tok;
-	content[0] = NULL;
-	content[1] = NULL;
+	// content[0] = NULL;
+	// content[1] = NULL;
 	while (before && before->type != EGAL)
 		before = before->next;
 	if (before && before->type == EGAL)
@@ -43,6 +43,7 @@ void	egal_exp(t_token *tok)
 		printf("av>%sap>%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
+		printf("av>%sap>%s\n", content[0], content[1]);
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 	}
 }
@@ -58,7 +59,7 @@ char	*search_in_env(char *var)
 			return (env->value);
 		env = env->next;
 	}
-	return ("");
+	return ("\n");
 }
 
 void	dollar_exp(t_token *tok)
@@ -97,15 +98,19 @@ char	*join_all_tok(t_token *tok)
 
 void	complet_pipeline(t_pipe *pipe, t_token *tok)
 {
-	addback_cell_pipe(&pipe, new_cell_pipe(join_all_tok(tok)));
-	printf("%s\n", 	pipe->pipe_line);
+	char	*av;
+
+	//ne pas faire ca cest pour compile
+	av = join_all_tok(tok);
+	addback_cell_pipe(&pipe, new_cell_pipe(av, new_job(av)));
+	// printf("%s\n", 	pipe->pipe_line);
 }
 
 void	check_expansion(t_token *tok)
 {
 	print_token(tok);
 	egal_exp(tok);
-	dollar_exp(tok);
+	// dollar_exp(tok);
 	join_cell_tok(&tok);
 	print_token(tok);
 	// print_hidden();

@@ -6,14 +6,15 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:03:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 20:31:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 22:00:27 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-void	env(t_global *g)
+int	env(t_job *j)
 {
-	(void)g;
+	(void)j;
 	print_envp(get_env_teub(*get_var_env(), 1));
+	return (0);
 }

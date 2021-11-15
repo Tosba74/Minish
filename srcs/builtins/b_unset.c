@@ -6,8 +6,14 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:17:13 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/20 23:34:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 21:52:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+int			unset(t_job *j)
+{
+	(void)j;
+	return (0);
+}

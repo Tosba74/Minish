@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 02:35:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/18 15:41:30 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/14 16:32:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static char	*choose_good_path(char **road_exec, char *av)
 		if (fd_tmp > 0)
 		{
 			close(fd_tmp);
+			while (road_exec[i--])
+				wrfree(road_exec[i]);
 			wrfree(road_exec);
 			return (tmp);
 		}

@@ -6,39 +6,47 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/08 21:22:27 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 14:05:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+int	dollar_tok(t_token **tok, char *input)
+{
+	int		i;
+	char	*tmp;
+	char	*value;
+	t_env	*cpy;
+
+	i = 1;
+	printf("|input=%s|\n", input);
+	while (input[i] && is_spec_char(input[i] != -1))
+		i++;
+	tmp = ft_substr(input, 1, i - 1);
+	cpy = env_find_cell(get_var_env(), tmp);
+	if (cpy)
+		value = cpy->value;
+	else
+		value = "";
+	addback_cell_tok(tok,
+		new_cell_tok(ft_strdup(value), ARG));
+	wrfree(tmp);
+	return (i + 1);
+}
+
 /*
 int	dollar_tok(t_token **tok, char *input)
 {
 	int		i;
 	char	*tmp;
+	char	*value;
 
-	i = -1;
-	tmp = NULL;
-	while (input[++i] && !is_spec_char(input[i]))
-		tmp[i] = input[i];
-	tmp[i + 1] = 0;
-	printf("tmp = %s\n", tmp);
-	addback_cell_tok(tok,
-		new_cell_tok(ft_strdup(tmp), DOLLAR));
-	return (i);
-}
-*/
-int	dollar_tok(t_token **tok, char *input)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
+	i = 1;
 	while (input[i] && !is_spec_char(input[i]))
 		i++;
-	tmp = malloc(sizeof(char) * i);
-	if (!tmp)
-		ft_err("Malloc error", 1);
+	printf("avant malloc de %d\n", i);
+	tmp = wrmalloc(sizeof(char) * i);
 	i = 1;
 	while (input[i] && !is_spec_char(input[i]))
 	{
@@ -46,10 +54,15 @@ int	dollar_tok(t_token **tok, char *input)
 		i++;
 	}
 	tmp[i] = 0;
-	addback_cell_tok(tok, new_cell_tok(ft_strdup(search_in_env(tmp)), ARG));
-	free(tmp);
+	printf("%s\n", tmp);
+	value = ft_strdup(search_in_env(tmp));
+	if (tmp && value)
+		printf("%s = %s\n", tmp, value);
+	addback_cell_tok(tok, new_cell_tok(value, ARG));
+	wrfree(tmp);
 	return (i);
 }
+*/
 
 int	is_spec_char(char c)
 {

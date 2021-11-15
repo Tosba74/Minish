@@ -6,29 +6,37 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 16:55:38 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/14 19:37:46by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
 bool	g_debug = false;
-int		g_err = 5;
+int		g_err = 0;
 
 static char	*create_prompt(void)
 {
 	char	*prompt;
-	char	*pwd;
+	char	*home;
+	t_env	*pwd;
 
-	pwd = search_in_env("PWD");
-	prompt = malloc(sizeof(char) * (ft_strlen(pwd) + ft_strlen(" \033[36m$\033[0m\033[34m>\033[0m ") + 1));
-	if (!prompt)
-		ft_err("malloc error", 1);
-	ft_strcpy(prompt, pwd);
-	if (g_err == 0)
-		ft_strcat(prompt, " \033[36m$\033[0m\033[34m>\033[0m ");
+	pwd = env_find_cell(get_var_env(), "PWD");
+	home = search_in_env("HOME");
+	if (!ft_strncmp(pwd->value, home, ft_strlen(home)))
+		prompt = ft_strjoin_free("~", pwd->value + ft_strlen(home), 0);
 	else
-		ft_strcat(prompt, " \033[31m$\033[0m\033[33m>\033[0m ");
+		prompt = ft_strdup(pwd->value);
+	if (g_err == 0)
+	{
+		prompt = ft_strjoin_free("\033[34m", prompt, 2);
+		prompt = ft_strjoin_free(prompt, "\033[0m\033[36m $\033[0m\033[34m>\033[0m ", 1);
+	}	
+	else
+	{
+		prompt = ft_strjoin_free("\033[33m", prompt, 2);
+		prompt = ft_strjoin_free(prompt, "\033[0m\033[31m $\033[0m\033[33m>\033[0m ", 1);
+	}
 	return (prompt);
 }
 
@@ -51,32 +59,41 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 	debug(1);
 }
 
-/*
-void	init_pipe_bluff(char *input)
+void	init_pipe_bluff(t_pipe **pipe, char *input)
 {
-	t_pipe	*tmp;
-
-	addback_cell_pipe(&g_g->pipe, new_cell_pipe(input));
-	tmp = last_cell_pipe(g_g->pipe);
-	tmp->job->job = input;
-	tmp->job->av = ft_split(input, ' ');
+	int		i;
+	char	**tmp;
+	
+	i = 0;
+	tmp = ft_split(input, '|');
+	while (tmp[i])
+	{
+		addback_cell_pipe(pipe,
+			new_cell_pipe(tmp[i], new_job(tmp[i])));
+		i++;
+	}
+	// printf("inpo t %s\n", input);
+	// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
+	// tmp = last_cell_pipe(g_g->pipe);
+	// tmp->job->job = input;
+	// tmp->job->av = ft_split(input, ' ');
 }
-*/
 
 static void	loop(t_global *g)
 {
 	int		i;
 	char	*input;
 	t_pipe	*pipe;
-	char	*prompt;
+	// char	*prompt;
 
 	i = 0;
-	prompt = create_prompt();
-	input = readline(prompt);
-	free(prompt);
+	input = readline(create_prompt());
+	// prompt = create_prompt();
+	// input = readline(prompt);
+	// free(prompt);
 	while (input)
 	{
-		pipe = &(t_pipe){0};
+		pipe = NULL;
 		if (input[0])
 		{
 			add_history(input);
@@ -88,13 +105,18 @@ static void	loop(t_global *g)
 				// simple_cmd(pipe);
 			// else
 				// exec(g, pipe);
-			// exec(g, pipe);
+			// clear_pipeline(pipe);
+			init_pipe_bluff(&pipe, input);
+			// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
+			exec(g, pipe);
+			clear_pipeline(pipe);
+			debug(0);
 		}
-		clear_pipeline(pipe);
 		wrfree(input);
-		prompt = create_prompt();
-		input = readline(prompt);
-		free(prompt);
+		input = readline(create_prompt());
+		// prompt = create_prompt();
+		// input = readline(prompt);
+		// free(prompt);
 	}
 }
 

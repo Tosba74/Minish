@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   env_edit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/04 01:11:05 by bmangin           #+#    #+#             */
-/*   Updated: 2020/12/10 14:17:47 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/11/15 11:13:50 by bmangin           #+#    #+#             */
+/*   Updated: 2021/11/15 13:53:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minish.h"
 
-char	*ft_strrchr(const char *s, int c)
+t_env	*env_find_cell(t_env **env, char *name)
 {
-	size_t	i;
+	t_env	*tmp;
+	int		namelen;
+	int		envlen;
 
-	i = ft_strlen(s);
-	while (i != 0 && s[i] != (unsigned char)c)
-		i--;
-	if (s[i] == (unsigned char)c)
-		return ((char *)&s[i]);
+	tmp = *env;
+	namelen = ft_strlen(name);
+	while (tmp)
+	{
+		envlen = ft_strlen(tmp->name);
+		if (envlen >= namelen && !ft_strncmp(tmp->name, name, namelen + 1))
+			return (tmp);
+		tmp = tmp->next;
+	}
 	return (NULL);
+}
+
+void	env_edit_value(t_env *env, char *value)
+{
+	wrfree(env->value);
+	env->value = ft_strdup(value);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minish.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/12 16:10:40 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 22:03:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 # include <signal.h>
 # include <errno.h>
 
-# include <curses.h>
-# include <term.h>
-
 # include "libft.h"
 # include "error.h"
 # include "tools.h"
@@ -37,9 +34,12 @@
 
 typedef struct s_global
 {
+	int			index;
+	int			pipe_fd[2];
+	pid_t		pids[1024];
 	size_t		nb_proc;
-	pid_t		pid_ar[1024];
 	char 		**env;
+	bool		debug;
 }	t_global;
 
 extern bool		g_debug;
@@ -49,18 +49,24 @@ extern int		g_err;
 /******************      BUILTIN      ********************/
 /*********************************************************/
 
-void		env(t_global *g);
-void		pwd(t_global *g);
 int			do_echo(t_job *j);
 int			do_cd(t_job *j);
-void		history(void);
+int			pwd(t_job *j);
+int			export(t_job *j);
+int			unset(t_job *j);
+int			env(t_job *j);
+int			do_exit(t_job *j);
+int			history(t_job *j);
+int			is_builtin(char *s);
+int			select_built(t_pipe *p);
+void		skip_slash(char *av);
 
 /*********************************************************/
 /******************      ENGINE       ********************/
 /*********************************************************/
 
 int			exec(t_global *g, t_pipe *pipe);
-int			is_builtin(char *s);
+int			waiting_pid(t_global *g);
 void		simple_cmd(t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
 

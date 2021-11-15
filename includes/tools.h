@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/12 16:10:06 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 13:53:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef enum e_print
 	PRINT,
 	PAPRINT
 }	t_print;
+
 typedef struct s_token
 {
 	char			*value;
@@ -67,10 +68,11 @@ typedef struct s_env
 
 typedef struct s_job
 {
-	char			*job; // /bin/ls
-	char			*flags; // -alR
-	char			**av; // {"ls", "-alR", "minish/"}
+	char			*job;
+	char			*flags;
+	char			**av;
 	char			**envp;
+	bool			is_cmd;
 }	t_job;
 
 typedef struct s_pipe
@@ -78,7 +80,8 @@ typedef struct s_pipe
 	char			*pipe_line; // ls -alR minish/
 	int				fd_in;
 	int				fd_out;
-	int				pipe_fd[2];
+	bool			in;
+	bool			out;
 	t_job			*job;
 	struct s_pipe	*next;
 }	t_pipe;
@@ -103,6 +106,8 @@ t_env		**get_var_env(void);
 t_env		*new_cell_env(char **content, t_print print);
 void		addback_cell_env(t_env **env, t_env *new);
 int			env_size(t_env *env, int print);
+t_env		*env_find_cell(t_env **env, char *name);
+void		env_edit_value(t_env *env, char *value);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -117,11 +122,14 @@ t_story		**get_history(void);
 /********************     PIPE     ***********************/
 /*********************************************************/
 
-t_pipe		*new_cell_pipe(char *content);
+t_pipe		*new_cell_pipe(char *content, t_job *job);
 t_pipe		*last_cell_pipe(t_pipe *pipe);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			count_cell_pipe(t_pipe *pipe);
 void		clear_pipeline(t_pipe *pipe);
+void		del_job(t_job *jobs);
+t_job		*new_job(char *av);
+void		print_pipe(t_pipe *p);
 
 /*********************************************************/
 /*******************   TOKENIZATOR   *********************/

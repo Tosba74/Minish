@@ -6,13 +6,15 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:03:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/20 21:32:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 21:59:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-void	history(void)
+int	history(t_job *j)
 {
+	(void)j;
 	print_story();
+	return (0);
 }

@@ -21,15 +21,18 @@ static const t_err	*err_pars(int err)
 		{EINVAL, "Not a typewriter\n"},
 		{EINVAL, "quote isn't closed\n"},
 		{258, "near unexpected token `|'\n"},
+		{1, "no such file or directory: "},
+		{EACCES, "Permission denied!\n"}
+		/*
+		{EEXIST, "File already exists!\n"},
 		{ENOSYS, "Function not implemented\n"},
 		{EAGAIN, "Insufficient resources!\n"},
 		{ENOMEM, "Insufficient memory!\n"},
-		{EEXIST, "File already exists!\n"},
 		{ENFILE, "File teuble overflow!\n"},
 		{EMFILE, "Too many open files!\n"},
 		{EDEADLK, "A deadlock has been detecte\nd!"},
 		{ENAMETOOLONG, "File name too long!\n"},
-		{EACCES, "Permission denied!\n"}
+		*/
 	};
 
 	return (&err_p[err]);
@@ -40,7 +43,7 @@ static const t_err	*err_exec(int err)
 	static const t_err	err_e[] = {
 		{EPIPE, "Broken pipe\n"},
 		{ENOEXEC, "Exec format error\n"},
-		{ECHILD, "No child processes"},
+		{ECHILD, "No child processes\n"},
 		{127, "command not found\n"},
 		{EBADF, "Bad file descriptor\n"},
 		{ENOENT, "No such file or directory!\n"},
