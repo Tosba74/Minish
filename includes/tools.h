@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 13:53:15 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:23:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct s_pipe
 	char			*pipe_line; // ls -alR minish/
 	int				fd_in;
 	int				fd_out;
+	bool			no_job;
 	bool			in;
 	bool			out;
 	t_job			*job;

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 14:05:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:29:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	dollar_tok(t_token **tok, char *input)
 	t_env	*cpy;
 
 	i = 1;
-	printf("|input=%s|\n", input);
 	while (input[i] && is_spec_char(input[i] != -1))
 		i++;
 	tmp = ft_substr(input, 1, i - 1);

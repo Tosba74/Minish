@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/15 23:19:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:24:03 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,14 @@ void	egal_exp(t_token *tok)
 	t_token	*after;
 
 	before = tok;
-	// content[0] = NULL;
-	// content[1] = NULL;
 	while (before && before->type != EGAL)
 		before = before->next;
 	if (before && before->type == EGAL)
 	{
-		// printf("La! ya un egal!\n");
 		after = before->next;
 		before = before->prev;
-		printf("av>%sap>%s\n", before->value, after->value);
 		content[0] = before->value;
 		content[1] = after->value;
-		printf("av>%sap>%s\n", content[0], content[1]);
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/14 17:46:28 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:26:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_pipe	*new_cell_pipe(char *input, t_job *job)
 	new->pipe_line = input;
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
+	new->no_job = false;
 	new->in = true;
 	new->out = true;
 	if (!job)

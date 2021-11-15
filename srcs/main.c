@@ -72,7 +72,10 @@ void	init_pipe_bluff(t_pipe **pipe, char *input)
 	{
 		addback_cell_pipe(pipe,
 			new_cell_pipe(tmp[i], new_job(tmp[i])));
+		if (!ft_strchr(tmp[i], '='))
+			(*pipe)->no_job = true;
 		i++;
+		
 	}
 	// printf("inpo t %s\n", input);
 	// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
@@ -110,10 +113,13 @@ static void	loop(t_global *g)
 			// clear_pipeline(pipe);
 			init_pipe_bluff(&pipe, input);
 			// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
+			if (pipe->no_job)
+			{
 			if (pipe->job->is_cmd)
 				exec(g, pipe);
 			else
 				g_err = select_built(pipe);
+			}
 			clear_pipeline(pipe);
 			debug(0);
 		}
