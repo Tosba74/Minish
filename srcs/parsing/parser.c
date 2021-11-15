@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/15 02:10:54 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:19:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,7 @@ void	check_expansion(t_token *tok)
 	egal_exp(tok);
 	// dollar_exp(tok);
 	join_cell_tok(&tok);
-	print_token(tok);
-	// print_hidden();
-	// printf("ENVPATH tu bug?:\n");
-	// printf("%s\n", select_env_path(tok->value, get_env_teub(g->env)));
+	// print_token(tok);
 }
 
 void	parser(t_pipe *pipe)
