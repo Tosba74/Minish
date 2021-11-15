@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 22:13:13 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:11:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 	if (p->out)
 		if (pipe(g->pipe_fd) < 0)
 			ft_err("ExecJobs: ", 10);
-	if (!p->job->is_cmd)
+	if (p->job->is_cmd)
 	{
 		pid = fork();
 		if (pid < 0)
@@ -200,9 +200,7 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 		}
 	}
 	else
-	{
 		exec_builtin(p, g, prev_in);
-	}
 }
 
 int	exec(t_global *g, t_pipe *pipe)
@@ -212,13 +210,11 @@ int	exec(t_global *g, t_pipe *pipe)
 
 	i = -1;
 	p = pipe;
-	// printf("%d\n", ac);
 	while (p)
 	{
 		print_pipe(p);
 		exec_jobs(p, g);
 		p = p->next;
 	}
-	return (0);
 	return (waiting_pid(g));
 }

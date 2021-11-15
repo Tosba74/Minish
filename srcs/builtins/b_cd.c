@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 21:50:35 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:15:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,8 @@ char	*get_path(char *path, char *av)
 	{
 		len = ft_strlen(ft_strrchr(path, '/'));
 		tmp = ft_substr(path, 0, (ft_strlen(path) - len));
-		printf("%s\n", tmp);
 		if (ft_strlen(av) != 2)
 			tmp = ft_strjoin_free(tmp, av + 2, 1);
-		printf("%s\n", tmp);
 	}
 	else
 	{
@@ -55,7 +53,6 @@ int	is_dir(char *road)
 	int		fd_tmp;
 
 	fd_tmp = open (road, O_DIRECTORY);
-	printf("fd_tmp = %d\n", fd_tmp);
 	if (fd_tmp < 0)
 	{
 		close(fd_tmp);
@@ -67,18 +64,18 @@ int	is_dir(char *road)
 
 int	if_is_dir(t_env *pwd, t_env *oldpwd, t_job *job, char *road)
 {
-	if (is_dir(road) == 1)
+	if (!is_dir(road))
+	{
+		env_edit_value(oldpwd, pwd->value);
+		env_edit_value(pwd, road);
+		return (0);
+	}
+	else
 	{
 		ft_err("cd", 6);
 		ft_putstr_fd(job->av[1], 2);
 		ft_putstr_fd("\n", 2);
 		return (1);
-	}
-	else if (is_dir(road) == 0)
-	{
-		env_edit_value(oldpwd, pwd->value);
-		env_edit_value(pwd, road);
-		return (0);
 	}
 	return (0);
 }

@@ -110,7 +110,10 @@ static void	loop(t_global *g)
 			// clear_pipeline(pipe);
 			init_pipe_bluff(&pipe, input);
 			// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
-			exec(g, pipe);
+			if (pipe->job->is_cmd)
+				exec(g, pipe);
+			else
+				g_err = select_built(pipe);
 			clear_pipeline(pipe);
 			debug(0);
 		}

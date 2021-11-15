@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:01:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:12:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ t_job	*new_job(char *av)
 	new = (t_job *)wrmalloc(sizeof(t_job));
 	new->av = ft_split(av, ' ');
 	vret = is_builtin(new->av[0]);
-	if (vret != -1)
+	if (vret == -1)
 		new->is_cmd = true;
 	else
 		new->is_cmd = false;
-	if (!new->is_cmd)
+	if (new->is_cmd)
 		new->job = select_env_path(av, get_env_teub(*get_var_env(), 1));
 	else
 		new->job = ft_strdup(new->av[0]);
