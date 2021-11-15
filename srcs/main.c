@@ -17,10 +17,12 @@ int		g_err = 0;
 
 static char	*create_prompt(void)
 {
-	char	*prompt;
-	char	*home;
-	t_env	*pwd;
+	static char	*prompt;
+	char		*home;
+	t_env		*pwd;
 
+	if (prompt)
+		wrfree(prompt);
 	pwd = env_find_cell(get_var_env(), "PWD");
 	home = search_in_env("HOME");
 	if (!ft_strncmp(pwd->value, home, ft_strlen(home)))

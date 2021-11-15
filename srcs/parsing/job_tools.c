@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/14 21:03:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/15 23:01:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_job	*new_job(char *av)
 	new = (t_job *)wrmalloc(sizeof(t_job));
 	new->av = ft_split(av, ' ');
 	vret = is_builtin(new->av[0]);
-	printf("vret == %d\n", vret);
 	if (vret != -1)
 		new->is_cmd = true;
 	else
