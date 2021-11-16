@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/15 22:03:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 19:31:17 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,14 @@ void		dup_close(int src, int dst, char *s);
 int			is_spec_char(char c);
 char		*search_in_env(char *var);
 int			count_this_char(char *s, char c);
-void		lexer(t_token **tok, char *input);
-void		parser(t_pipe *pipe);
+int			lexer(t_token **tok, char *input);
+int			parser(t_pipe *pipe);
 void		init_env(char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
 char		**get_env_teub(t_env *env, int print);
+int			rredir_tok(t_token **token, char *input);
+int			lredir_tok(t_token **token, char *input);
 
 /*********************************************************/
 /******************       MAIN        ********************/

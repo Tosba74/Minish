@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/15 23:24:03 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 19:43:16 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,18 @@ void	check_expansion(t_token *tok)
 	// print_token(tok);
 }
 
-void	parser(t_pipe *pipe)
+int	parser(t_pipe *pipe)
 {
 	t_token	*tok;
 	char	*s;
 
 	tok = NULL;
 	s = get_last_input();
-	lexer(&tok, s);
+	if (!lexer(&tok, s))
+	{
+		clear_tok(tok);
+		return (0);
+	}
 	if (find_error(tok))
 		ft_err(find_error(tok), 5);
 	else
@@ -126,4 +130,5 @@ void	parser(t_pipe *pipe)
 		complet_pipeline(pipe, tok);
 	}
 	clear_tok(tok);
+	return (1);
 }

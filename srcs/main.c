@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/14 19:37:46by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 19:39:23 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ void	init_pipe_bluff(t_pipe **pipe, char *input)
 {
 	int		i;
 	char	**tmp;
-	
+
 	i = 0;
 	tmp = ft_split(input, '|');
 	while (tmp[i])
 	{
 		addback_cell_pipe(pipe,
-			new_cell_pipe(tmp[i], new_job(tmp[i])));
+				new_cell_pipe(tmp[i], new_job(tmp[i])));
 		if (!ft_strchr(tmp[i], '='))
 			(*pipe)->no_job = true;
 		i++;
-		
+
 	}
 	// printf("inpo t %s\n", input);
 	// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
@@ -103,25 +103,27 @@ static void	loop(t_global *g)
 		{
 			add_history(input);
 			addback_cell_history(get_history(),
-				new_cell_history(skip_space(input), i++));
-			parser(pipe);
-			(void)g;
-			// if (count_cell_pipe(pipe) == 1)
-				// simple_cmd(pipe);
-			// else
-				// exec(g, pipe);
-			// clear_pipeline(pipe);
-			init_pipe_bluff(&pipe, input);
-			// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
-			if (pipe->no_job)
+					new_cell_history(skip_space(input), i++));
+			if (parser(pipe))
 			{
-			if (pipe->job->is_cmd)
-				exec(g, pipe);
-			else
-				g_err = select_built(pipe);
+				(void)g;
+				// if (count_cell_pipe(pipe) == 1)
+				// simple_cmd(pipe);
+				// else
+				// exec(g, pipe);
+				// clear_pipeline(pipe);
+				init_pipe_bluff(&pipe, input);
+				// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
+				if (pipe->no_job)
+				{
+					if (pipe->job->is_cmd)
+						exec(g, pipe);
+					else
+						g_err = select_built(pipe);
+				}
+				clear_pipeline(pipe);
+				debug(0);
 			}
-			clear_pipeline(pipe);
-			debug(0);
 		}
 		wrfree(input);
 		input = readline(create_prompt());

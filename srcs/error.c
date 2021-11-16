@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/11 21:27:31y bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 18:26:55 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static const t_err	*err_pars(int err)
 		{EINVAL, "quote isn't closed\n"},
 		{258, "near unexpected token `|'\n"},
 		{1, "no such file or directory: "},
-		{EACCES, "Permission denied!\n"}
+		{EACCES, "Permission denied!\n"},
+		{148, "Parse Error\n"}
 		/*
 		{EEXIST, "File already exists!\n"},
 		{ENOSYS, "Function not implemented\n"},
