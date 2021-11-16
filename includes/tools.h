@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:23:19 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 16:09:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ typedef enum e_type
 	OPT,
 	DOLLAR,
 	EGAL,
-	REDIR,
+	DRREDIR,
+	RREDIR,
+	DLREDIR,
+	LREDIR,
 	PIPE,
 	SPC,
 	ERROR,
@@ -69,9 +72,7 @@ typedef struct s_env
 typedef struct s_job
 {
 	char			*job;
-	char			*flags;
 	char			**av;
-	char			**envp;
 	bool			is_cmd;
 }	t_job;
 

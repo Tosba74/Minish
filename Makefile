@@ -31,7 +31,7 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 
 override FILES_P	:= parser.c lexer.c pars_tools.c history.c \
 					tokenizator.c token_tools.c pipe_tools.c \
-					job_tools.c
+					job_tools.c redir_tok.c
 override FILES_E	:= exec.c exec_tools.c simple_cmd.c 
 override FILES_B	:= b_env.c b_history.c echo.c b_cd.c b_exit.c \
 					b_export.c b_pwd.c b_unset.c

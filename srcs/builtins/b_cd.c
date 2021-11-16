@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:15:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 14:10:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_tild(char *av)
 
 	home = env_find_cell(get_var_env(), "HOME");
 	road = ft_strdup(home->value);
-	if (ft_strlen(av) > 1)
+	if (av && ft_strlen(av) > 1)
 		road = ft_strjoin_free(home->value, av + 1, 0);
 	return (road);
 }
@@ -89,7 +89,7 @@ int	do_cd(t_job *j)
 	road = NULL;
 	pwd = env_find_cell(get_var_env(), "PWD");
 	oldpwd = env_find_cell(get_var_env(), "OLDPWD");
-	if (!j->av[1] || !ft_strncmp(j->av[1], "~", 1))
+	if (!j->av[1] || (j->av[1] && !ft_strncmp(j->av[1], "~", 1)))
 		road = get_tild(j->av[1]);
 	else if (!ft_strcmp(j->av[1], "-"))
 		road = ft_strdup((env_find_cell(get_var_env(), "OLDPWD"))->value);

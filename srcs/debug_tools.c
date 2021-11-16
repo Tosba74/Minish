@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 20:46:07 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 02:16:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 15:42:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_pipestruct(t_pipe *p)
 		dprintf(STDERR_FILENO, "%s\n", pipe_line->pipe_line);
 		dprintf(STDERR_FILENO, "|%d|%d|\n", pipe_line->fd_in, pipe_line->fd_out);
 		dprintf(STDERR_FILENO, "%s\n", pipe_line->job->job);
-		dprintf(STDERR_FILENO, "%s\n", pipe_line->job->flags);
+		// dprintf(STDERR_FILENO, "%s\n", pipe_line->job->flags);
 		while (pipe_line->job->av[++i])
 			dprintf(STDERR_FILENO, "\t* %s\n", pipe_line->job->av[i]);
 		pipe_line = pipe_line->next;
