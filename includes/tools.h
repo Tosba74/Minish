@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/16 16:09:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 22:45:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef enum e_type
 	OPT,
 	DOLLAR,
 	EGAL,
-	DRREDIR,
-	RREDIR,
-	DLREDIR,
-	LREDIR,
+	REDIR_R,
+	REDIR_RD,
+	REDIR_L,
+	REDIR_LD,
 	PIPE,
 	SPC,
 	ERROR,
@@ -110,6 +110,7 @@ void		addback_cell_env(t_env **env, t_env *new);
 int			env_size(t_env *env, int print);
 t_env		*env_find_cell(t_env **env, char *name);
 void		env_edit_value(t_env *env, char *value);
+int			is_name_env(char c);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -140,9 +141,9 @@ void		print_pipe(t_pipe *p);
 t_token		*new_cell_tok(char *content, t_type t);
 t_token		*last_cell_tok(t_token *tok);
 void		addback_cell_tok(t_token **tok, t_token *new);
-void		join_cell_tok(t_token **tok);
+void		join_cell_tok(t_token *tok);
 void		clear_tok(t_token *tok);
-char		*find_error(t_token *tok);
+int			find_error(t_token *tok);
 int			dollar_tok(t_token **tok, char *input);
 int			quote_tok(t_token **tok, char *input);
 int			space_tok(t_token **tok, char *input);
@@ -151,5 +152,11 @@ int			pipe_tok(t_token **tok, char *input);
 int			egal_tok(t_token **tok, char *input);
 int			option_tok(t_token **tok, char *input);
 int			egal_tok(t_token **tok, char *input);
+
+void		egal_exp(t_token *tok);
+void		dollar_exp(t_token *tok);
+char		*join_all_tok(t_token *tok);
+void		complet_pipeline(t_pipe *pipe, t_token *tok);
+void		check_expansion(t_token *tok);
 
 #endif

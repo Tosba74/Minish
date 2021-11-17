@@ -20,7 +20,7 @@ static const t_err	*err_pars(int err)
 		{EAGAIN, "Insufficient resources!\n"},
 		{EINVAL, "Not a typewriter\n"},
 		{EINVAL, "quote isn't closed\n"},
-		{258, "near unexpected token `|'\n"},
+		{258, "near unexpected token "},
 		{1, "no such file or directory: "},
 		{EACCES, "Permission denied!\n"}
 		/*
@@ -46,7 +46,8 @@ static const t_err	*err_exec(int err)
 		{ECHILD, "No child processes\n"},
 		{127, "command not found\n"},
 		{EBADF, "Bad file descriptor\n"},
-		{ENOENT, "No such file or directory!\n"},
+		{ENOENT, "No such file or directory!\n"}
+		/*
 		{ESRCH, "Invalid thread/process id!\n"},
 		{EAGAIN, "Insufficient resources!\n"},
 		{ENOMEM, "Insufficient memory!\n"},
@@ -57,6 +58,7 @@ static const t_err	*err_exec(int err)
 		{EMFILE, "Too many open files!\n"},
 		{EDEADLK, "A deadlock has been detected!\n"},
 		{ENAMETOOLONG, "File name too long!\n"}
+		*/
 	};
 
 	return (&err_e[err]);
@@ -75,7 +77,8 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd(s, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd((char *)error->strerror, 2);
-	g_err = error->err;
+	if (!g_err)
+		g_err = error->err;
 	// wrdestroy();
 	// exit(error->err);
 }

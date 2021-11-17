@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:11:48 by bmangin           #+#    #+#             */
-/*   Updated: 2021/10/22 11:33:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 11:48:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ int		do_echo(t_job *j)
 		if (opt_flag)
 			index++;
 		while (j->av[index])
+		{
 			ft_putstr(j->av[index++]);
+			if (j->av[index])
+				ft_putstr(" ");
+		}
 	}
 	if (!j->av[index] && !opt_flag)
 		ft_putstr("\n");

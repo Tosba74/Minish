@@ -93,9 +93,6 @@ static void	loop(t_global *g)
 
 	i = 0;
 	input = readline(create_prompt());
-	// prompt = create_prompt();
-	// input = readline(prompt);
-	// free(prompt);
 	while (input)
 	{
 		pipe = NULL;
@@ -106,21 +103,25 @@ static void	loop(t_global *g)
 				new_cell_history(skip_space(input), i++));
 			parser(pipe);
 			(void)g;
-			// if (count_cell_pipe(pipe) == 1)
-				// simple_cmd(pipe);
-			// else
-				// exec(g, pipe);
-			// clear_pipeline(pipe);
-			init_pipe_bluff(&pipe, input);
-			// printf("input %s == %s\n", pipe->pipe_line, pipe->job->job);
-			if (pipe->no_job)
-			{
-			if (pipe->job->is_cmd)
-				exec(g, pipe);
+			if (count_cell_pipe(pipe) == 1)
+				simple_cmd(g, pipe);
 			else
-				g_err = select_built(pipe);
-			}
+				exec(g, pipe);
 			clear_pipeline(pipe);
+			// init_pipe_bluff(&pipe, input);
+			// if (pipe->no_job)
+			// {
+			// 	if (count_cell_pipe(pipe) > 1)
+			// 		exec(g, pipe);
+			// 	else if (count_cell_pipe(pipe) == 1)
+			// 	{
+			// 		if (pipe->job->is_cmd)
+			// 			simple_cmd(g, pipe);
+			// 		else
+			// 			g_err = select_built(pipe);
+			// 	}
+			// }
+			// clear_pipeline(pipe);
 			debug(0);
 		}
 		wrfree(input);

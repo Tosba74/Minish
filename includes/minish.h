@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/15 22:03:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 21:20:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		skip_slash(char *av);
 
 int			exec(t_global *g, t_pipe *pipe);
 int			waiting_pid(t_global *g);
-void		simple_cmd(t_pipe *pipe);
+int			simple_cmd(t_global *g, t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
 
 /*********************************************************/
@@ -76,7 +76,7 @@ void		dup_close(int src, int dst, char *s);
 
 int			is_spec_char(char c);
 char		*search_in_env(char *var);
-int			count_this_char(char *s, char c);
+// int			count_this_char(char *s, char c);
 void		lexer(t_token **tok, char *input);
 void		parser(t_pipe *pipe);
 void		init_env(char **env);

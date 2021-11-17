@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 01:43:42 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 23:23:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ void	addback_cell_tok(t_token **tok, t_token *new)
 	}
 }
 
-void	join_cell_tok(t_token **tok)
-{
-	t_token	*tmp;
-
-	while ((*tok))
-	{
-		if ((*tok)->type == ARG && (*tok)->next && ((*tok)->next->type <= 2))
-		{
-			tmp = (*tok)->next;
-			if (!tmp && !tmp->value)
-				(*tok)->value = ft_strjoin_free((*tok)->value, tmp->value, 3);
-			(*tok)->next = tmp->next;
-			wrfree(tmp);
-			if ((*tok)->next)
-				(*tok)->next->prev = (*tok);
-		}
-		else
-			(*tok) = (*tok)->next;
-	}
-}
-
 void	clear_tok(t_token *tok)
 {
 	t_token	*actu;
@@ -84,4 +63,25 @@ void	clear_tok(t_token *tok)
 	}
 	ft_memdel(actu->value);
 	ft_memdel(actu);
+}
+
+void	join_cell_tok(t_token *tok)
+{
+	t_token	*second;
+
+	while (tok)
+	{
+		if ((tok->type == ARG || (9 < tok->type && tok->type < 15))
+			&& (tok->next && (tok->next->type < 3)))
+		{
+			second = tok->next;
+			tok->value = ft_strjoin_free(tok->value, second->value, 3);
+			tok->next = second->next;
+			if (tok->next)
+				tok->next->prev = tok;
+			ft_memdel(second);
+		}
+		else
+			tok = tok->next;
+	}
 }

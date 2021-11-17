@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/10 20:39:24 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 12:33:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	print_token(t_token *tok)
 	{
 		if (cpy->type < 1)
 			dprintf(STDERR_FILENO, "\033[32m%s|\033[0m", cpy->value);
-		else if (cpy->type < 6)
+		else if (cpy->type < 8)
 			dprintf(STDERR_FILENO, "\033[34m%s|\033[0m", cpy->value);
-		else if (cpy->type == 6 || cpy->type == 7)
+		else if (cpy->type > 8 || cpy->type < 15)
 			dprintf(STDERR_FILENO, "\033[36m%s|\033[0m", cpy->value);
 		else
 			dprintf(STDERR_FILENO, "\033[31m%s|\033[0m", cpy->value);

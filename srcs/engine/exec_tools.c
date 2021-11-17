@@ -6,27 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:06:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/17 12:58:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
-
-int	waiting_pid(t_global *g)
-{
-	int	i;
-	int	ret;
-	int	wstatus;
-
-	i = -1;
-	while (++i < g->index)
-	{
-		waitpid(g->pids[i], &wstatus, 0);
-		if (WIFEXITED(wstatus))
-			ret = (unsigned char)WEXITSTATUS(wstatus);
-	}
-	return (ret);
-}
 
 void	dup_close(int src, int dst, char *s)
 {
@@ -79,6 +63,23 @@ int	select_built(t_pipe *p)
 	pf_built[7] = history;
 	return (pf_built[is_builtin(p->job->job)](p->job));
 }
+
+int	waiting_pid(t_global *g)
+{
+	int	i;
+	int	ret;
+	int	wstatus;
+
+	i = 0;
+	while (++i < g->index)
+	{
+		waitpid(g->pids[i], &wstatus, 0);
+		if (WIFEXITED(wstatus))
+			ret = (unsigned char)WEXITSTATUS(wstatus);
+	}
+	return (ret);
+}
+
 /*
 static void	init_fd(t_pipe *pipe, char *file1, char *file2)
 {

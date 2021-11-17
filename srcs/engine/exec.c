@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:11:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/16 17:37:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,16 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
-	printf("Attention: j'exec !!!\n");
-	execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
-	ft_err("EXECVE ERROR: ", 11);
+	if (p->job->is_cmd)
+	{
+		execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
+		ft_err("EXECVE ERROR: ", 11);
+	}
+	else
+	{
+		g_err = select_built(p);
+		exit(g_err);
+	}
 }
 
 static void	daddy_process(t_pipe *p, t_global *g, const int prev)
@@ -186,21 +193,18 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 	if (p->out)
 		if (pipe(g->pipe_fd) < 0)
 			ft_err("ExecJobs: ", 10);
-	if (p->job->is_cmd)
-	{
-		pid = fork();
-		if (pid < 0)
-			ft_err("ExecJobs: ", 11);
-		if (pid == 0)
-			child_process(p, g, prev_in);
-		else
-		{
-			g->pids[g->index++] = pid;
-			daddy_process(p, g, prev_in);
-		}
-	}
+	pid = fork();
+	if (pid < 0)
+		ft_err("ExecJobs: ", 11);
+	if (pid == 0)
+		child_process(p, g, prev_in);
 	else
-		exec_builtin(p, g, prev_in);
+	{
+		g->pids[g->index++] = pid;
+		daddy_process(p, g, prev_in);
+	}
+	// else
+		// exec_builtin(p, g, prev_in);
 }
 
 int	exec(t_global *g, t_pipe *pipe)
