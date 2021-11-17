@@ -95,7 +95,6 @@ void	check_exp(t_token *tok)
 		printf("%d > ", tok->type);
 		tok = tok->next;
 	}
-
 }
 
 void	check_expansion(t_token *tok)

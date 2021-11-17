@@ -137,6 +137,7 @@ norm :
 			${NORM} ${INC}
 			
 minish:
+		clear
 		printf "\n"
 		printf "\n"
 		printf "${_C}        :::   :::  :::::::::: ::::    ::: :::::::: ::::::::: :::    ::: ${_E}\n"

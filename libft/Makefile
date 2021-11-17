@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 12:45:19 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/08 17:39:45 by astucky          ###   ########lyon.fr    #
+#    Updated: 2021/11/17 23:31:37 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ _E		= \x1b[0m
 # ********************   MAKE SHIT   ******************** #
 # ******************************************************* #
 
-all :		crea_b ${NAME} 
+all :		crea_b ${NAME} libft
 
 ${PATH_O}/%.o : ${PATH_S}/%.c ${INC}
 	${CC} ${FLAGS} -I${PATH_I} -o $@ -c $<
@@ -89,7 +89,7 @@ ${NAME}	:	${BIN}
 	echo "\n"
 	echo "${_P}-----${_E}\t${_R}        LIB FT     ${_E}\t${_P}-----${_E}"
 	echo "${_P}-----${_E}\t${_R}   creating archive${_E}\t${_P}-----${_E}"
-	echo "${_P}-----${_E}\t${_R}    library index${_E}\t${_P}-----${_E}"
+	echo "${_P}-----${_E}\t${_R}    library index${_E}\t${_P}-----${_E}\n"
 	${I_LIB} $@
 
 crea_b :
