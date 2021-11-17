@@ -31,7 +31,7 @@ void	egal_exp(t_token *tok)
 	}
 }
 
-void	dollar_exp(t_token *tok)
+static void	dollar_exp(t_token *tok)
 {
 	int		i;
 	int		j;
@@ -51,7 +51,7 @@ void	dollar_exp(t_token *tok)
 	wrfree(tok_tmp);
 }
 
-static void	check_quotes(t_token *token)
+void	check_quotes(t_token *token)
 {
 	int		i;
 	t_token	*tok;
@@ -87,34 +87,4 @@ char	*join_all_tok(t_token *tok)
 		tok = tok->next;
 	}
 	return (s);
-}
-void	check_exp(t_token *tok)
-{
-	while (tok)
-	{
-		printf("%d > ", tok->type);
-		tok = tok->next;
-	}
-}
-
-void	check_expansion(t_token *tok)
-{
-	print_token(tok);
-	check_quotes(tok);
-	print_token(tok);
-	egal_exp(tok);
-	join_cell_tok(tok);
-	print_token(tok);
-}
-
-void	complet_pipeline(t_pipe *pipe, t_token *tok)
-{
-	char	*av;
-
-	//ne pas faire ca cest pour compile
-	check_expansion(tok);
-	av = join_all_tok(tok);
-	(void)pipe;
-	// addback_cell_pipe(&pipe, new_cell_pipe(av, new_job(av)));
-	// print_pipe(pipe);
 }
