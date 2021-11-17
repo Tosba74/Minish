@@ -45,7 +45,7 @@ void	dollar_exp(t_token *tok)
 	j = dollar_tok(&tok_tmp, tok->value + i);
 	tmp = ft_substr(tok->value, 0, i);
 	tmp = ft_strjoin_free(tmp, tok_tmp->value, 3);
-	tmp = ft_strjoin_free(tmp, tok->value + i + j - 1, 3);
+	tmp = ft_strjoin_free(tmp, tok->value + i + j, 3);
 	tok->value = tmp;
 	tok->type = ARG;
 	wrfree(tok_tmp);
