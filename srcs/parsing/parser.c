@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/17 13:09:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 01:34:00 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	lexer(t_token **tok, char *input)
 	}
 }
 
-void	parser(t_pipe *pipe)
+void	parser(t_pipe **pipe)
 {
 	t_token	*tok;
 	char	*s;

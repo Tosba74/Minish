@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 01:09:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 01:33:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ int			egal_tok(t_token **tok, char *input);
 void		check_quotes(t_token *token);
 void		egal_exp(t_token *tok);
 void		skip_redir(t_token *tok);
-void		complet_pipeline(t_pipe *pipe, t_token *tok);
+void		complet_pipeline(t_pipe **pipe, t_token *tok);
 void		check_expansion(t_token *tok);
 char		*join_all_tok(t_token *tok);
 

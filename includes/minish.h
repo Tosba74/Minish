@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/17 21:20:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 18:22:30 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_global
 	bool		debug;
 }	t_global;
 
-extern bool		g_debug;
 extern int		g_err;
 
 /*********************************************************/
@@ -65,7 +64,7 @@ void		skip_slash(char *av);
 /******************      ENGINE       ********************/
 /*********************************************************/
 
-int			exec(t_global *g, t_pipe *pipe);
+void		exec(t_global *g, t_pipe *pipe);
 int			waiting_pid(t_global *g);
 int			simple_cmd(t_global *g, t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
@@ -76,9 +75,8 @@ void		dup_close(int src, int dst, char *s);
 
 int			is_spec_char(char c);
 char		*search_in_env(char *var);
-// int			count_this_char(char *s, char c);
 void		lexer(t_token **tok, char *input);
-void		parser(t_pipe *pipe);
+void		parser(t_pipe **pipe);
 void		init_env(char **env);
 void		print_envp(char **env);
 char		*get_last_input(void);
@@ -88,6 +86,6 @@ char		**get_env_teub(t_env *env, int print);
 /******************       MAIN        ********************/
 /*********************************************************/
 
-void		debug(int i);
+void		debug(t_global *g, int i);
 
 #endif

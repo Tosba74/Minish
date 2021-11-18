@@ -60,7 +60,7 @@ void	check_quotes(t_token *token)
 	tok = token;
 	while (tok)
 	{
-		if (tok->type == DQUOTE || (9 < tok->type || tok->type < 15))
+		if (tok->type == DQUOTE || (9 < tok->type && tok->type < 14))
 			while (ft_isinstr(tok->value, '$'))
 				dollar_exp(tok);
 		else if (tok->type == QUOTE)

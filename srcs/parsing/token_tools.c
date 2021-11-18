@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/17 23:23:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 01:43:25 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	join_cell_tok(t_token *tok)
 
 	while (tok)
 	{
-		if ((tok->type == ARG || (9 < tok->type && tok->type < 15))
+		if ((tok->type == ARG || (9 < tok->type && tok->type < 14))
 			&& (tok->next && (tok->next->type < 3)))
 		{
 			second = tok->next;

@@ -12,7 +12,6 @@
 
 #include "minish.h"
 
-bool	g_debug = false;
 int		g_err = 0;
 
 static char	*create_prompt(void)
@@ -44,12 +43,12 @@ static char	*create_prompt(void)
 
 static void	init_global(t_global *g, int ac, char **av, char **env)
 {
-	g_debug = false;
+	 g->debug = false;
 	(void)g;
 	if (ac == 2)
 	{
 		if (!ft_strncmp(av[1], "-debug", 6))
-			g_debug = true;
+			 g->debug = true;
 		else
 		{
 			ft_err("Arg", 1);
@@ -57,8 +56,8 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 		}
 	}
 	init_env(env);
-	debug(0);
-	debug(1);
+	debug(g, 0);
+	debug(g, 1);
 }
 
 void	init_pipe_bluff(t_pipe **pipe, char *input)
@@ -89,7 +88,6 @@ static void	loop(t_global *g)
 	int		i;
 	char	*input;
 	t_pipe	*pipe;
-	// char	*prompt;
 
 	i = 0;
 	input = readline(create_prompt());
@@ -101,13 +99,15 @@ static void	loop(t_global *g)
 			add_history(input);
 			addback_cell_history(get_history(),
 				new_cell_history(skip_space(input), i++));
-			parser(pipe);
-			(void)g;
-			if (count_cell_pipe(pipe) == 1)
-				simple_cmd(g, pipe);
-			else
-				exec(g, pipe);
+			parser(&pipe);
+			if (!pipe)
+				printf("AH ABH MERDE ALORS");
+			// exec(g, pipe);
 			clear_pipeline(pipe);
+			(void)g;
+			// if (count_cell_pipe(pipe) == 1)
+			// 	simple_cmd(g, pipe);
+			// else
 			// init_pipe_bluff(&pipe, input);
 			// if (pipe->no_job)
 			// {
@@ -122,13 +122,10 @@ static void	loop(t_global *g)
 			// 	}
 			// }
 			// clear_pipeline(pipe);
-			debug(0);
+			debug(g, 0);
 		}
 		wrfree(input);
 		input = readline(create_prompt());
-		// prompt = create_prompt();
-		// input = readline(prompt);
-		// free(prompt);
 	}
 }
 
@@ -136,7 +133,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_global	g;
 
-	g = (t_global){};; 
+	g = (t_global){};
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);

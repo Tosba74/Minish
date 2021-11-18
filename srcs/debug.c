@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/17 23:38:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 18:20:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	print_token(t_token *tok)
 			dprintf(STDERR_FILENO, "\033[32m%s|\033[0m", cpy->value);
 		else if (cpy->type < 8)
 			dprintf(STDERR_FILENO, "\033[34m%s|\033[0m", cpy->value);
-		else if (cpy->type > 9 || cpy->type < 15)
+		else if (cpy->type > 9 && cpy->type < 14)
 			dprintf(STDERR_FILENO, "\033[36m%s|\033[0m", cpy->value);
-		else if (cpy->type == 15)
-			dprintf(STDERR_FILENO, "\033[91m%s|\033[0m", cpy->value);
+		else if (cpy->type == 14)
+			dprintf(STDERR_FILENO, "\033[93m%s|\033[0m", cpy->value);
 		else
 			dprintf(STDERR_FILENO, "\033[31m%s|\033[0m", cpy->value);
 		cpy = cpy->next;
@@ -47,7 +47,7 @@ void	print_envp(char **env)
 	}
 }
 
-void	debug(int i)
+void	debug(t_global *g, int i)
 {
 	void	(*pf[5])(void);
 
@@ -55,7 +55,7 @@ void	debug(int i)
 	pf[1] = print_env_teub;
 	pf[2] = print_hidden;
 	pf[3] = print_story;
-	if (g_debug == true)
+	if (g->debug == true)
 	{
 		printf("debug activate\n");
 		pf[i]();

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 00:12:17 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 18:43:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*get_redir_value(char *input, int *i, t_type *type)
 	while (input[*i] && is_spec_char(input[*i]) == -1)
 		(*i)++;
 	tmp = ft_substr(input, 0, *i);
-	if (!tmp)
+	if (!tmp[0])
 	{
 		tmp = ft_strdup("newline");
 		*type = ERROR;
@@ -70,9 +70,13 @@ int	redir_tok(t_token **tok, char *input)
 	while (input[i + j] && input[i + j] == ' ')
 		j++;
 	if (type == ERROR)
-		tmp = ft_substr(input, i, 1);
+		tmp = ft_substr(input, i - 1, 1);
 	else
-		tmp = get_redir_value(input + i + j, &i, &type);
+	{
+		j += i;
+		i = 0;
+		tmp = get_redir_value(input + j, &i, &type);
+	}
 	addback_cell_tok(tok, new_cell_tok(tmp, type));
-	return (i + j + 1);
+	return (i + j);
 }

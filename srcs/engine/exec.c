@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/16 17:37:59 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 01:13:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 		// exec_builtin(p, g, prev_in);
 }
 
-int	exec(t_global *g, t_pipe *pipe)
+void	exec(t_global *g, t_pipe *pipe)
 {
 	int		i;
 	t_pipe	*p;
@@ -220,5 +220,5 @@ int	exec(t_global *g, t_pipe *pipe)
 		exec_jobs(p, g);
 		p = p->next;
 	}
-	return (waiting_pid(g));
+	g_err = waiting_pid(g);
 }
