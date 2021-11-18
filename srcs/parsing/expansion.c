@@ -69,6 +69,10 @@ void	check_quotes(t_token *token)
 	}
 }
 
+void	skip_redir(t_token *tok)
+{
+	(void)tok;
+}
 char	*join_all_tok(t_token *tok)
 {
 	char	*s;

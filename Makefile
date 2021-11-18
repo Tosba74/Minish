@@ -29,14 +29,14 @@ override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
 					${PATH_S}
 
-override FILES_P	:= parser.c lexer.c pars_tools.c history.c \
-					tokenizator.c token_tools.c pipe_tools.c \
-					job_tools.c expansion.c redir_exp.c
+override FILES_P	:= parser.c lexer.c pars_tools.c history.c tokenizator.c \
+					token_tools.c pipe_tools.c job_tools.c expansion.c \
+					redir_exp.c complet_pipeline.c
 override FILES_E	:= exec.c exec_tools.c simple_cmd.c 
-override FILES_B	:= b_env.c b_history.c echo.c b_cd.c b_exit.c \
-					b_export.c b_pwd.c b_unset.c
-override FILES_M	:= signaux.c debug.c debug_tools.c error.c main.c \
-					init_env.c env_tools.c env_edit.c 
+override FILES_B	:= b_env.c b_history.c echo.c b_cd.c b_exit.c b_export.c \
+					b_pwd.c b_unset.c
+override FILES_M	:= signaux.c debug.c debug_tools.c error.c main.c init_env.c \
+					env_tools.c env_edit.c 
  
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \
