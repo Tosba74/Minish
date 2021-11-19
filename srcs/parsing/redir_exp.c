@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:22:50 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 02:44:33 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	skip_redir(t_token *tok, t_pipe *pipe)
 	t_token	*next;
 
 	tcpy = tok;
-	pcpy = last_cell_pipe(pipe);
+	pcpy = pipe;
 	pcpy->fd_in = 0;
 	pcpy->fd_out = 1;
 	while (tcpy)

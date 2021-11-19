@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:37:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 02:46:39 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 	check_expansion(tok);
 	// skip_redir(tok);
 	new = new_cell_pipe(tok);
+	new->next = 0;
 	if (skip_redir(tok, new) == 1)
 	{
 		print_token(tok);
