@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:43:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 20:16:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 02:36:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	is_name_env(char c)
 		return (1);
 	return (0);
 }
+
 int	count_this_char(char *s, char c)
 {
 	int	i;

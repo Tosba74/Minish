@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:21:55 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 03:14:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_pipe	*new_cell_pipe(t_token *tok)
 			new->job->is_cmd = false;
 		}
 	}
+	new->next = NULL;
 	return (new);
 }
 

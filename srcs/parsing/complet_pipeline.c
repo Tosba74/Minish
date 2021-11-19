@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 02:46:39 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 03:19:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char **complet_av(t_token *tok)
 	i = 0;
 	count = count_cell_tok(tok);
 	av = wrmalloc(sizeof(char *) * (count + 1));	
-	while (tok && tok->type == PIPE)
+	while (tok && tok->type != PIPE)
 	{
 		av[i++] = tok->value;
 		tok = tok->next;
@@ -54,23 +54,36 @@ char **complet_av(t_token *tok)
 	av[i] = NULL;
 	return (av);
 }
+
+void	next_pipe(t_token **tok)
+{
+	while (*tok && (*tok)->type != PIPE)
+		(*tok) = (*tok)->next;
+	if (*tok)
+		(*tok) = (*tok)->next;
+}
+
 void	complet_pipeline(t_pipe **pipe, t_token *tok)
 {
+	int		ret;
 	t_pipe	*new;
 
 	check_expansion(tok);
-	// skip_redir(tok);
-	new = new_cell_pipe(tok);
-	new->next = 0;
-	if (skip_redir(tok, new) == 1)
+	while (tok)
 	{
-		print_token(tok);
-		new->job->av = complet_av(tok);
-		print_pipe(new);
+		new = new_cell_pipe(tok);
+		ret = skip_redir(tok, new);
+		if (ret == 1)
+		{
+			print_token(tok);
+			new->job->av = complet_av(tok);
+			next_pipe(&tok);
+			// print_pipe(new);
+		}
+		else
+		{
+			printf("tu gere pas lerreur mec!\n");
+		}
 	}
-	
-	
-	//ne pas faire ca cest pour compile
-	// av = join_all_tok(tok);
 	addback_cell_pipe(pipe, new);
 }
