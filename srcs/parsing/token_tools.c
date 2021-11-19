@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 01:43:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 23:04:08 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,19 @@ void	join_cell_tok(t_token *tok)
 		else
 			tok = tok->next;
 	}
+}
+
+void	remove_cell_tok(t_token *tok)
+{
+	t_token	*prev;
+	t_token	*next;
+
+	prev = tok->prev;
+	next = tok->next;
+	if (prev)
+		prev->next = next;
+	if (next)
+		next->prev = prev;
+	wrfree(tok->value);
+	wrfree(tok);
 }
