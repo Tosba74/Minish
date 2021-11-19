@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 23:42:13 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 01:33:01 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ typedef struct s_pipe
 	char			*pipe_line; // ls -alR minish/
 	int				fd_in;
 	int				fd_out;
-	bool			no_job;
 	bool			in;
 	bool			out;
 	t_job			*job;
@@ -125,7 +124,8 @@ t_story		**get_history(void);
 /********************     PIPE     ***********************/
 /*********************************************************/
 
-t_pipe		*new_cell_pipe(char *content, t_job *job);
+// t_pipe		*new_cell_pipe(char *content, t_job *job);
+t_pipe		*new_cell_pipe(t_token *tok);
 t_pipe		*last_cell_pipe(t_pipe *pipe);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			count_cell_pipe(t_pipe *pipe);
@@ -153,6 +153,8 @@ int			pipe_tok(t_token **tok, char *input);
 int			egal_tok(t_token **tok, char *input);
 int			option_tok(t_token **tok, char *input);
 int			egal_tok(t_token **tok, char *input);
+int			count_cell_tok(t_token *tok);
+char		**complet_av(t_token *tok);
 
 /*********************************************************/
 /********************   EXPANSION    *********************/

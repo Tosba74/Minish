@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/18 18:22:30 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 22:36:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_global
 	pid_t		pids[1024];
 	size_t		nb_proc;
 	char 		**env;
+	bool		no_job;
 	bool		debug;
 }	t_global;
 

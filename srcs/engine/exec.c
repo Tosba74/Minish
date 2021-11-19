@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 01:13:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/18 23:03:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,11 @@ int	exec(t_global *g, t_pipe *pipe)
 
 static void	child_process(t_pipe *p, t_global *g, const int prev)
 {
-	if (p->in)
+	if (!p->in)
 		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
 	else
 		dup_close(p->fd_in, STDIN_FILENO, "fd_in");
-	if (p->out)
+	if (!p->out)
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
@@ -143,7 +143,7 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 
 static void	daddy_process(t_pipe *p, t_global *g, const int prev)
 {
-	if (p->in)
+	if (!p->in)
 	{
 		if (close(prev) < 0)
 			ft_err("Pipe_fd[0]", 8);
@@ -153,7 +153,7 @@ static void	daddy_process(t_pipe *p, t_global *g, const int prev)
 		if (close(p->fd_in) < 0)
 			ft_err("fd_in", 8);
 	}
-	if (p->out)
+	if (!p->out)
 	{
 		if (close(g->pipe_fd[1]) < 0)
 			ft_err("Pipe_fd[1]", 8);
@@ -167,7 +167,7 @@ static void	daddy_process(t_pipe *p, t_global *g, const int prev)
 
 void	exec_builtin(t_pipe *p, t_global *g, int prev)
 {
-	if (p->in)
+	if (!p->in)
 	{
 		if (close(prev) < 0)
 			ft_err("Pipe_fd[0]", 8);
@@ -177,7 +177,7 @@ void	exec_builtin(t_pipe *p, t_global *g, int prev)
 		if (close(p->fd_in) < 0)
 			ft_err("fd_in", 8);
 	}
-	if (p->out)
+	if (!p->out)
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");

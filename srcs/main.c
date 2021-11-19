@@ -60,6 +60,7 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 	debug(g, 1);
 }
 
+/*
 void	init_pipe_bluff(t_pipe **pipe, char *input)
 {
 	int		i;
@@ -82,6 +83,7 @@ void	init_pipe_bluff(t_pipe **pipe, char *input)
 	// tmp->job->job = input;
 	// tmp->job->av = ft_split(input, ' ');
 }
+*/
 
 static void	loop(t_global *g)
 {

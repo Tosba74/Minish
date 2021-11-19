@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/17 12:58:57 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 01:31:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,23 @@ void	skip_slash(char *av)
 
 int	is_builtin(char *s)
 {
-	int		i;
-	char	*built[8];
+	int	i;
+	static const char	*const built[] = {
+		"echo",
+		"cd",
+		"pwd",
+		"export",
+		"unset",
+		"env",
+		"exit",
+		"history"
+	};
 
 	i = -1;
-	built[0] = "echo";
-	built[1] = "cd";
-	built[2] = "pwd";
-	built[3] = "export";
-	built[4] = "unset";
-	built[5] = "env";
-	built[6] = "exit";
-	built[7] = "history";
-	while (++i < 8)
-		if (!ft_strcmp(built[i], s))
-			return (i);
+	if (s)
+		while (++i < (int)(sizeof(built) / sizeof(*built)))
+			if (!ft_strcmp(built[i], s))
+				return (i);
 	return (-1);
 }
 
