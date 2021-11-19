@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:17:10 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 01:22:50 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 static int	try_open(char *path, t_type type)
 {
 	if (type == REDIR_R)
-		return(open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
+		return (open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
 	if (type == REDIR_RD)
-		return(open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
+		return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
 	if (type == REDIR_L)
-		return(open(path, O_RDONLY));
+		return (open(path, O_RDONLY));
 	return (-1);
 }
 
@@ -39,7 +39,7 @@ int	skip_redir(t_token *tok, t_pipe *pipe)
 	t_token	*tcpy;
 	t_pipe	*pcpy;
 	int		new_fd;
-	t_token *next;
+	t_token	*next;
 
 	tcpy = tok;
 	pcpy = last_cell_pipe(pipe);
@@ -48,7 +48,7 @@ int	skip_redir(t_token *tok, t_pipe *pipe)
 	while (tcpy)
 	{
 		if (tcpy->type == REDIR_RD || tcpy->type == REDIR_L
-				|| tcpy->type == REDIR_R)
+			|| tcpy->type == REDIR_R)
 		{
 			new_fd = try_open(tcpy->value, tcpy->type);
 			if (new_fd == -1 || !check_read(new_fd))
@@ -73,12 +73,12 @@ int	skip_redir(t_token *tok, t_pipe *pipe)
 			}
 			next = tcpy->next;
 			remove_cell_tok(tcpy);
-			tcpy=next;
+			tcpy = next;
 			while (tcpy && tcpy->type == SPC)
 			{
 				next = tcpy->next;
 				remove_cell_tok(tcpy);
-				tcpy=next;
+				tcpy = next;
 			}
 		}
 		else
