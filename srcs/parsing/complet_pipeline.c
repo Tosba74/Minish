@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:01:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 01:37:40 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,15 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 	check_expansion(tok);
 	// skip_redir(tok);
 	new = new_cell_pipe(tok);
-	// new->fd_in = STDIN_FILENO;
-	// new->fd_out = STDOUT_FILENO;
-	// new->in = false;
-	// new->out = false;
-	new->job->av = complet_av(tok);
-	// if (skip_redir(pipe, tok) == 1)
-	// {
-	// }
+	if (skip_redir(tok, new) == 1)
+	{
+		print_token(tok);
+		new->job->av = complet_av(tok);
+		print_pipe(new);
+	}
 	
 	
 	//ne pas faire ca cest pour compile
-	print_token(tok);
 	// av = join_all_tok(tok);
-	(void)pipe;
 	addback_cell_pipe(pipe, new);
-	// print_pipe(*pipe);
 }
