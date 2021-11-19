@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 02:44:33 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 03:14:31 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,55 +34,63 @@ static int	check_read(int fd)
 	return (1);
 }
 
-int	skip_redir(t_token *tok, t_pipe *pipe)
+static void	replace_fd(int *old, int new, int default_fd)
 {
-	t_token	*tcpy;
-	t_pipe	*pcpy;
-	int		new_fd;
+	if (*old != default_fd)
+		close(*old);
+	*old = new;
+}
+
+static void	remove_redir_tok(t_token *tok)
+{
 	t_token	*next;
 
-	tcpy = tok;
-	pcpy = pipe;
-	pcpy->fd_in = 0;
-	pcpy->fd_out = 1;
-	while (tcpy)
+	next = tok->next;
+	remove_cell_tok(tok);
+	tok = next;
+	while (tok && tok->type == SPC)
 	{
-		if (tcpy->type == REDIR_RD || tcpy->type == REDIR_L
-			|| tcpy->type == REDIR_R)
+		next = tok->next;
+		remove_cell_tok(tok);
+		tok = next;
+	}
+}
+
+void	close_all_fd(t_pipe *pipe)
+{
+	if (pipe->fd_out != 1)
+		close(pipe->fd_out);
+	if (pipe->fd_in)
+		close(pipe->fd_in);
+	pipe->fd_out = 1;
+	pipe->fd_in = 0;
+	pipe->out = false;
+	pipe->in = false;
+}
+
+int	skip_redir(t_token *tok, t_pipe *pipe)
+{
+	int		new_fd;
+
+	while (tok && tok->type != PIPE)
+	{
+		if (tok->type == REDIR_RD || tok->type == REDIR_L
+			|| tok->type == REDIR_R)
 		{
-			new_fd = try_open(tcpy->value, tcpy->type);
+			new_fd = try_open(tok->value, tok->type);
 			if (new_fd == -1 || !check_read(new_fd))
 			{
-				if (pcpy->fd_out != 1)
-					close(pcpy->fd_out);
-				if (pcpy->fd_in)
-					close(pcpy->fd_in);
+				close_all_fd(pipe);
 				return (0);
 			}
-			if (tcpy->type == REDIR_RD || tcpy->type == REDIR_R)
-			{
-				if (pcpy->fd_out != 1)
-					close(pcpy->fd_out);
-				pcpy->fd_out = new_fd;
-			}
+			if (tok->type == REDIR_RD || tok->type == REDIR_R)
+				replace_fd(&pipe->fd_out, new_fd, 1);
 			else
-			{
-				if (pcpy->fd_in)
-					close(pcpy->fd_in);
-				pcpy->fd_in = new_fd;
-			}
-			next = tcpy->next;
-			remove_cell_tok(tcpy);
-			tcpy = next;
-			while (tcpy && tcpy->type == SPC)
-			{
-				next = tcpy->next;
-				remove_cell_tok(tcpy);
-				tcpy = next;
-			}
+				replace_fd(&pipe->fd_in, new_fd, 0);
+			remove_redir_tok(tok);
 		}
 		else
-			tcpy = tcpy->next;
+			tok = tok->next;
 	}
 	return (1);
 }
