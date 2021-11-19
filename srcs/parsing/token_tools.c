@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 01:34:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 16:27:20 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	join_cell_tok(t_token *t)
 
 	while (t)
 	{
-		if ((((9 < t->type && t->type < 14) || t->type < 3)
-			&& is_builtin(t->value) == -1 && (t->next && (t->next->type < 3))))
+		if (((9 < t->type && t->type < 14) || t->type < 3)
+			&& is_builtin(t->value) == -1 && (t->next && (t->next->type < 3)))
 		{
 			second = t->next;
 			t->value = ft_strjoin_free(t->value, second->value, 3);
@@ -96,8 +96,8 @@ void	join_cell_tok(t_token *t)
 				t->next->prev = t;
 			ft_memdel(second);
 		}
-		// else if (is_builtin(t->value) != -1)
-			// t->type = BUILTIN;
+		else if ((9 < t->type && t->type < 14) && t->prev->type == SPC)
+			remove_cell_tok(t->prev);
 		else
 			t = t->next;
 	}

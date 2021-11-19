@@ -6,20 +6,36 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 03:25:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 17:56:05 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-static int	try_open(char *path, t_type type)
+static int	try_open(t_token *token, char *path)
 {
-	if (type == REDIR_R)
-		return (open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
-	if (type == REDIR_RD)
-		return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
-	if (type == REDIR_L)
-		return (open(path, O_RDONLY));
+	struct stat	buf;
+
+	stat(token->value, &buf);
+	printf("%s\n", token->value);
+	if (buf.st_mode & S_IFDIR)
+	{
+		if (token->type == REDIR_L)
+			ft_err("stdin", 8);
+		else if (token->type == REDIR_R || token->type == REDIR_RD)
+			ft_err(token->value, 8);
+	}
+	else if (!(buf.st_mode & S_IRUSR))
+		ft_err(token->value, 7);
+	else
+	{
+		if (token->type == REDIR_R)
+			return (open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
+		if (token->type == REDIR_RD)
+			return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
+		if (token->type == REDIR_L)
+			return (open(path, O_RDONLY));
+	}
 	return (-1);
 }
 
@@ -68,16 +84,16 @@ void	close_all_fd(t_pipe *pipe)
 	pipe->in = false;
 }
 
-int	skip_redir(t_token *tok, t_pipe *pipe)
+int	skip_redir(t_pipe *pipe, t_token *tok)
 {
-	int		new_fd;
+	int			new_fd;
 
 	while (tok && tok->type != PIPE)
 	{
 		if (tok->type == REDIR_RD || tok->type == REDIR_L
 			|| tok->type == REDIR_R)
 		{
-			new_fd = try_open(tok->value, tok->type);
+			new_fd = try_open(tok, tok->value);
 			if (new_fd == -1 || !check_read(new_fd))
 			{
 				close_all_fd(pipe);

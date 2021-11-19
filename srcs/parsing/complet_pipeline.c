@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 03:19:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/19 17:41:22 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 	check_expansion(tok);
 	while (tok)
 	{
+		printf("Wesh mec!\n");
 		new = new_cell_pipe(tok);
-		ret = skip_redir(tok, new);
+		ret = skip_redir(new, tok);
+		printf("%d\n", ret);
 		if (ret == 1)
 		{
 			print_token(tok);
@@ -83,6 +85,7 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 		else
 		{
 			printf("tu gere pas lerreur mec!\n");
+			break;
 		}
 	}
 	addback_cell_pipe(pipe, new);
