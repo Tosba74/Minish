@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 16:11:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:29:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	skip_slash(char *av)
 
 int	is_builtin(char *s)
 {
-	int	i;
-	static const char	*const built[] = {
+	int					i;
+	static const char	*built[] = {
 		"echo",
 		"cd",
 		"pwd",

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:41:15 by bmangin           #+#    #+#             */
-/*   Updated: 2020/12/08 23:04:54 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/21 20:18:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	ssrc = (const unsigned char *)src;
 	sdst = (unsigned char *)dst;
-	i = 0;
+	i = -1;
 	if (src == NULL && dst == NULL)
 		return (NULL);
 	if (ssrc == sdst)
 		return (dst);
-	while (i < n)
-	{
+	while (++i < n)
 		sdst[i] = ssrc[i];
-		i++;
-	}
 	return ((void *)sdst);
 }

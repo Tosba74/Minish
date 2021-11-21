@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 16:27:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:22:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,27 +78,4 @@ void	remove_cell_tok(t_token *tok)
 		next->prev = prev;
 	wrfree(tok->value);
 	wrfree(tok);
-}
-
-void	join_cell_tok(t_token *t)
-{
-	t_token	*second;
-
-	while (t)
-	{
-		if (((9 < t->type && t->type < 14) || t->type < 3)
-			&& is_builtin(t->value) == -1 && (t->next && (t->next->type < 3)))
-		{
-			second = t->next;
-			t->value = ft_strjoin_free(t->value, second->value, 3);
-			t->next = second->next;
-			if (t->next)
-				t->next->prev = t;
-			ft_memdel(second);
-		}
-		else if ((9 < t->type && t->type < 14) && t->prev->type == SPC)
-			remove_cell_tok(t->prev);
-		else
-			t = t->next;
-	}
 }

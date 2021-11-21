@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 23:12:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/21 22:35:25 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,31 @@ t_job	*new_job(char *av)
 	return (new);
 }
 
+int	count_cell_tok(t_token *tok)
+{
+	int		count;
+
+	count = 0;
+	if (!tok)
+		return (count);
+	while (tok)
+	{
+		tok = tok->next;
+		count++;
+	}
+	return (count);
+}
+
 void	print_pipe(t_pipe *p)
 {
 	t_pipe	*cpy;
 	int		i;
 
 	cpy = p;
-	while (cpy)
-	{
+	// while (cpy)
+	// {
 		i = -1;
-		printf("| input = %27s |\n", cpy->pipe_line);
+		// printf("| input = %27s |\n", cpy->pipe_line);
 		printf("|  cmd = %28s |\n", cpy->job->job);
 		while (cpy->job->av[++i])
 			printf("| av[%d]  %28s |\n", i, cpy->job->av[i]);
@@ -89,6 +104,6 @@ void	print_pipe(t_pipe *p)
 		printf("| bool_in = %3d     bool_ out = %3d   |\n", cpy->in, cpy->out);
 		printf("| fd_in = %3d       fd_ out = %3d     |\n",
 			cpy->fd_in, cpy->fd_out);
-		cpy = cpy->next;
-	}
+		// cpy = cpy->next;
+	// }
 }

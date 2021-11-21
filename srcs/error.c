@@ -24,7 +24,7 @@ static const t_err	*err_pars(int err)
 		{1, "no such file or directory\n"},
 		{1, "Permission denied\n"},
 		{1, "Is a directory\n"},
-		{1, "ambigous redirect\n"},
+		{1, "ambigous redirect\n"}
 		/*
 		{EEXIST, "File already exists!\n"},
 		{ENOSYS, "Function not implemented\n"},
@@ -48,7 +48,7 @@ static const t_err	*err_exec(int err)
 		{ECHILD, "No child processes\n"},
 		{127, "command not found\n"},
 		{EBADF, "Bad file descriptor\n"},
-		{ENOENT, "No such file or directory!\n"}
+		{ENOENT, "No such file or directory!\n"},
 		{1, "File name too long\n"}
 		/*
 		{ESRCH, "Invalid thread/process id!\n"},

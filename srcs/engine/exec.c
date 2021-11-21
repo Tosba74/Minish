@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/18 23:03:22 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:37:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,17 +194,20 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 		if (pipe(g->pipe_fd) < 0)
 			ft_err("ExecJobs: ", 10);
 	pid = fork();
-	if (pid < 0)
-		ft_err("ExecJobs: ", 11);
-	if (pid == 0)
-		child_process(p, g, prev_in);
-	else
+	if (p->job->is_cmd)
 	{
-		g->pids[g->index++] = pid;
-		daddy_process(p, g, prev_in);
+		if (pid < 0)
+			ft_err("ExecJobs: ", 11);
+		if (pid == 0)
+			child_process(p, g, prev_in);
+		else
+		{
+			g->pids[g->index++] = pid;
+			daddy_process(p, g, prev_in);
+		}
 	}
-	// else
-		// exec_builtin(p, g, prev_in);
+	else
+		exec_builtin(p, g, prev_in);
 }
 
 void	exec(t_global *g, t_pipe *pipe)

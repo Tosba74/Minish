@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 17:56:05 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/21 22:28:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static int	try_open(t_token *token, char *path)
 	struct stat	buf;
 
 	stat(token->value, &buf);
-	printf("%s\n", token->value);
+	printf("dire = %d\n", (bool)(buf.st_mode & S_IFDIR));
+	printf("usrr = %d\n", (bool)(buf.st_mode & S_IRUSR));
+	printf("usrw = %d\n", (bool)(buf.st_mode & S_IWUSR));
+	printf("file = %d\n", (bool)(buf.st_mode & S_IFMT));
 	if (buf.st_mode & S_IFDIR)
 	{
 		if (token->type == REDIR_L)
@@ -25,16 +28,22 @@ static int	try_open(t_token *token, char *path)
 		else if (token->type == REDIR_R || token->type == REDIR_RD)
 			ft_err(token->value, 8);
 	}
-	else if (!(buf.st_mode & S_IRUSR))
-		ft_err(token->value, 7);
-	else
+	else if ((bool)(buf.st_mode & S_IFMT))
 	{
-		if (token->type == REDIR_R)
-			return (open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
-		if (token->type == REDIR_RD)
-			return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
-		if (token->type == REDIR_L)
-			return (open(path, O_RDONLY));
+		printf("%s\n", token->value);
+		if ((!(buf.st_mode & S_IRUSR) && token->type == REDIR_L)
+			|| (!(buf.st_mode & S_IWUSR) && (token->type == REDIR_R
+					|| token->type == REDIR_RD)))
+			ft_err(token->value, 7);
+		else
+		{
+			if (token->type == REDIR_R)
+				return (open(path, O_CREAT | O_RDWR | O_TRUNC, 0644));
+			if (token->type == REDIR_RD)
+				return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
+			if (token->type == REDIR_L)
+				return (open(path, O_RDONLY));
+		}
 	}
 	return (-1);
 }

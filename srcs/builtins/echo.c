@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:11:48 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/17 11:48:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:25:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	no_return(char *str)
 	return (1);
 }
 
-int		do_echo(t_job *j)
+int	do_echo(t_job *j)
 {
 	int	index;
 	int	opt_flag;

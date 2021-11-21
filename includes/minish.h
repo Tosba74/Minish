@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/18 22:36:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:40:58 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void		lexer(t_token **tok, char *input);
 void		parser(t_pipe **pipe);
 void		init_env(char **env);
 void		print_envp(char **env);
-char		*get_last_input(void);
 char		**get_env_teub(t_env *env, int print);
 
 /*********************************************************/

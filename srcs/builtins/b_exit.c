@@ -6,14 +6,15 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:16:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 21:56:12 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 21:36:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int		do_exit(t_job *j)
+int	do_exit(t_job *j)
 {
 	(void)j;
+	wrdestroy();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 17:34:28 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/20 19:41:31 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ typedef struct s_pipe
 	struct s_pipe	*next;
 }	t_pipe;
 
-
 /*********************************************************/
 /********************     DEBUG     **********************/
 /*********************************************************/
@@ -115,10 +114,11 @@ int			is_name_env(char c);
 /********************    HISTORY    **********************/
 /*********************************************************/
 
+t_story		**get_history(void);
 t_story		*new_cell_history(char *content, int index);
 t_story		*last_cell_history(t_story *story);
+char		*get_last_input(void);
 void		addback_cell_history(t_story **story, t_story *new);
-t_story		**get_history(void);
 
 /*********************************************************/
 /********************     PIPE     ***********************/
