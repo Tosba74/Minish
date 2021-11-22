@@ -6,17 +6,32 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/21 22:28:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/22 16:59:52 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
+/* PETIT RECAP DES MODIFS
+
+gestion d'erreurs:
+access(path, F_OK) renvoie 0 si le fichier existe ou -1 s'il n'existe pas
+du coup tu peux poser l'erreur "no such file or directory" en te servant de la valeur de create
+
+boucle inf:
+maintenant remove_redir_tok prend en parametre un t_token **
+sinon tok ne passe pas a l'addresse suivante dans skip_redir, et du coup on se retrouve avec un pointeur vide, ce qui occasionnait un -1...
+
+*/
+
 static int	try_open(t_token *token, char *path)
 {
 	struct stat	buf;
+	int			create;
 
-	stat(token->value, &buf);
+	create = access(path, F_OK);
+	if (!create)
+		stat(token->value, &buf);
 	printf("dire = %d\n", (bool)(buf.st_mode & S_IFDIR));
 	printf("usrr = %d\n", (bool)(buf.st_mode & S_IRUSR));
 	printf("usrw = %d\n", (bool)(buf.st_mode & S_IWUSR));
@@ -28,12 +43,13 @@ static int	try_open(t_token *token, char *path)
 		else if (token->type == REDIR_R || token->type == REDIR_RD)
 			ft_err(token->value, 8);
 	}
-	else if ((bool)(buf.st_mode & S_IFMT))
+	else if (create == -1 || (bool)(buf.st_mode & S_IFMT))
 	{
 		printf("%s\n", token->value);
-		if ((!(buf.st_mode & S_IRUSR) && token->type == REDIR_L)
+		if ((create == -1 && token->type == REDIR_L)
+			|| (((!(buf.st_mode & S_IRUSR) && token->type == REDIR_L)
 			|| (!(buf.st_mode & S_IWUSR) && (token->type == REDIR_R
-					|| token->type == REDIR_RD)))
+					|| token->type == REDIR_RD))) && !create))
 			ft_err(token->value, 7);
 		else
 		{
@@ -66,18 +82,18 @@ static void	replace_fd(int *old, int new, int default_fd)
 	*old = new;
 }
 
-static void	remove_redir_tok(t_token *tok)
+static void	remove_redir_tok(t_token **tok)
 {
 	t_token	*next;
 
-	next = tok->next;
-	remove_cell_tok(tok);
-	tok = next;
-	while (tok && tok->type == SPC)
+	next = (*tok)->next;
+	remove_cell_tok(*tok);
+	*tok = next;
+	while (*tok && (*tok)->type == SPC)
 	{
-		next = tok->next;
-		remove_cell_tok(tok);
-		tok = next;
+		next = (*tok)->next;
+		remove_cell_tok(*tok);
+		*tok = next;
 	}
 }
 
@@ -112,7 +128,7 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 				replace_fd(&pipe->fd_out, new_fd, 1);
 			else
 				replace_fd(&pipe->fd_in, new_fd, 0);
-			remove_redir_tok(tok);
+			remove_redir_tok(&tok);
 		}
 		else
 			tok = tok->next;
