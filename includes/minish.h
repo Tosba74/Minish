@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/20 19:40:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 10:40:57 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <errno.h>
 
 # include "libft.h"
-# include "error.h"
 # include "tools.h"
 
 /*********************************************************/
@@ -87,5 +86,6 @@ char		**get_env_teub(t_env *env, int print);
 /*********************************************************/
 
 void		debug(t_global *g, int i);
+void		ft_err(char *s, int err);
 
 #endif

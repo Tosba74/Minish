@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/20 19:41:31 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/22 21:19:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,12 @@ typedef enum e_print
 	PRINT,
 	PAPRINT
 }	t_print;
+
+typedef struct s_err
+{
+	int		err;
+	char	*strerror;
+}	t_err;
 
 typedef struct s_token
 {
@@ -165,6 +171,6 @@ void		egal_exp(t_token *tok);
 void		check_expansion(t_token *tok);
 char		*join_all_tok(t_token *tok);
 void		complet_pipeline(t_pipe **pipe, t_token *tok);
-int			skip_redir(t_pipe *pipe, t_token *tok);
+int			skip_redir(t_pipe *new, t_token *tok);
 
 #endif

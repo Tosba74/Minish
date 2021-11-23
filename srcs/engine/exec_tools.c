@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/20 19:29:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 10:45:36 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ static void	init_fd(t_pipe *pipe, char *file1, char *file2)
 	if (p->fd_in > 0)
 	{
 		close(p->fd_in);
-		ft_err("File opening:\n", 0);
+		ft_err("File opening:\n", NULL, 0);
 	}
 	close(p->fd_in);
 	p->fd_in = open(file1, O_RDONLY);

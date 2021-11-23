@@ -46,7 +46,7 @@ FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 SRCS		= ${addprefix ${PATH_S}/, ${FILES}}
 OBJS		= ${addprefix ${PATH_O}/, ${notdir ${SRCS:.c=.o}}}
 
-HEADER	 	:= error.h tools.h minish.h 
+HEADER	 	:= tools.h minish.h 
 INC			= ${addprefix ${PATH_I}/, ${HEADER}}
 
 LIBFT_NAME	= ${PATH_L}.a

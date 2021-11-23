@@ -79,10 +79,9 @@ static void	loop(t_global *g)
 			addback_cell_history(get_history(),
 				new_cell_history(skip_space(input), i++));
 			parser(&pipe);
-			if (!pipe)
-				printf("AH ABH MERDE ALORS");
-			// exec(g, pipe);
 			clear_pipeline(pipe);
+			if (pipe)
+				exec(g, pipe);
 			debug(g, 0);
 		}
 		wrfree(input);

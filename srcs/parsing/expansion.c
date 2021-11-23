@@ -60,9 +60,19 @@ void	check_quotes(t_token *token)
 	tok = token;
 	while (tok)
 	{
-		if (tok->type == DQUOTE || (9 < tok->type && tok->type < 14))
+		if (tok->type == DQUOTE)// || (9 < tok->type && tok->type < 14))
 			while (ft_isinstr(tok->value, '$'))
 				dollar_exp(tok);
+		else if (9 < tok->type && tok->type < 14)
+		{
+			if (tok->value[0] == '$' && tok->next)
+			{
+				if (env_find_cell(get_var_env(), tok->value + 1))
+					tok->value = env_find_cell(get_var_env(), tok->value + 1)->value;
+				else if ((tok->next && (tok->next->type == QUOTE || tok->type == DQUOTE || tok->next->type == ARG)))
+					tok->value = env_find_cell(get_var_env(), tok->value + 1)->value;
+			}
+		}
 		else if (tok->type == QUOTE)
 			tok->type = ARG;
 		tok = tok->next;
@@ -75,8 +85,9 @@ void	join_cell_tok(t_token *t)
 
 	while (t)
 	{
-		if (((9 < t->type && t->type < 14) || t->type < 3)
-			&& is_builtin(t->value) == -1 && (t->next && (t->next->type < 3)))
+		if ((((9 < t->type && t->type < 14) && ft_strncmp(t->value, "$", 1))
+				|| t->type < 3) && is_builtin(t->value) == -1
+			&& (t->next && (t->next->type < 3)))
 		{
 			second = t->next;
 			t->value = ft_strjoin_free(t->value, second->value, 3);
