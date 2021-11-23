@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/22 16:59:52 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/23 15:26:08 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	try_open(t_token *token, char *path)
 	int			create;
 
 	create = access(path, F_OK);
+	buf.st_mode = 0;
 	if (!create)
 		stat(token->value, &buf);
 	printf("dire = %d\n", (bool)(buf.st_mode & S_IFDIR));
@@ -75,11 +76,12 @@ static int	check_read(int fd)
 	return (1);
 }
 
-static void	replace_fd(int *old, int new, int default_fd)
+static void	replace_fd(int *old, int new, int default_fd, bool *change)
 {
 	if (*old != default_fd)
 		close(*old);
 	*old = new;
+	*change = true;
 }
 
 static void	remove_redir_tok(t_token **tok)
@@ -125,13 +127,14 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 				return (0);
 			}
 			if (tok->type == REDIR_RD || tok->type == REDIR_R)
-				replace_fd(&pipe->fd_out, new_fd, 1);
+				replace_fd(&pipe->fd_out, new_fd, 1, &pipe->out);
 			else
-				replace_fd(&pipe->fd_in, new_fd, 0);
+				replace_fd(&pipe->fd_in, new_fd, 0, &pipe->in);
 			remove_redir_tok(&tok);
 		}
 		else
 			tok = tok->next;
+		print_pipe(pipe);
 	}
 	return (1);
 }
