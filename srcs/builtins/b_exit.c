@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:16:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/20 21:36:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 15:30:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int	do_exit(t_job *j)
 {
 	(void)j;
 	wrdestroy();
-	return (0);
+	return (g_err);
 }

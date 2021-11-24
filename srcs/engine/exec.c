@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/23 10:46:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 15:27:12 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 	else
 	{
 		g_err = select_built(p);
-		exit(g_err);
+		// exit(g_err);
 	}
 }
 
