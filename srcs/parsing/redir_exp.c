@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/23 20:53:24 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 15:53:32 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ static void	remove_redir_tok(t_token **tok)
 		remove_cell_tok(*tok);
 		*tok = next;
 	}
+}
+
+static int	check_perm(t_type type, mode_t st_mode)
+{
+	if (!st_mode)
+		return (1);
+	if (type == REDIR_L && !(st_mode & S_IRUSR))
+		return (0);
+	if ((type == REDIR_R || type == REDIR_RD) && !(st_mode & S_IWUSR))
+		return (0);
+	return (1);
 }
 
 static int	try_open(t_token *tok, char *path)
@@ -55,8 +66,7 @@ static int	try_open(t_token *tok, char *path)
 			|| (!(buf.st_mode & S_IWUSR) && (token->type == REDIR_R
 					|| token->type == REDIR_RD))) && !create))
 			ft_err(token->value, 7); */
-
-	buf.st_mode = 0;
+	buf = (struct stat){0};
 	stat(tok->value, &buf);
 	if ((buf.st_mode & S_IFDIR))
 	{
@@ -73,11 +83,12 @@ static int	try_open(t_token *tok, char *path)
 			return (-1);
 		}
 	}
-	else if ((bool)(buf.st_mode & S_IFMT))
+	else if ((bool)(buf.st_mode & S_IFMT) || !buf.st_mode)
 	{
-		if ((!(((bool)buf.st_mode & S_IRUSR)) && tok->type == REDIR_L)
-			|| ((!((bool)(buf.st_mode & S_IWUSR)) && (tok->type == REDIR_R
-					|| tok->type == REDIR_RD))))
+/*		if (buf.st_mode && ((!(((bool)buf.st_mode & S_IRUSR)) && tok->type == REDIR_L)
+			|| (!((bool)(buf.st_mode & S_IWUSR)) && (tok->type == REDIR_R
+					|| tok->type == REDIR_RD)))) */
+		if (!check_perm(tok->type, buf.st_mode))
 		{
 			ft_err(tok->value, 7);
 			remove_redir_tok(&tok);
@@ -94,17 +105,6 @@ static int	try_open(t_token *tok, char *path)
 		}
 	}
 	return (-1);
-}
-
-static int	check_read(int fd)
-{
-	char	test[2];
-	int		err;
-
-	err = read(fd, test, 1);
-	if (err == -1)
-		return (0);
-	return (1);
 }
 
 static void	replace_fd(int *old, int new, int default_fd, bool *change)
@@ -137,10 +137,10 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 			|| tok->type == REDIR_R)
 		{
 			new_fd = try_open(tok, tok->value);
-			if (new_fd == -1 || !check_read(new_fd))
+			if (new_fd == -1)
 			{
 				close_all_fd(pipe);
-				return (0);
+				return (-1);
 			}
 			if (tok->type == REDIR_RD || tok->type == REDIR_R)
 				replace_fd(&pipe->fd_out, new_fd, 1, &pipe->out);
@@ -152,7 +152,7 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 			tok = tok->next;
 		print_pipe(pipe);
 	}
-	return (1);
+	return (0);
 }
 /*
 stat(tok->value, &buf);
