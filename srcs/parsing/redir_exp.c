@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/24 15:53:32 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 16:49:06 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,7 @@ static int	check_perm(t_type type, mode_t st_mode)
 static int	try_open(t_token *tok, char *path)
 {
 	struct stat	buf;
-/*	int			create;
 
-	create = access(path, F_OK);
-	buf.st_mode = 0;
-	if (!create)
-		stat(token->value, &buf);
-	printf("dire = %d\n", (bool)(buf.st_mode & S_IFDIR));
-	printf("usrr = %d\n", (bool)(buf.st_mode & S_IRUSR));
-	printf("usrw = %d\n", (bool)(buf.st_mode & S_IWUSR));
-	printf("file = %d\n", (bool)(buf.st_mode & S_IFMT));
-	if (buf.st_mode & S_IFDIR)
-	{
-		if (token->type == REDIR_L)
-			ft_err("stdin", 8);
-		else if (token->type == REDIR_R || token->type == REDIR_RD)
-			ft_err(token->value, 8);
-	}
-	else if (create == -1 || (bool)(buf.st_mode & S_IFMT))
-	{
-		printf("%s\n", token->value);
-		if ((create == -1 && token->type == REDIR_L)
-			|| (((!(buf.st_mode & S_IRUSR) && token->type == REDIR_L)
-			|| (!(buf.st_mode & S_IWUSR) && (token->type == REDIR_R
-					|| token->type == REDIR_RD))) && !create))
-			ft_err(token->value, 7); */
 	buf = (struct stat){0};
 	stat(tok->value, &buf);
 	if ((buf.st_mode & S_IFDIR))
@@ -83,7 +59,13 @@ static int	try_open(t_token *tok, char *path)
 			return (-1);
 		}
 	}
-	else if ((bool)(buf.st_mode & S_IFMT) || !buf.st_mode)
+	if (!buf.st_mode && tok->type == REDIR_L)
+	{
+		ft_err(tok->value, 6);
+		remove_redir_tok(&tok);
+		return (-1);
+	}
+	else if (!buf.st_mode || (bool)(buf.st_mode & S_IFMT))
 	{
 /*		if (buf.st_mode && ((!(((bool)buf.st_mode & S_IRUSR)) && tok->type == REDIR_L)
 			|| (!((bool)(buf.st_mode & S_IWUSR)) && (tok->type == REDIR_R
@@ -154,60 +136,3 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 	}
 	return (0);
 }
-/*
-stat(tok->value, &buf);
-	if ((buf.st_mode & S_IFDIR))
-	{
-		if (tok->type == REDIR_L)
-		{
-			ft_err("stdin", 8);
-			remove_redir_tok(tok);
-			return (-1);
-		}
-		else if (tok->type == REDIR_R || tok->type == REDIR_RD)
-		{
-			ft_err(tok->value, 8);
-			remove_redir_tok(tok);
-			return (-1);
-		}
-	}
-	else if ((bool)(buf.st_mode & S_IFMT))
-	{
-		if ((!(((bool)buf.st_mode & S_IRUSR)) && tok->type == REDIR_L)
-			|| ((!((bool)(buf.st_mode & S_IWUSR)) && (tok->type == REDIR_R
-					|| tok->type == REDIR_RD))))
-		{
-			ft_err(tok->value, 7);
-			remove_redir_tok(tok);
-			return (-1);
-		}
-		else
-		{
-			if (tok->type == REDIR_R)
-			{
-				new->fd_out = open(tok->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
-				new->out = true;
-				remove_redir_tok(tok);
-				return (0);
-			}
-			else if (tok->type == REDIR_RD)
-			{
-				new->fd_out = open(tok->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
-				new->out = true;
-				remove_redir_tok(tok);
-				return (0);
-			}
-			else if (tok->type == REDIR_L)
-			{
-				new->fd_out = open(tok->value, O_RDONLY);
-				new->out = true;
-				remove_redir_tok(tok);
-				return (0);
-			}
-			if (tok->type == REDIR_RD || tok->type == REDIR_R)
-				replace_fd(&pipe->fd_out, new_fd, 1, &pipe->out);
-			else
-				replace_fd(&pipe->fd_in, new_fd, 0, &pipe->in);
-			remove_redir_tok(&tok);
-		}
-*/
