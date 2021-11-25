@@ -60,7 +60,7 @@ INC_LFT		= ${addprefix ${LIBFT_H}/, ${LIBFT_INC}}
 # ******************************************************* #
 
 CC			:= clang
-CCF			:= ${CC} -Wall -Wextra -Werror -g 
+CCF			:= ${CC} -Wall -Wextra -Werror 
 CF_FS		:= ${CCF} -g3 -fsanitize=address
 CF_DB		:= ${CCF} -glldb -fsanitize=address
 LLFT		:= -L${PATH_L}
@@ -137,7 +137,7 @@ norm :
 			${NORM} ${INC}
 			
 minish:
-		clear
+#		clear
 		printf "\n"
 		printf "\n"
 		printf "${_C}        :::   :::  :::::::::: ::::    ::: :::::::: ::::::::: :::    ::: ${_E}\n"

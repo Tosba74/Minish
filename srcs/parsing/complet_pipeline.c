@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/21 22:32:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 19:15:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ char	**complet_av(t_token *tok)
 	av = wrmalloc(sizeof(char *) * (count + 1));
 	while (tok && tok->type != PIPE)
 	{
-		av[i++] = ft_strdup(tok->value);
+		if (tok->type != SPC)
+			av[i++] = ft_strdup(tok->value);
 		tok = tok->next;
 	}
 	av[i] = NULL;
@@ -55,6 +56,17 @@ void	next_pipe(t_token **tok)
 		(*tok) = (*tok)->next;
 }
 
+int have_redir(t_token *tok)
+{
+	while (tok && tok->type != PIPE)
+	{
+		if (9 < tok->type && tok->type < 14)
+			return (1);
+		tok = tok->next;
+	}
+	return (0);
+}
+
 void	complet_pipeline(t_pipe **pipe, t_token *tok)
 {
 	int		ret;
@@ -64,14 +76,20 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 	{
 		printf("Wesh mec!\n");
 		new = new_cell_pipe(tok);
-		ret = skip_redir(new, tok);
-		printf("%d\n", ret);
+		while (have_redir(tok))
+		{
+			ret = skip_redir(new, tok);
+			printf("ret_redir = %d\n", ret);
+			print_token(tok);
+		}
+		// ret = skip_redir(new, tok);
+		// printf("%d\n", ret);
 		if (ret != -1)
 		{
 			print_token(tok);
 			new->job->av = complet_av(tok);
 			next_pipe(&tok);
-			print_pipe(new);
+			// print_pipe(new);
 		}
 		else
 		{

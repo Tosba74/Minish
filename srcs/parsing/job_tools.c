@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/21 22:35:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/24 19:01:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,13 @@ void	del_job(t_job *jobs)
 	int	len;
 
 	len = ft_strslen(jobs->av);
-	if (len != 0)
+	if (len > 0)
 	{
 		while (len-- != 0)
 			ft_memdel(jobs->av[len]);
 	}
 	ft_memdel(jobs->av);
+	ft_memdel(jobs->job);
 	ft_memdel(jobs);
 }
 
