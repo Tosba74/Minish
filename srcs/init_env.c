@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/16 14:15:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/25 14:30:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**get_env_teub(t_env *env, int print)
 	teub = (char **)wrmalloc(sizeof(char *) * env_size(cpy, print) + 1);
 	while (cpy)
 	{
-		if (cpy->print == PRINT)
+		if ((int)(cpy->print) < print)
 			teub[i] = get_env_line(cpy);
 		cpy = cpy->next;
 		i++;
