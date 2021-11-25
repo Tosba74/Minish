@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/24 19:06:17 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/25 22:55:48 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,21 +148,21 @@ static void	daddy_process(t_pipe *p, t_global *g, const int prev)
 		if (close(prev) < 0)
 			ft_err("Pipe_fd[0]", 8);
 	}
-	else
-	{
-		if (close(p->fd_in) < 0)
-			ft_err("fd_in", 8);
-	}
+//	else
+//	{
+//		if (close(p->fd_in) < 0)
+//			ft_err("fd_in", 8);
+//	}
 	if (p->out)
 	{
 		if (close(g->pipe_fd[1]) < 0)
 			ft_err("Pipe_fd[1]", 8);
 	}
-	else
-	{
-		if (close(p->fd_out) < 0)
-			ft_err("fd_out", 8);
-	}
+//	else
+//	{
+//		if (close(p->fd_out) < 0)
+//			ft_err("fd_out", 8);
+//	}
 }
 
 void	exec_builtin(t_pipe *p, t_global *g, int prev)
