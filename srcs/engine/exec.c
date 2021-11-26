@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 21:45:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:56:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ static void exec_jobs(t_pipe *p, t_global *g)
 	else
 	{
 		get_pid_exec()->pids[get_pid_exec()->index++] = pid;
+		signal(SIGINT, &handler);
+		signal(SIGQUIT, &handler);
 		if (!p->job->is_cmd)
 			g_err = select_built(p);
 		else

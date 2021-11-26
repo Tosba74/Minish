@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 23:39:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:44:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	waiting_pid(void)
 		waitpid(get_pid_exec()->pids[i], &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			ret = (unsigned char)WEXITSTATUS(wstatus);
+		else if (WIFSIGNALED(wstatus))
+			ret = (unsigned char)WTERMSIG(wstatus) + 128;
 	}
 	return (ret);
 }

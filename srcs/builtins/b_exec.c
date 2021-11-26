@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 23:15:35 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:55:25 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		b_exec(t_pipe *p)
 	else
 	{
 		get_pid_exec()->pids[get_pid_exec()->index++] = pid;
+		signal(SIGINT, &handler);
+		signal(SIGQUIT, &handler);
 		if (p->in)
 			close(p->fd_in);
 		if (p->out)

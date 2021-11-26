@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/26 23:14:13 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:58:19 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ char		*create_prompt(void);
 /*********************************************************/
 
 void		handler(int sig);
+void		handler_idle(int sig);
 
 #endif

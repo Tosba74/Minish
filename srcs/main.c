@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 21:26:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 00:10:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,19 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 	debug(g, 1);
 }
 
+static void init_pids(void)
+{
+	int		i;
+
+	i = 0;
+	while (i < 1024)
+	{
+		get_pid_exec()->pids[i] = 0;
+		i++;
+	}
+	get_pid_exec()->index = 0;
+}
+
 static void	loop(t_global *g)
 {
 	int		i;
@@ -79,11 +92,12 @@ static void	loop(t_global *g)
 	t_pipe	*pipe;
 
 	i = 0;
-	signal(SIGINT, &handler);
-	signal(SIGQUIT, &handler);
 	input = readline(create_prompt());
 	while (input)
 	{
+		init_pids();
+		sigignore(SIGQUIT);
+		signal(SIGINT, &handler_idle);
 		pipe = NULL;
 		if (input[0])
 		{
