@@ -6,7 +6,11 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/11/26 19:47:03 by astucky          ###   ########lyon.fr   */
+=======
+/*   Updated: 2021/11/26 19:58:28 by bmangin          ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +41,11 @@ typedef struct s_pids
 	int			index;
 	pid_t		pids[1024];
 }	t_pids;
+
 typedef struct s_global
 {
 	int			pipe_fd[2];
 	size_t		nb_proc;
-	char 		**env;
 	bool		no_job;
 	bool		debug;
 }	t_global;

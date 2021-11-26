@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 18:24:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 19:24:24 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,13 +123,15 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 {
 	if (!p->in)
 	{
-		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
 		printf("in-false prev= %d\n", prev);
+		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
+		close (p->fd_in);
 	}
 	else
 	{
-		dup_close(p->fd_in, STDIN_FILENO, "fd_in");
 		printf("in-true fd_in= %d\n", p->fd_in);
+		dup_close(p->fd_in, STDIN_FILENO, "fd_in");
+		close (prev);
 	}
 	if (!p->out)
 	{
@@ -138,8 +140,8 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 	}
 	else
 	{
-		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
 		printf("in-true fd_out = %d\n", p->fd_out);
+		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
 	}
 	if (p->job->is_cmd)
 	{
