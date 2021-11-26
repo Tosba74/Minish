@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/20 19:40:58 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 17:41:44 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		exec(t_global *g, t_pipe *pipe);
 int			waiting_pid(t_global *g);
 int			simple_cmd(t_global *g, t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
+pid_t		*get_pid_exec(void);
 
 /*********************************************************/
 /******************      PARSING      ********************/

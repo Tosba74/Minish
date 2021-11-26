@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/20 19:29:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 17:41:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	waiting_pid(t_global *g)
 	i = 0;
 	while (++i < g->index)
 	{
-		waitpid(g->pids[i], &wstatus, 0);
+		waitpid(get_pid_exec[i], &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			ret = (unsigned char)WEXITSTATUS(wstatus);
 	}

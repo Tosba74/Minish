@@ -6,13 +6,20 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/25 21:48:55 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 17:41:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
 int		g_err = 0;
+
+pid_t	*get_pid_exec(void)
+{
+	static pid_t	pid[1024];
+
+	return (pid);
+}
 
 static char	*create_prompt(void)
 {

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 16:50:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 17:41:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 			child_process(p, g, prev_in);
 		else
 		{
-			g->pids[g->index++] = pid;
+			get_pid_exec[g->index++] = pid;
 			daddy_process(p, g, prev_in);
 		}
 	}
