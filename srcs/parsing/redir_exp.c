@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/24 17:10:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 10:11:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ static int	try_open(t_token *tok, char *path)
 	}
 	else if (!buf.st_mode || (bool)(buf.st_mode & S_IFMT))
 	{
-/*		if (buf.st_mode && ((!(((bool)buf.st_mode & S_IRUSR)) && tok->type == REDIR_L)
-			|| (!((bool)(buf.st_mode & S_IWUSR)) && (tok->type == REDIR_R
-					|| tok->type == REDIR_RD)))) */
 		if (!check_perm(tok->type, buf.st_mode))
 		{
 			ft_err(tok->value, 7);

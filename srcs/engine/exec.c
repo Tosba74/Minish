@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/25 22:55:48 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 16:50:36 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,11 @@ int	exec(t_global *g, t_pipe *pipe)
 
 static void	child_process(t_pipe *p, t_global *g, const int prev)
 {
-	if (p->in)
+	if (!p->in)
 		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
 	else
 		dup_close(p->fd_in, STDIN_FILENO, "fd_in");
-	if (p->out)
+	if (!p->out)
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
@@ -137,37 +137,13 @@ static void	child_process(t_pipe *p, t_global *g, const int prev)
 	else
 	{
 		g_err = select_built(p);
-		// exit(g_err);
+		// t exit(g_err);
 	}
 }
 
 static void	daddy_process(t_pipe *p, t_global *g, const int prev)
 {
-	if (p->in)
-	{
-		if (close(prev) < 0)
-			ft_err("Pipe_fd[0]", 8);
-	}
-//	else
-//	{
-//		if (close(p->fd_in) < 0)
-//			ft_err("fd_in", 8);
-//	}
-	if (p->out)
-	{
-		if (close(g->pipe_fd[1]) < 0)
-			ft_err("Pipe_fd[1]", 8);
-	}
-//	else
-//	{
-//		if (close(p->fd_out) < 0)
-//			ft_err("fd_out", 8);
-//	}
-}
-
-void	exec_builtin(t_pipe *p, t_global *g, int prev)
-{
-	if (p->in)
+	if (!p->in)
 	{
 		if (close(prev) < 0)
 			ft_err("Pipe_fd[0]", 8);
@@ -177,7 +153,31 @@ void	exec_builtin(t_pipe *p, t_global *g, int prev)
 		if (close(p->fd_in) < 0)
 			ft_err("fd_in", 8);
 	}
-	if (p->out)
+	if (!p->out)
+	{
+		if (close(g->pipe_fd[1]) < 0)
+			ft_err("Pipe_fd[1]", 8);
+	}
+	else
+	{
+		if (close(p->fd_out) < 0)
+			ft_err("fd_out", 8);
+	}
+}
+
+void	exec_builtin(t_pipe *p, t_global *g, int prev)
+{
+	if (!p->in)
+	{
+		if (close(prev) < 0)
+			ft_err("Pipe_fd[0]", 8);
+	}
+	else
+	{
+		if (close(p->fd_in) < 0)
+			ft_err("fd_in", 8);
+	}
+	if (!p->out)
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
 	else
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
@@ -190,12 +190,12 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 	const int	prev_in = g->pipe_fd[0];
 	pid_t		pid;
 
-	if (p->out)
+	if (!p->out)
 		if (pipe(g->pipe_fd) < 0)
 			ft_err("ExecJobs: ", 10);
-	pid = fork();
 	if (p->job->is_cmd)
 	{
+		pid = fork();
 		if (pid < 0)
 			ft_err("ExecJobs: ", 11);
 		if (pid == 0)
@@ -219,7 +219,7 @@ void	exec(t_global *g, t_pipe *pipe)
 	p = pipe;
 	while (p)
 	{
-		// print_pipe(p);
+		print_pipe(p);
 		exec_jobs(p, g);
 		p = p->next;
 	}
