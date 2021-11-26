@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/26 17:41:44 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 18:01:42 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@
 /*******************      GLOBAL      ********************/
 /*********************************************************/
 
-typedef struct s_global
+typedef struct s_pids
 {
 	int			index;
-	int			pipe_fd[2];
 	pid_t		pids[1024];
+}	t_pids;
+typedef struct s_global
+{
+	int			pipe_fd[2];
 	size_t		nb_proc;
 	char 		**env;
 	bool		no_job;
@@ -66,10 +69,10 @@ void		skip_slash(char *av);
 /*********************************************************/
 
 void		exec(t_global *g, t_pipe *pipe);
-int			waiting_pid(t_global *g);
+int			waiting_pid(void);
 int			simple_cmd(t_global *g, t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);
-pid_t		*get_pid_exec(void);
+t_pids		*get_pid_exec(void);
 
 /*********************************************************/
 /******************      PARSING      ********************/

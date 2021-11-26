@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 17:41:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 17:58:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int		g_err = 0;
 
-pid_t	*get_pid_exec(void)
+t_pids	*get_pid_exec(void)
 {
-	static pid_t	pid[1024];
+	static t_pids	p;
 
-	return (pid);
+	return (&p);
 }
 
 static char	*create_prompt(void)
@@ -88,7 +88,6 @@ static void	loop(t_global *g)
 			parser(&pipe);
 			if (pipe)
 				exec(g, pipe);
-				// printf("AH ABH MERDE ALORS");
 			clear_pipeline(pipe);
 			// debug(g, 0);
 			(void)g;

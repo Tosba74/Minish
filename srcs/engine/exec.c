@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 17:41:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 18:24:36 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,22 +122,36 @@ int	exec(t_global *g, t_pipe *pipe)
 static void	child_process(t_pipe *p, t_global *g, const int prev)
 {
 	if (!p->in)
+	{
 		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
+		printf("in-false prev= %d\n", prev);
+	}
 	else
+	{
 		dup_close(p->fd_in, STDIN_FILENO, "fd_in");
+		printf("in-true fd_in= %d\n", p->fd_in);
+	}
 	if (!p->out)
+	{
+		printf("in-false pipe_fd= %d\n", g->pipe_fd[1]);
 		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
+	}
 	else
+	{
 		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
+		printf("in-true fd_out = %d\n", p->fd_out);
+	}
 	if (p->job->is_cmd)
 	{
+		printf("COMMAND\n");
 		execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
 		ft_err("EXECVE ERROR: ", 11);
 	}
 	else
 	{
+		printf("BUILTIN\n");
 		g_err = select_built(p);
-		// t exit(g_err);
+		// exit(g_err);
 	}
 }
 
@@ -193,21 +207,16 @@ static void	exec_jobs(t_pipe *p, t_global *g)
 	if (!p->out)
 		if (pipe(g->pipe_fd) < 0)
 			ft_err("ExecJobs: ", 10);
-	if (p->job->is_cmd)
-	{
-		pid = fork();
-		if (pid < 0)
-			ft_err("ExecJobs: ", 11);
-		if (pid == 0)
-			child_process(p, g, prev_in);
-		else
-		{
-			get_pid_exec[g->index++] = pid;
-			daddy_process(p, g, prev_in);
-		}
-	}
+	pid = fork();
+	if (pid < 0)
+		ft_err("ExecJobs: ", 11);
+	if (pid == 0)
+		child_process(p, g, prev_in);
 	else
-		exec_builtin(p, g, prev_in);
+	{
+		get_pid_exec()->pids[get_pid_exec()->index++] = pid;
+		daddy_process(p, g, prev_in);
+	}
 }
 
 void	exec(t_global *g, t_pipe *pipe)
@@ -223,5 +232,5 @@ void	exec(t_global *g, t_pipe *pipe)
 		exec_jobs(p, g);
 		p = p->next;
 	}
-	g_err = waiting_pid(g);
+	g_err = waiting_pid();
 }
