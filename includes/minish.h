@@ -6,11 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2021/11/26 19:47:03 by astucky          ###   ########lyon.fr   */
-=======
-/*   Updated: 2021/11/26 19:58:28 by bmangin          ###   ########lyon.fr   */
->>>>>>> Stashed changes
+/*   Updated: 2021/11/26 20:20:25 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
