@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/24 19:00:16 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 22:23:50 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_pipe
 void		print_env(void);
 void		print_env_teub(void);
 void		print_hidden(void);
-void		print_story(void);
+void		print_story(int out);
 void		print_pipestruct(t_pipe *p);
 void		print_token(t_token *tok);
 

@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/26 17:31:59 by astucky          ###   ########lyon.fr    #
+#    Updated: 2021/11/26 23:07:55 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ override FILES_P	:= parser.c lexer.c pars_tools.c history.c tokenizator.c \
 					redir_exp.c complet_pipeline.c
 override FILES_E	:= exec.c exec_tools.c simple_cmd.c 
 override FILES_B	:= b_env.c b_history.c echo.c b_cd.c b_exit.c b_export.c \
-					b_pwd.c b_unset.c
+					b_pwd.c b_unset.c b_exec.c
 override FILES_M	:= signals.c debug.c debug_tools.c error.c main.c init_env.c \
 					env_tools.c env_edit.c 
  

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 20:46:07 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/24 19:02:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 22:26:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	print_env_teub(void)
 
 	dprintf(STDERR_FILENO, "\033[34m----- ENV_teub -----\033[0m\n");
 	env = get_env_teub(*get_var_env(), 2);
-	print_envp(env);
+	print_envp(env, 1);
 }
 
 void	print_hidden(void)
@@ -53,22 +53,6 @@ void	print_hidden(void)
 			dprintf(STDERR_FILENO, "\033[33m|%s| = |%s|\033[0m\n",
 				cpy->name, cpy->value);
 		cpy = cpy->next;
-	}
-}
-
-void	print_story(void)
-{
-	t_story	*history;
-
-	history = *get_history();
-	dprintf(STDERR_FILENO, "\033[34m-----  HISTORY  ------\033[0m\n");
-	if (get_history() == NULL)
-		dprintf(STDERR_FILENO, "\033[31mget_history() is NULL, Bro!\033[0m\n");
-	while (history)
-	{
-		dprintf(STDERR_FILENO, "\033[33m#%u\033[0m\t\033[32m%s\033[33m\n",
-			history->index, history->cmd);
-		history = history->next;
 	}
 }
 

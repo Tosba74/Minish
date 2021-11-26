@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 19:08:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:39:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	is_builtin(char *s)
 		"unset",
 		"env",
 		"exit",
-		"history"
+		"history",
+		"exec"
 	};
 
 	i = -1;
@@ -53,7 +54,8 @@ int	is_builtin(char *s)
 
 int	select_built(t_pipe *p)
 {
-	int		(*pf_built[8])(t_job *j);
+	int		index;
+	int		(*pf_built[8])(t_job *j, int out);
 
 	pf_built[0] = do_echo;
 	pf_built[1] = do_cd;
@@ -63,7 +65,10 @@ int	select_built(t_pipe *p)
 	pf_built[5] = env;
 	pf_built[6] = do_exit;
 	pf_built[7] = history;
-	return (pf_built[is_builtin(p->job->job)](p->job));
+	index = is_builtin(p->job->job);
+	if (index < 0)
+		return (b_exec(p));
+	return (pf_built[index](p->job, p->fd_out));
 }
 
 int	waiting_pid(void)

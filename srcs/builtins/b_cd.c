@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/16 14:10:11 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 21:55:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ int	if_is_dir(t_env *pwd, t_env *oldpwd, t_job *job, char *road)
 	return (0);
 }
 
-int	do_cd(t_job *j)
+int	do_cd(t_job *j, int out)
 {
 	t_env	*pwd;
 	t_env	*oldpwd;
 	char	*road;
 
+	(void)out;
 	road = NULL;
 	pwd = env_find_cell(get_var_env(), "PWD");
 	oldpwd = env_find_cell(get_var_env(), "OLDPWD");

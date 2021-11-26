@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:14:25 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/15 21:59:52 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 21:59:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int	pwd(t_job *j)
+int	pwd(t_job *j, int out)
 {
 	t_env	*cpy;
 
@@ -20,9 +20,11 @@ int	pwd(t_job *j)
 	(void)j;
 	while (cpy)
 	{
-		dprintf(STDERR_FILENO, "\033[32m%s = %s\033[0m\n", cpy->name, cpy->value);
 		if (!ft_strcmp(cpy->name, "PWD"))
-			printf("%s\n", cpy->value);
+		{
+			ft_putstr_fd(cpy->value, out);
+			ft_putstr_fd("\n", out);
+		}
 		cpy = cpy->next;
 	}
 	return (0);

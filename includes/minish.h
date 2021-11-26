@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/26 20:20:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 23:14:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ extern int		g_err;
 /******************      BUILTIN      ********************/
 /*********************************************************/
 
-int			do_echo(t_job *j);
-int			do_cd(t_job *j);
-int			pwd(t_job *j);
-int			export(t_job *j);
-int			unset(t_job *j);
-int			env(t_job *j);
-int			do_exit(t_job *j);
-int			history(t_job *j);
+int			do_echo(t_job *j, int out);
+int			do_cd(t_job *j, int out);
+int			pwd(t_job *j, int out);
+int			export(t_job *j, int out);
+int			unset(t_job *j, int out);
+int			env(t_job *j, int out);
+int			do_exit(t_job *j, int out);
+int			history(t_job *j, int out);
+int			b_exec(t_pipe *p);
 int			is_builtin(char *s);
 int			select_built(t_pipe *p);
 void		skip_slash(char *av);
@@ -83,7 +84,7 @@ char		*search_in_env(char *var);
 void		lexer(t_token **tok, char *input);
 void		parser(t_pipe **pipe);
 void		init_env(char **env);
-void		print_envp(char **env);
+void		print_envp(char **env, int out);
 char		**get_env_teub(t_env *env, int print);
 
 /*********************************************************/
