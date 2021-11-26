@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signaux.c                                          :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 13:50:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/20 19:43:32 by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/11/26 14:38:18 by astucky           #+#    #+#             */
+/*   Updated: 2021/11/26 18:29:50 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-/*
-void	sig_c(int sig)
+void kill_fork(int sig)
 {
-	ft_printf("\n");
-	if (!get_all_st(NULL)->prog)
-	{
-		get_all_st(NULL)->state = 1;
-		ft_printf("\033[32mMiShell %s", get_tild());
-	}
 	(void)sig;
+	return ;
 }
 
-void	sig_quit(int sig)
+void	handler(int sig)
 {
-	if (!get_all_st(NULL)->prog)
-		return ;
-	ft_printf("Quit: %d\n", sig);
-	(void)sig;
+	if (get_pid_exec()->index && (sig == SIGINT || sig == SIGQUIT))
+		kill_fork(sig);
+	else if (sig == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		g_err = 130;
+		ft_putstr_fd(create_prompt(), 1);
+	}
+	else
+	{
+		ft_putstr_fd("\b ", 1);
+	}
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 17:58:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/26 18:27:22 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_pids	*get_pid_exec(void)
 	return (&p);
 }
 
-static char	*create_prompt(void)
+char	*create_prompt(void)
 {
 	static char	*prompt;
 	char		*home;
@@ -76,6 +76,8 @@ static void	loop(t_global *g)
 	t_pipe	*pipe;
 
 	i = 0;
+	signal(SIGINT, &handler);
+	signal(SIGQUIT, &handler);
 	input = readline(create_prompt());
 	while (input)
 	{
