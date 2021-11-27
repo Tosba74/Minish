@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 15:02:05 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 17:37:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 	if (ac == 2)
 	{
 		if (!ft_strncmp(av[1], "-debug", 6))
-			 g->debug = true;
+			g->debug = true;
 		else
 		{
 			ft_err("Arg", 1);
@@ -83,6 +83,7 @@ static void init_pids(void)
 		i++;
 	}
 	get_pid_exec()->index = 0;
+	get_pid_exec()->no_job = false;
 }
 
 static void	loop(t_global *g)
@@ -121,7 +122,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_global	g;
 
-	g = (t_global){};
+	g = (t_global){0};
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);
