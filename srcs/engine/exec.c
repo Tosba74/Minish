@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 21:00:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 23:37:41 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void exec_builtin(t_pipe *p, t_global *g, int prev)
 }
 */
 
-static void child_process(t_pipe *p, t_global *g, const int prev)
+static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 {
 	if (g->nb_proc > 1)
 	{
@@ -117,7 +117,7 @@ static void exec_jobs(t_pipe *p, t_global *g)
 		if (pid < 0)
 			ft_err("ExecJobs: ", 11);
 		if (pid == 0)
-			child_process(p, g, prev_in);
+			child_process(p, g, prev_in, pid);
 		else
 		{
 			get_pid_exec()->pids[get_pid_exec()->index++] = pid;

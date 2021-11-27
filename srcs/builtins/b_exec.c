@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:55:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 23:41:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		b_exec(t_pipe *p)
 {
-	pid_t 		pid;
+	pid_t 	pid;
 
 	pid = fork();
 	if (pid < 0)
