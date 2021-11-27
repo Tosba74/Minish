@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/25 23:54:24 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 15:01:13 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,11 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 			printf("ret_redir = %d\n", ret);
 			print_token(tok);
 		}
-		// ret = skip_redir(new, tok);
-		// printf("%d\n", ret);
 		if (ret != -1)
 		{
 			print_token(tok);
 			new->job->av = complet_av(tok);
 			next_pipe(&tok);
-			// print_pipe(new);
-		}
-		else
-		{
-			printf("tu gere pas lerreur mec!\n");
-			break ;
 		}
 	}
 	addback_cell_pipe(pipe, new);

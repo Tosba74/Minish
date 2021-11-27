@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/20 19:08:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 15:01:13 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ void	check_expansion(t_token *tok)
 	print_token(tok);
 	check_quotes(tok);
 	print_token(tok);
-	egal_exp(tok);
 	join_cell_tok(tok);
+	egal_exp(tok);
 	print_token(tok);
 }
 
