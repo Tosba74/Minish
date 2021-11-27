@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 11:13:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:31:38 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 19:59:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	remove_cell_env(char *name, t_env *env)
 	if (env)
 	{
 		copy->next = env->next;
-		wrfree(env->name);
-		wrfree(env->value);
-		wrfree(env);
+		ft_memdel(env->name);
+		ft_memdel(env->value);
+		ft_memdel(env);
 	}
 }
 
@@ -54,6 +54,6 @@ t_env	*env_find_cell(t_env **env, char *name)
 
 void	env_edit_value(t_env *env, char *value)
 {
-	wrfree(env->value);
+	ft_memdel(env->value);
 	env->value = ft_strdup(value);
 }

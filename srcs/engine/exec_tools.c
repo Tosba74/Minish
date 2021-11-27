@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:13:41 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:28:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,56 +89,9 @@ int	waiting_pid(void)
 	return (ret);
 }
 
-/*
-static void	init_fd(t_pipe *pipe, char *file1, char *file2)
+t_pids	*get_pid_exec(void)
 {
-	t_pipe	*p;
-	int		fd_tmp;
+	static t_pids	p;
 
-	p = pipe;
-	p->fd_in = open (file1, O_DIRECTORY);
-	if (p->fd_in > 0)
-	{
-		close(p->fd_in);
-		ft_err("File opening:\n", 0);
-	}
-	close(p->fd_in);
-	p->fd_in = open(file1, O_RDONLY);
-	fd_tmp = p->fd_in;
-	p = last_cell_pipe(p);
-	p->fd_out = open(file2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (fd_tmp == -1 || p->fd_out == -1)
-	{
-		close(fd_tmp);
-		close(p->fd_out);
-	}
+	return (&p);
 }
-
-int	pipex(int ac, char **av, char **env)
-{
-	int		i;
-	t_pipe	*p;
-	t_pipe	*cpy;
-
-	i = 1;
-	p = NULL;
-	while (i++ < ac - 2)
-	{
-		addback_cell_pipe(&p,
-			new_cell_pipe(av[i], new_job(av[i], env)));
-	}
-	init_fd(p, av[1], av[ac - 1]);
-	i = 1;
-	cpy = p;
-	while (i++ < ac - 2)
-	{
-		if (i == 2)
-			cpy->in = false;
-		if (i == ac - 2)
-			cpy->out = false;
-		cpy = cpy->next;
-	}
-	print_pipe(p);
-	return (exec(p, ac, env));
-}
-*/

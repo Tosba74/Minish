@@ -6,20 +6,17 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2021/11/27 19:56:04 by astucky          ###   ########lyon.fr   */
+=======
+/*   Updated: 2021/11/27 20:09:36 by bmangin          ###   ########lyon.fr   */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
 int		g_err = 0;
-
-t_pids	*get_pid_exec(void)
-{
-	static t_pids	p;
-
-	return (&p);
-}
 
 char	*create_prompt(void)
 {
@@ -28,7 +25,7 @@ char	*create_prompt(void)
 	t_env		*pwd;
 
 	if (prompt)
-		wrfree(prompt);
+		ft_memdel(prompt);
 	pwd = env_find_cell(get_var_env(), "PWD");
 	home = search_in_env("HOME");
 	if (!ft_strncmp(pwd->value, home, ft_strlen(home)))
@@ -83,6 +80,8 @@ static void init_pids(void)
 	}
 	get_pid_exec()->index = 0;
 	get_pid_exec()->no_job = false;
+	sigignore(SIGQUIT);
+	signal(SIGINT, &handler_idle);
 }
 
 static void	loop(t_global *g)
@@ -92,14 +91,12 @@ static void	loop(t_global *g)
 	t_pipe	*pipe;
 
 	i = 0;
-	//sigignore(SIGQUIT);
+	sigignore(SIGQUIT);
 	signal(SIGINT, &handler_idle);
 	input = readline(create_prompt());
 	while (input)
 	{
 		init_pids();
-	//	sigignore(SIGQUIT);
-		signal(SIGINT, &handler_idle);
 		pipe = NULL;
 		if (input[0])
 		{

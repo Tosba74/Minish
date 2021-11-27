@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:24:36 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 19:59:09 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void	clear_pipeline(t_pipe *pipe)
 		p = pipe;
 		pipe = pipe->next;
 		del_job(p->job);
-		wrfree(p);
+		ft_memdel(p);
 	}
 }

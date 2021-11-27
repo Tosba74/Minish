@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/26 23:07:55 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/11/27 20:00:50 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ INC_LFT		= ${addprefix ${LIBFT_H}/, ${LIBFT_INC}}
 # ******************************************************* #
 
 CC			:= clang
-CCF			:= ${CC} -Wall -Wextra -Werror
+CCF			:= ${CC} -Wall -Wextra -Werror -g
 CF_FS		:= ${CCF} -g3 -fsanitize=address
 CF_DB		:= ${CCF} -glldb -fsanitize=address
 LLFT		:= -L${PATH_L}

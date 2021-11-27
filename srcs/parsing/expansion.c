@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:59:34 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:27:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	egal_exp(t_token *tok)
 		content[1] = after->value;
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 		get_pid_exec()->no_job = true;
+		before = brefore->prev;
+		if (before->type == SPC)
+			before = brefore->prev;
+		if (ft_strcmp(before->value, "export"))
+			get_pid_exec()->no_job = false;
 	}
 }
 
@@ -49,7 +54,7 @@ static void	dollar_exp(t_token *tok)
 	tmp = ft_strjoin_free(tmp, tok->value + i + j, 3);
 	tok->value = tmp;
 	tok->type = ARG;
-	wrfree(tok_tmp);
+	ft_memdel(tok_tmp);
 }
 
 void	check_quotes(t_token *token)
