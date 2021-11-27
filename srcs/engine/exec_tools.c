@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:59:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 19:33:56 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_builtin(char *s)
 int	select_built(t_pipe *p)
 {
 	int		index;
-	int		(*pf_built[8])(t_job *j, int out);
+	static int		(*pf_built[8])(t_job *j, int out);
 
 	pf_built[0] = do_echo;
 	pf_built[1] = do_cd;
