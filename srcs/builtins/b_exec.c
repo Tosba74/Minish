@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 23:55:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:48:48 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		b_exec(t_pipe *p)
 	{
 		execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
 		ft_err("EXECVE ERROR: ", 11);
+		exit(pid);
 	}
 	else
 	{

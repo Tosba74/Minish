@@ -1,0 +1,3 @@
+free (was not allocated)
+bugs redirection vers la gauche
+t_type n'est pas defini dans le premier token
