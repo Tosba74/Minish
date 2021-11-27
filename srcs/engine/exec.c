@@ -6,11 +6,33 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:27:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 21:00:56 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
+
+/*
+void exec_builtin(t_pipe *p, t_global *g, int prev)
+{
+	if (!p->in && g->nb_proc > 1)
+	{
+		if (close(prev) < 0)
+			ft_err("Pipe_fd[0]", 14);
+	}
+	else
+	{
+		if (close(p->fd_in) < 0)
+			ft_err("fd_in", 14);
+	}
+	if (!p->out && g->nb_proc > 1)
+		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
+	else
+		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
+	g_err = select_built(p);
+	close(p->fd_out);
+}
+*/
 
 static void child_process(t_pipe *p, t_global *g, const int prev)
 {
@@ -43,6 +65,7 @@ static void child_process(t_pipe *p, t_global *g, const int prev)
 			printf("COMMAND\n");
 			execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
 			ft_err("EXECVE ERROR: ", 11);
+			exit(pid);
 		}
 		else
 		{
@@ -79,28 +102,6 @@ static void daddy_process(t_pipe *p, t_global *g, const int prev)
 		}
 	}
 }
-
-/*
-void exec_builtin(t_pipe *p, t_global *g, int prev)
-{
-	if (!p->in && g->nb_proc > 1)
-	{
-		if (close(prev) < 0)
-			ft_err("Pipe_fd[0]", 14);
-	}
-	else
-	{
-		if (close(p->fd_in) < 0)
-			ft_err("fd_in", 14);
-	}
-	if (!p->out && g->nb_proc > 1)
-		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
-	else
-		dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
-	g_err = select_built(p);
-	close(p->fd_out);
-}
-*/
 
 static void exec_jobs(t_pipe *p, t_global *g)
 {
