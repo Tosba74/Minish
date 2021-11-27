@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:31:43 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:19:45 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void		clear_pipeline(t_pipe *pipe);
 void		del_job(t_job *jobs);
 t_job		*new_job(char *av);
 void		print_pipe(t_pipe *p);
+void		close_all_fd(t_pipe *pipe);
 
 /*********************************************************/
 /*******************   TOKENIZATOR   *********************/

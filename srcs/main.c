@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:24:38 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 19:56:04 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,13 @@ static void	loop(t_global *g)
 	t_pipe	*pipe;
 
 	i = 0;
-	sigignore(SIGQUIT);
+	//sigignore(SIGQUIT);
 	signal(SIGINT, &handler_idle);
 	input = readline(create_prompt());
 	while (input)
 	{
 		init_pids();
-		sigignore(SIGQUIT);
+	//	sigignore(SIGQUIT);
 		signal(SIGINT, &handler_idle);
 		pipe = NULL;
 		if (input[0])

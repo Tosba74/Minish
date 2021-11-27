@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:13:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:50:06 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:10:09 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	do_export(t_job *j, int out)
 		if (tmp)
 		{
 			tmp->print = PRINT;
+	printf("je passe %s\n", tmp->value);
 			return (0);
 		}
 	}

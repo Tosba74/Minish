@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:31:03 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:18:12 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,7 @@ void exec(t_global *g, t_pipe *pipe)
 	if (g->nb_proc == 1)
 	{
 		g_err = select_built(p);
+		close_all_fd(pipe);
 	}
 	else
 	{

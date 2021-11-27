@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:33:56 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 20:13:41 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	waiting_pid(void)
 	int	ret;
 	int	wstatus;
 
-	i = 0;
+	i = -1;
 	while (++i < get_pid_exec()->index)
 	{
 		waitpid(get_pid_exec()->pids[i], &wstatus, 0);
