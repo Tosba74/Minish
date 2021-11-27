@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:37:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 17:59:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	egal_exp(t_token *tok)
 		content[0] = before->value;
 		content[1] = after->value;
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
-		get_pid_exec()->no_jobs = true;
+		get_pid_exec()->no_job = true;
 	}
 }
 

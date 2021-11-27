@@ -6,13 +6,13 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:13:23 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:02:02 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 17:50:06 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int	export(t_job *j, int out)
+int	do_export(t_job *j, int out)
 {
 	t_env	*tmp;
 

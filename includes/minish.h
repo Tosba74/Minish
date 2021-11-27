@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/27 17:26:08 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 17:49:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ extern int		g_err;
 int			do_echo(t_job *j, int out);
 int			do_cd(t_job *j, int out);
 int			pwd(t_job *j, int out);
-int			export(t_job *j, int out);
+int			do_export(t_job *j, int out);
 int			unset(t_job *j, int out);
 int			env(t_job *j, int out);
 int			do_exit(t_job *j, int out);

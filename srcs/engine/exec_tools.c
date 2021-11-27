@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 23:44:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/27 17:59:53 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	select_built(t_pipe *p)
 	pf_built[0] = do_echo;
 	pf_built[1] = do_cd;
 	pf_built[2] = pwd;
-	pf_built[3] = export;
+	pf_built[3] = do_export;
 	pf_built[4] = unset;
 	pf_built[5] = env;
 	pf_built[6] = do_exit;
