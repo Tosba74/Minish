@@ -1,4 +1,5 @@
 free (was not allocated)
-bugs redirection vers la gauche
+bugs redirection vers la gauche (cat < [fichier inexistant] part en boucle infinie)
 t_type n'est pas defini dans le premier token
 exit
+

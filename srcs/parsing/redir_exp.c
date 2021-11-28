@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:34:24 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 17:27:22 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,40 @@ static int	check_perm(t_type type, mode_t st_mode)
 	return (1);
 }
 
+static int	redir_errors(struct stat buf, t_token **tok)
+{
+	if ((buf.st_mode & S_IFDIR))
+	{
+		if ((*tok)->type == REDIR_L)
+		{
+			ft_err("stdin", 8);
+			remove_redir_tok(tok);
+			return (0);
+		}
+		else if ((*tok)->type == REDIR_R || (*tok)->type == REDIR_RD)
+		{
+			ft_err((*tok)->value, 8);
+			remove_redir_tok(tok);
+			return (0);
+		}
+	}
+	if (!buf.st_mode && (*tok)->type == REDIR_L)
+	{
+		ft_err((*tok)->value, 6);
+		remove_redir_tok(tok);
+		return (0);
+	}
+	return (1);
+}
+
 static int	try_open(t_token *tok, char *path)
 {
 	struct stat	buf;
 
 	buf = (struct stat){0};
 	stat(tok->value, &buf);
-	if ((buf.st_mode & S_IFDIR))
-	{
-		if (tok->type == REDIR_L)
-		{
-			ft_err("stdin", 8);
-			remove_redir_tok(&tok);
-			return (-1);
-		}
-		else if (tok->type == REDIR_R || tok->type == REDIR_RD)
-		{
-			ft_err(tok->value, 8);
-			remove_redir_tok(&tok);
-			return (-1);
-		}
-	}
-	if (!buf.st_mode && tok->type == REDIR_L)
-	{
-		ft_err(tok->value, 6);
-		remove_redir_tok(&tok);
+	if (!redir_errors(buf, &tok))
 		return (-1);
-	}
 	else if (!buf.st_mode || (bool)(buf.st_mode & S_IFMT))
 	{
 		if (!check_perm(tok->type, buf.st_mode))
