@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:12:24 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 21:55:48 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:55:13 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	if_is_dir(t_env *pwd, t_env *oldpwd, t_job *job, char *road)
 	{
 		env_edit_value(oldpwd, pwd->value);
 		env_edit_value(pwd, road);
+		chdir(road);
 		return (0);
 	}
 	else
