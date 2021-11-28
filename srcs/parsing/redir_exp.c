@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 17:27:22 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:27:38 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static int	redir_errors(struct stat buf, t_token **tok)
 	}
 	if (!buf.st_mode && (*tok)->type == REDIR_L)
 	{
+		get_pid_exec()->no_job = true;
 		ft_err((*tok)->value, 6);
 		remove_redir_tok(tok);
 		return (0);
