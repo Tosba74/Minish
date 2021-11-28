@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:31:51 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*create_prompt(void)
 	t_env		*pwd;
 
 	if (prompt)
-		ft_memdel(prompt);
+		wrfree(prompt);
 	pwd = env_find_cell(get_var_env(), "PWD");
 	home = search_in_env("HOME");
 	if (!ft_strncmp(pwd->value, home, ft_strlen(home)))
@@ -41,6 +41,22 @@ char	*create_prompt(void)
 				"\033[0m\033[31m $\033[0m\033[33m>\033[0m ", 1);
 	}
 	return (prompt);
+}
+
+static void	init_pids(void)
+{
+	int		i;
+
+	i = 0;
+	while (i < 1024)
+	{
+		get_pid_exec()->pids[i] = 0;
+		i++;
+	}
+	get_pid_exec()->index = 0;
+	get_pid_exec()->no_job = false;
+	sigignore(SIGQUIT);
+	signal(SIGINT, &handler_idle);
 }
 
 static void	init_global(t_global *g, int ac, char **av, char **env)
@@ -64,30 +80,14 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 	debug(g, 1);
 }
 
-static void init_pids(void)
-{
-	int		i;
-
-	i = 0;
-	while (i < 1024)
-	{
-		get_pid_exec()->pids[i] = 0;
-		i++;
-	}
-	get_pid_exec()->index = 0;
-	get_pid_exec()->no_job = false;
-//	sigignore(SIGQUIT);
-	signal(SIGINT, &handler_idle);
-}
-
 static void	loop(t_global *g)
 {
-	int		i;
-	char	*input;
-	t_pipe	*pipe;
+	unsigned int	i;
+	char			*input;
+	t_pipe			*pipe;
 
 	i = 0;
-//	sigignore(SIGQUIT);
+	sigignore(SIGQUIT);
 	signal(SIGINT, &handler_idle);
 	input = readline(create_prompt());
 	while (input)
@@ -99,7 +99,7 @@ static void	loop(t_global *g)
 			add_history(input);
 			addback_cell_history(get_history(),
 				new_cell_history(skip_space(input), i++));
-			parser(&pipe);
+			parser(&pipe, input);
 			if (pipe && !get_pid_exec()->no_job)
 				exec(g, pipe);
 			clear_pipeline(pipe);
@@ -110,16 +110,16 @@ static void	loop(t_global *g)
 
 int	main(int ac, char **av, char **env)
 {
-	t_global	g;
+	t_global	*g;
 
-	g = (t_global){0};
+	g = &(t_global){0};
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);
 		exit(1);
 	}
-	init_global(&g, ac, av, env);
-	loop(&g);
+	init_global(g, ac, av, env);
+	loop(g);
 	wrdestroy();
 	return (g_err);
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:59:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,7 @@ t_pipe	*new_cell_pipe(t_token *tok)
 	new->fd_out = STDOUT_FILENO;
 	new->in = false;
 	new->out = false;
-	new->job = wrmalloc(sizeof(t_job *));
-	new->job->av = complet_av(tok);
-	if (new->job->av[0])
-	{
-		if (is_builtin(new->job->av[0]) == -1)
-		{
-			new->job->job = select_env_path(new->job->av[0],
-					get_env_teub(*get_var_env(), 1));
-			new->job->is_cmd = true;
-		}
-		else
-		{
-			new->job->job = new->job->av[0];
-			new->job->is_cmd = false;
-		}
-	}
+	new->job = new_job(tok);
 	new->next = NULL;
 	return (new);
 }
@@ -70,8 +55,8 @@ int	count_cell_pipe(t_pipe *pipe)
 		return (count);
 	while (pipe)
 	{
-		pipe = pipe->next;
 		count++;
+		pipe = pipe->next;
 	}
 	return (count);
 }
@@ -80,13 +65,11 @@ void	clear_pipeline(t_pipe *pipe)
 {
 	t_pipe	*p;
 
-	if (pipe)
-		return ;
 	while (pipe)
 	{
-		p = pipe;
-		pipe = pipe->next;
-		del_job(p->job);
-		ft_memdel(p);
+		p = pipe->next;
+		del_job(pipe->job);
+		wrfree(&pipe);
+		pipe = p;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:19:45 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 14:32:33 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_job
 	char			*job;
 	char			**av;
 	bool			is_cmd;
+	bool			is_built;
 }	t_job;
 
 typedef struct s_pipe
@@ -103,12 +104,13 @@ void		print_token(t_token *tok);
 
 t_env		**get_var_env(void);
 t_env		*new_cell_env(char **content, t_print print);
+t_env		*env_find_cell(t_env **env, char *name);
 void		remove_cell_env(char *name, t_env *env);
 void		addback_cell_env(t_env **env, t_env *new);
-int			env_size(t_env *env, int print);
-t_env		*env_find_cell(t_env **env, char *name);
 void		env_edit_value(t_env *env, char *value);
+int			env_size(t_env *env, int print);
 int			is_name_env(char c);
+char		*select_path(char *av);
 
 /*********************************************************/
 /********************    HISTORY    **********************/
@@ -131,7 +133,7 @@ void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
 int			count_cell_pipe(t_pipe *pipe);
 void		clear_pipeline(t_pipe *pipe);
 void		del_job(t_job *jobs);
-t_job		*new_job(char *av);
+t_job		*new_job(t_token *tok);
 void		print_pipe(t_pipe *p);
 void		close_all_fd(t_pipe *pipe);
 

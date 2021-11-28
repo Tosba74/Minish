@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/11/27 17:49:46 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 15:13:17 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_pids
 
 typedef struct s_global
 {
-	int			pipe_fd[2];
 	size_t		nb_proc;
+	int			pipe_fd[2];
 	bool		debug;
 }	t_global;
 
@@ -82,7 +82,7 @@ t_pids		*get_pid_exec(void);
 int			is_spec_char(char c);
 char		*search_in_env(char *var);
 void		lexer(t_token **tok, char *input);
-void		parser(t_pipe **pipe);
+void		parser(t_pipe **pipe, char *input);
 void		init_env(char **env);
 void		print_envp(char **env, int out);
 char		**get_env_teub(t_env *env, int print);

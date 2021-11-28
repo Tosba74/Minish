@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:58:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/03 15:24:31 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 17:28:02 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int					wrfree(void *ptr);
 /*
 **					PERSONNAL FUNCTIONS
 */
-void				ft_memdel(void *ap);
+void				ft_memdel(void **ap);
 void				ft_sort_integer_teub(int *teub, int size);
 void				free_all(char **strs, int size);
 int					ft_strslen(char **strs);

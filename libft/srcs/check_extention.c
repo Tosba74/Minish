@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 17:40:20 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/25 17:42:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 15:20:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	check_extention(char *s, char *ext)
 		return (FAILURE);
 	cmp = ft_strdup(ft_strrchr(s, 46));
 	if (ft_strncmp(cmp, ext, 4))
+	{
+		wrfree(cmp);
 		return (FAILURE);
+	}
 	wrfree(cmp);
 	return (SUCCESS);
 }

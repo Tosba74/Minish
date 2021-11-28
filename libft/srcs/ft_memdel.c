@@ -6,17 +6,17 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/04 00:40:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/04/26 16:01:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 17:27:43 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void *ap)
+void	ft_memdel(void **ap)
 {
-	if (ap)
+	if (*ap)
 	{
-		wrfree(ap);
-		ap = NULL;
+		wrfree(*ap);
+		*ap = NULL;
 	}
 }

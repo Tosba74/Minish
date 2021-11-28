@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:56:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:30:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**complet_av(t_token *tok)
 	while (tok && tok->type != PIPE)
 	{
 		if (tok->type != SPC)
-			av[i++] = ft_strdup(tok->value); 
+			av[i++] = ft_strdup(tok->value);
 		tok = tok->next;
 	}
 	av[i] = NULL;
@@ -56,7 +56,7 @@ void	next_pipe(t_token **tok)
 		(*tok) = (*tok)->next;
 }
 
-int have_redir(t_token *tok)
+int	have_redir(t_token *tok)
 {
 	while (tok && tok->type != PIPE)
 	{
@@ -74,16 +74,12 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 
 	while (tok)
 	{
-		printf("Wesh mec!\n");
 		new = new_cell_pipe(tok);
 		if (have_redir(tok))
 			ret = skip_redir(new, tok);
 		if (ret != -1)
-		{
-			print_token(tok);
 			new->job->av = complet_av(tok);
-			next_pipe(&tok);
-		}
+		next_pipe(&tok);
 	}
 	addback_cell_pipe(pipe, new);
 }

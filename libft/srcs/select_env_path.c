@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/25 02:35:04 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/19 17:44:56 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 00:07:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ static char	*choose_good_path(char **road_exec, char *av)
 
 char	*select_env_path(char *av, char **env)
 {
+	int		i;
 	char	*road;
 	char	**tmp;
 	char	**road_exec;
 
+	i = 0;
 	road = NULL;
 	tmp = ft_split(av, ' ');
 	if (tmp)
@@ -76,6 +78,8 @@ char	*select_env_path(char *av, char **env)
 		road_exec = extract_path(env);
 		if (road_exec)
 			road = choose_good_path(road_exec, tmp[0]);
+		while (tmp[i])
+			wrfree(tmp[i++]);
 		wrfree (tmp);
 	}
 	return (road);

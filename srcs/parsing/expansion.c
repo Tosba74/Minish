@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 20:31:08 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	dollar_exp(t_token *tok)
 	tmp = ft_strjoin_free(tmp, tok->value + i + j, 3);
 	tok->value = tmp;
 	tok->type = ARG;
-	ft_memdel(tok_tmp);
+	wrfree(tok_tmp);
 }
 
 void	check_quotes(t_token *token)
@@ -89,7 +89,7 @@ void	join_cell_tok(t_token *t)
 			t->next = second->next;
 			if (t->next)
 				t->next->prev = t;
-			ft_memdel(second);
+			wrfree(second);
 		}
 		else if ((9 < t->type && t->type < 14) && t->prev->type == SPC)
 			remove_cell_tok(t->prev);

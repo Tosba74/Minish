@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 19:59:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:35:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	dollar_tok(t_token **tok, char *input)
 		value = "";
 	addback_cell_tok(tok,
 		new_cell_tok(ft_strdup(value), ARG));
-	ft_memdel(tmp);
+	wrfree(tmp);
 	return (i);
 }
 
@@ -57,7 +57,7 @@ int	quote_tok(t_token **tok, char *input)
 			else if (input[0] == '"')
 				addback_cell_tok(tok,
 					new_cell_tok(ft_substr(input, 1, i - 1), DQUOTE));
-			ft_memdel(tmp);
+			wrfree(tmp);
 			return (i + 1);
 		}
 	}
@@ -90,7 +90,7 @@ int	pipe_tok(t_token **tok, char *input)
 		last->type = ERROR;
 	else if (last->type == SPC)
 	{
-		ft_memdel(last->value);
+		wrfree(last->value);
 		last->value = ft_strdup("|");
 		last->type = PIPE;
 	}

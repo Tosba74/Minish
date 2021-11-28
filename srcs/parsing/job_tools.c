@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 10:11:27 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 18:37:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,40 @@
 
 void	del_job(t_job *jobs)
 {
-	int	len;
-
-	len = ft_strslen(jobs->av);
-	if (len > 0)
-	{
-		while (len-- != 0)
-			ft_memdel(jobs->av[len]);
-	}
-	ft_memdel(jobs->av);
-	ft_memdel(jobs->job);
-	ft_memdel(jobs);
+	free_all(jobs->av, 0);
+	jobs->is_cmd = false;
+	jobs->is_built = false;
+	wrfree(jobs->job);
+	wrfree(&jobs);
 }
 
-t_job	*new_job(char *av)
+t_job	*new_job(t_token *tok)
 {
 	t_job	*new;
-	int		vret;
 
-	new = (t_job *)wrmalloc(sizeof(t_job));
-	new->av = ft_split(av, ' ');
-	vret = is_builtin(new->av[0]);
-	if (vret == -1)
-		new->is_cmd = true;
-	else
-		new->is_cmd = false;
-	if (new->is_cmd)
-		new->job = select_env_path(av, get_env_teub(*get_var_env(), 1));
-	else
-		new->job = ft_strdup(new->av[0]);
+	new = wrmalloc(sizeof(t_job *));
+	new->av = complet_av(tok);
+	if (new->av[0])
+	{
+		if (is_builtin(new->av[0]) == -1)
+		{
+			new->job = select_path(new->av[0]);
+			if (new->job)
+				new->is_cmd = true;
+			else
+			{
+				get_pid_exec()->no_job = true;
+				ft_err(new->av[0], 13);
+			}
+			new->is_built = false;
+		}
+		else
+		{
+			new->job = ft_strdup(new->av[0]);
+			new->is_cmd = false;
+			new->is_built = true;
+		}
+	}
 	return (new);
 }
 
@@ -53,10 +58,11 @@ int	count_cell_tok(t_token *tok)
 	count = 0;
 	if (!tok)
 		return (count);
-	while (tok)
+	while (tok && tok->type != PIPE)
 	{
+		if (tok->type != SPC)
+			count++;
 		tok = tok->next;
-		count++;
 	}
 	return (count);
 }
@@ -71,7 +77,8 @@ void	print_pipe(t_pipe *p)
 	printf("|  cmd = %28s |\n", cpy->job->job);
 	while (cpy->job->av[++i])
 		printf("| av[%d]  %28s |\n", i, cpy->job->av[i]);
-	printf("| is_cmd = %3d                        |\n", cpy->job->is_cmd);
+	printf("| is_cmd = %3d      is_built = %3d    |\n",
+		cpy->job->is_cmd, cpy->job->is_built);
 	printf("| bool_in = %3d     bool_ out = %3d   |\n", cpy->in, cpy->out);
 	printf("| fd_in = %3d       fd_ out = %3d     |\n", cpy->fd_in, cpy->fd_out);
 }

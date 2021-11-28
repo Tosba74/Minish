@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 19:10:27 by bmangin           #+#    #+#             */
-/*   Updated: 2021/09/24 23:37:40 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 15:25:38 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,8 @@ static int	ft_nb_words(char const *s)
 
 static char	**ft_free_all(char **teub, int t)
 {
-	int	i;
-
-	i = 0;
-	while (i != t)
-		wrfree(teub[i++]);
-	wrfree(teub);
-	return (teub);
+	free_all(teub, t);
+	return (NULL);
 }
 
 static char	*ft_new_words(char const *s, int *index)

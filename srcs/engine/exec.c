@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 23:37:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 15:29:07 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void exec_builtin(t_pipe *p, t_global *g, int prev)
 }
 */
 
+/*
 static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 {
 	if (g->nb_proc > 1)
@@ -71,6 +72,37 @@ static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 		{
 			printf("BUILTIN\n");
 			g_err = select_built(p);
+			exit(g_err);
+		}
+	}
+}
+*/
+
+static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
+{
+	if (g->nb_proc > 1)
+	{
+		if (!p->in)
+		{
+			dup_close(p->fd_in, STDIN_FILENO, "fd_in");
+		}
+		if (!p->out)
+		{
+			dup_close(p->fd_out, STDOUT_FILENO, "fd_out");
+		}
+		dup_close(prev, STDIN_FILENO, "Pipe_fd[0]");
+		dup_close(g->pipe_fd[1], STDOUT_FILENO, "Pipe_fd[1]");
+		if (p->job->is_cmd)
+		{
+			printf("COMMAND\n");
+			execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
+			ft_err("EXECVE ERROR: ", 11);
+		}
+		else
+		{
+			printf("BUILTIN\n");
+			g_err = select_built(p);
+			exit(pid);
 			exit(g_err);
 		}
 	}
@@ -123,15 +155,14 @@ static void exec_jobs(t_pipe *p, t_global *g)
 			get_pid_exec()->pids[get_pid_exec()->index++] = pid;
 			signal(SIGINT, &handler);
 			signal(SIGQUIT, &handler);
-			if (!p->job->is_cmd)
-				g_err = select_built(p);
-			else
-				daddy_process(p, g, prev_in);
+			daddy_process(p, g, prev_in);
 		}
 	}
+	else
+		g_err = select_built(p);
 }
 
-void exec(t_global *g, t_pipe *pipe)
+void	exec(t_global *g, t_pipe *pipe)
 {
 	int		i;
 	t_pipe	*p;
