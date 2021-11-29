@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 14:32:33 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 01:04:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void		addback_cell_history(t_story **story, t_story *new);
 t_pipe		*new_cell_pipe(t_token *tok);
 t_pipe		*last_cell_pipe(t_pipe *pipe);
 void		addback_cell_pipe(t_pipe **pipe, t_pipe *new);
-int			count_cell_pipe(t_pipe *pipe);
+size_t		count_cell_pipe(t_pipe *pipe);
 void		clear_pipeline(t_pipe *pipe);
 void		del_job(t_job *jobs);
 t_job		*new_job(t_token *tok);

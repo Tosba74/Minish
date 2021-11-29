@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 01:07:54 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	addback_cell_pipe(t_pipe **pipe, t_pipe *new)
 		*pipe = new;
 }
 
-int	count_cell_pipe(t_pipe *pipe)
+size_t	count_cell_pipe(t_pipe *pipe)
 {
-	int		count;
+	size_t	count;
 
 	count = 0;
 	if (!pipe)

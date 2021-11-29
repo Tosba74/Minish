@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 19:44:17 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*create_prompt(void)
 	return (prompt);
 }
 
-static void	init_pids(void)
+static void	init_pids(t_global *g)
 {
 	int		i;
 
@@ -53,6 +53,9 @@ static void	init_pids(void)
 		get_pid_exec()->pids[i] = 0;
 		i++;
 	}
+	g->nb_proc = 0;
+	g->pipe_fd[0] = 0;
+	g->pipe_fd[1] = 1;
 	get_pid_exec()->index = 0;
 	get_pid_exec()->no_job = false;
 	sigignore(SIGQUIT);
@@ -62,9 +65,6 @@ static void	init_pids(void)
 static void	init_global(t_global *g, int ac, char **av, char **env)
 {
 	g->debug = false;
-	g->nb_proc = 0;
-	g->pipe_fd[0] = 0;
-	g->pipe_fd[1] = 1;
 	if (ac == 2)
 	{
 		if (!ft_strncmp(av[1], "-debug", 6))
@@ -92,7 +92,7 @@ static void	loop(t_global *g)
 	input = readline(create_prompt());
 	while (input)
 	{
-		init_pids();
+		init_pids(g);
 		pipe = NULL;
 		if (input[0])
 		{
@@ -104,6 +104,7 @@ static void	loop(t_global *g)
 				exec(g, pipe);
 			clear_pipeline(pipe);
 		}
+		// wrfree(input);
 		input = readline(create_prompt());
 	}
 }
@@ -122,4 +123,5 @@ int	main(int ac, char **av, char **env)
 	loop(g);
 	wrdestroy();
 	return (g_err);
+	// exit(g_err);
 }

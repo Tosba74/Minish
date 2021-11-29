@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/27 20:00:50 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/11/29 16:36:41 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ INC_LFT		= ${addprefix ${LIBFT_H}/, ${LIBFT_INC}}
 # ******************************************************* #
 
 CC			:= clang
-CCF			:= ${CC} -Wall -Wextra -Werror -g
+CCF			:= ${CC} -Wall -Wextra -Werror
 CF_FS		:= ${CCF} -g3 -fsanitize=address
 CF_DB		:= ${CCF} -glldb -fsanitize=address
 LLFT		:= -L${PATH_L}
@@ -109,7 +109,7 @@ fs:			${OBJS} ${INC} ${INC_LFT}
 
 db:			${OBJS} ${INC} ${INC_LFT} 
 		${CF_DB} ${INCS} ${LLFT} ${OBJS} -o ${NAME} ${LFT}
-		lldb ${NAME}
+		#lldb ${NAME}
 
 crea_b :
 		${shell mkdir -p ${PATH_O}}

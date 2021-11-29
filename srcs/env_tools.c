@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 18:17:34 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:42:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 19:02:51 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	env_size(t_env *env, int i)
 
 t_env	**get_var_env(void)
 {
-	static t_env	*env;
+	static t_env	*env = 0;
 
 	return (&env);
 }

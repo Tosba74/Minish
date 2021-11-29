@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 19:10:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:45:53 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/28 19:02:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	init_env(char **env)
 
 	i = -1;
 	size = ft_strslen(env);
-	*get_var_env() = NULL;
-	*get_history() = NULL;
 	while (++i < size)
 	{
 		addback_cell_env(get_var_env(),

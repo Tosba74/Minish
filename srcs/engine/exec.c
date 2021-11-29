@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec copy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 15:29:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 15:07:49 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void exec_builtin(t_pipe *p, t_global *g, int prev)
 }
 */
 
-/*
 static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 {
 	if (g->nb_proc > 1)
@@ -68,16 +67,16 @@ static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 			ft_err("EXECVE ERROR: ", 11);
 			exit(pid);
 		}
-		else
-		{
-			printf("BUILTIN\n");
-			g_err = select_built(p);
-			exit(g_err);
-		}
+		// else
+		// {
+		// 	printf("BUILTIN\n");
+		// 	g_err = select_built(p);
+		// 	exit(g_err);
+		// }
 	}
 }
-*/
 
+/*
 static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 {
 	if (g->nb_proc > 1)
@@ -107,6 +106,7 @@ static void child_process(t_pipe *p, t_global *g, const int prev, pid_t pid)
 		}
 	}
 }
+*/
 
 static void daddy_process(t_pipe *p, t_global *g, const int prev)
 {
@@ -137,6 +137,31 @@ static void daddy_process(t_pipe *p, t_global *g, const int prev)
 
 static void exec_jobs(t_pipe *p, t_global *g)
 {
+	const int prev_in = g->pipe_fd[0];
+	pid_t pid;
+
+	if (g->nb_proc > 1)
+		if (pipe(g->pipe_fd) < 0)
+			ft_err("ExecJobs: ", 10);
+	pid = fork();
+	if (pid < 0)
+		ft_err("ExecJobs: ", 11);
+	if (pid == 0)
+		child_process(p, g, prev_in, pid);
+	else
+	{
+		get_pid_exec()->pids[get_pid_exec()->index++] = pid;
+		signal(SIGINT, &handler);
+		signal(SIGQUIT, &handler);
+		if (!p->job->is_cmd)
+			g_err = select_built(p);
+		daddy_process(p, g, prev_in);
+	}
+}
+
+/*
+static void exec_jobs(t_pipe *p, t_global *g)
+{
 	const int	prev_in = g->pipe_fd[0];
 	pid_t		pid;
 
@@ -161,18 +186,25 @@ static void exec_jobs(t_pipe *p, t_global *g)
 	else
 		g_err = select_built(p);
 }
+*/
 
-void	exec(t_global *g, t_pipe *pipe)
+void exec(t_global *g, t_pipe *pipe)
 {
-	int		i;
-	t_pipe	*p;
+	int i;
+	t_pipe *p;
 
 	i = -1;
 	g->nb_proc = (size_t)count_cell_pipe(pipe);
+	printf("%zu\n", g->nb_proc);
 	p = pipe;
 	if (g->nb_proc == 1)
 	{
-		g_err = select_built(p);
+		print_pipe(pipe);
+		if (p->job->is_cmd)
+			g_err = b_exec(pipe);
+		else if (p->job->is_built)
+			g_err = select_built(pipe);
+		g_err = select_built(pipe);
 		close_all_fd(pipe);
 	}
 	else
