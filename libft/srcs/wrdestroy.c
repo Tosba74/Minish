@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 14:22:33 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/29 16:26:17 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 15:22:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ void	wrdestroy(void)
 	while (current)
 	{
 		next = current->next;
-		printf("c.c\t\t\t%p\n", current->content);
 		free(current->content);
-		printf("c\t\t\t%p\n", current);
 		free(current);
 		current = next;
 	}

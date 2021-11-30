@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/29 01:07:54 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 15:19:59 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_pipe	*new_cell_pipe(t_token *tok)
 {
 	t_pipe	*new;
 
-	new = wrmalloc(sizeof(t_pipe *));
+	new = wrmalloc(sizeof(t_pipe));
 	new->fd_in = STDIN_FILENO;
 	new->fd_out = STDOUT_FILENO;
 	new->in = false;
@@ -51,11 +51,12 @@ size_t	count_cell_pipe(t_pipe *pipe)
 	size_t	count;
 
 	count = 0;
-	if (!pipe)
-		return (count);
+	// if (!pipe)
+	// 	return (count);
 	while (pipe)
 	{
 		count++;
+		print_pipe(pipe);
 		pipe = pipe->next;
 	}
 	return (count);
@@ -69,7 +70,7 @@ void	clear_pipeline(t_pipe *pipe)
 	{
 		p = pipe->next;
 		del_job(pipe->job);
-		wrfree(&pipe);
+		wrfree(pipe);
 		pipe = p;
 	}
 }

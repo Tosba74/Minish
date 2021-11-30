@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 00:14:05 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/29 00:57:25 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/29 00:57:25y bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 		if (ret != -1)
 			new->job->av = complet_av(tok);
 		next_pipe(&tok);
+		addback_cell_pipe(pipe, new);
 	}
-	printf("pipe:%p ==> new :%p\n", pipe, new);
-	addback_cell_pipe(pipe, new);
+	// printf("pipe:%p ==> new :%p\n", pipe, new);
 }

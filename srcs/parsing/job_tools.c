@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:37:51 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 13:47:03 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	del_job(t_job *jobs)
 	jobs->is_cmd = false;
 	jobs->is_built = false;
 	wrfree(jobs->job);
-	wrfree(&jobs);
+	wrfree(jobs);
 }
 
 t_job	*new_job(t_token *tok)
 {
 	t_job	*new;
 
-	new = wrmalloc(sizeof(t_job *));
+	new = wrmalloc(sizeof(t_job));
 	new->av = complet_av(tok);
 	if (new->av[0])
 	{
