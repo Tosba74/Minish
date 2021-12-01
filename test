@@ -1,7 +1,0 @@
-|  cmd =                    /bin/Echo |
-| av[0]                          Echo |
-| av[1]                            yo |
-| is_cmd =   1      is_built =   0    |
-| bool_in =   0     bool_ out =   1   |
-| fd_in =   0       fd_ out =   3     |
-yo
