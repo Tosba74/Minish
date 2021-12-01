@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/01 12:38:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/01 16:49:55 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ static void	init_pids(t_global *g)
 	g->pipe_fd[1] = 1;
 	get_pid_exec()->index = 0;
 	get_pid_exec()->no_job = false;
-	sigignore(SIGQUIT);
+	get_pid_exec()->exit = false;
+	//sigignore(SIGQUIT);
 	signal(SIGINT, &handler_idle);
 }
 
@@ -87,7 +88,7 @@ static void	loop(t_global *g)
 	t_pipe			*pipe;
 
 	i = 0;
-	sigignore(SIGQUIT);
+	//sigignore(SIGQUIT);
 	signal(SIGINT, &handler_idle);
 	input = readline(create_prompt());
 	while (input)
@@ -106,7 +107,9 @@ static void	loop(t_global *g)
 			clear_pipeline(pipe);
 		}
 		free(input);
-		input = readline(create_prompt());
+		input = 0;
+		if (!get_pid_exec()->exit)
+			input = readline(create_prompt());
 	}
 }
 

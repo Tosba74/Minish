@@ -6,16 +6,15 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:17:13 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 17:31:38 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/11/30 17:07:38 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int			unset(t_job *j, int out)
+int	unset(t_job *j, int out)
 {
 	(void)out;
-	
 	remove_cell_env(j->av[1], *get_var_env());
 	return (0);
 }
