@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 02:00:38 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:35:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/01 15:13:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	quote_tok(t_token **tok, char *input)
 	{
 		if (input[i] == input[0])
 		{
+			if (i == 1)
+				return (2);
 			if (input[0] == '\'')
 				addback_cell_tok(tok,
 					new_cell_tok(ft_substr(input, 1, i - 1), QUOTE));

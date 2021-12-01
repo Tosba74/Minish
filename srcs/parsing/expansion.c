@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/28 18:36:26 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/01 09:09:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	egal_exp(t_token *tok)
 		addback_cell_env(get_var_env(), new_cell_env(content, PAPRINT));
 		get_pid_exec()->no_job = true;
 		before = before->prev;
-		if (before->type == SPC)
+		if (!before && before->type == SPC)
+		{
 			before = before->prev;
-		if (ft_strcmp(before->value, "export"))
-			get_pid_exec()->no_job = false;
+			if (ft_strcmp(before->value, "export"))
+				get_pid_exec()->no_job = false;		
+		}
 	}
 }
 
