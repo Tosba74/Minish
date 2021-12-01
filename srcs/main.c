@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/01 16:49:55 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/01 17:14:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	main(int ac, char **av, char **env)
 	t_global	*g;
 
 	g = &(t_global){0};
+	g_err = 0;
 	if (ac > 2)
 	{
 		ft_err("Arg", 0);
