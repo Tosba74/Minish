@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 19:28:37 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 21:18:46 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,7 @@ static void	loop(t_global *g)
 		if (input[0])
 		{
 			add_history(input);
-			addback_cell_history(get_history(),
-				new_cell_history(skip_space(input), i++));
-			parser(&pipe, input);
+			parser(&pipe, input, &i);
 			g->nb_proc = count_cell_pipe(pipe);
 			if (g->nb_proc > 0 && !get_pid_exec()->no_job)
 				exec(g, pipe);
@@ -127,5 +125,4 @@ int	main(int ac, char **av, char **env)
 	loop(g);
 	wrdestroy();
 	return (g_err);
-	// exit(g_err);
 }

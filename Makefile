@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/14 19:07:44 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/30 13:34:10 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/12/02 21:23:19 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME = minishell
 override PATH_L		:= libft
 override PATH_I		:= includes
 override PATH_S		:= srcs
+override PATH_M		:= main
 override PATH_O		:= .bin
 override PATH_P		:= parsing
 override PATH_E		:= engine
@@ -27,6 +28,7 @@ override PATH_B		:= builtins
 override VPATH		:= ${addprefix ${PATH_S}/, ${PATH_P}} \
 					${addprefix ${PATH_S}/, ${PATH_E}} \
 					${addprefix ${PATH_S}/, ${PATH_B}} \
+					${addprefix ${PATH_S}/, ${PATH_M}} \
 					${PATH_S}
 
 override FILES_P	:= parser.c lexer.c pars_tools.c history.c tokenizator.c \
@@ -41,7 +43,7 @@ override FILES_M	:= signals.c debug.c debug_tools.c error.c main.c init_env.c \
 FILES		= ${addprefix ${PATH_P}/, ${FILES_P}} \
 			${addprefix ${PATH_E}/, ${FILES_E}} \
 			${addprefix ${PATH_B}/, ${FILES_B}} \
-			${FILES_M}
+			${addprefix ${PATH_M}/, ${FILES_M}} 
 
 SRCS		= ${addprefix ${PATH_S}/, ${FILES}}
 OBJS		= ${addprefix ${PATH_O}/, ${notdir ${SRCS:.c=.o}}}

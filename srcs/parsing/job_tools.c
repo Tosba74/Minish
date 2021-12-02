@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 21:12:41 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 21:31:47 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ void	del_job(t_job *jobs)
 	jobs->is_built = false;
 	wrfree(jobs->job);
 	wrfree(jobs);
+}
+
+void	built_job(t_job *pipe, char *s)
+{
+	pipe->job = ft_strdup(s);
+	pipe->is_cmd = false;
+	pipe->is_built = true;
 }
 
 t_job	*new_job(t_token *tok)
@@ -42,11 +49,7 @@ t_job	*new_job(t_token *tok)
 			new->is_built = false;
 		}
 		else
-		{
-			new->job = ft_strdup(new->av[0]);
-			new->is_cmd = false;
-			new->is_built = true;
-		}
+			built_job(new, new->av[0]);
 	}
 	return (new);
 }

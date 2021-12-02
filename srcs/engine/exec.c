@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 19:31:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 21:26:16 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,12 @@ void	exec(t_global *g, t_pipe *pipe)
 			g_err = b_exec(pipe);
 		else if (p->job->is_built)
 			g_err = select_built(pipe);
-		// close_all_fd(pipe);
 	}
 	else
 	{
 		while (p)
 		{
 			++i;
-			// print_pipe(p);
 			exec_jobs(p, g, i);
 			p = p->next;
 		}
