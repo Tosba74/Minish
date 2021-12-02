@@ -6,15 +6,27 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 15:07:13 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 18:29:55 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minish.h"
 
-int		b_exec(t_pipe *p)
+static void	daddy_exec(pid_t pid, t_pipe *p)
 {
-	pid_t 	pid;
+	get_pid_exec()->pids[get_pid_exec()->index++] = pid;
+	signal(SIGINT, &handler);
+	signal(SIGQUIT, &handler);
+	g_err = waiting_pid();
+	if (p->in)
+		close(p->fd_in);
+	if (p->out)
+		close(p->fd_out);
+}
+
+int	b_exec(t_pipe *p)
+{
+	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
@@ -30,15 +42,6 @@ int		b_exec(t_pipe *p)
 		exit(pid);
 	}
 	else
-	{
-		get_pid_exec()->pids[get_pid_exec()->index++] = pid;
-		signal(SIGINT, &handler);
-		signal(SIGQUIT, &handler);
-		g_err = waiting_pid();
-		if (p->in)
-			close(p->fd_in);
-		if (p->out)
-			close(p->fd_out);
-	}
+		daddy_exec(pid, p);
 	return (g_err);
 }
