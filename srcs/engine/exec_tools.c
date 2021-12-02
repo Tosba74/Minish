@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/01 18:09:02 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 15:47:13 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	dup_close(int src, int dst, char *s)
 	if (dup2(src, dst) < 0)
 		ft_err(s, 14);
 	printf("src = %d dst = %d\n", src, dst);
-	if (close (src) < 0)
+	if (close(src) < 0)
 		ft_err(s, 14);
 }
 
