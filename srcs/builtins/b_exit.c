@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 22:16:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/01 17:12:27 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/02 18:58:41 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	ft_isnum(char *str)
 	}
 	return (1);
 }
+
 int	do_exit(t_job *j, int out)
 {
-	(void)j;
 	(void)out;
 	if (j->av[1] && !ft_isnum(j->av[1]))
 		ft_putstr_fd("exit: numeric argument required\n", 2);

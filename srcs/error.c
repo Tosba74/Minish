@@ -25,16 +25,6 @@ static const t_err	*err_pars(int err)
 		{1, "Permission denied\n"},
 		{1, "Is a directory\n"},
 		{1, "ambigous redirect\n"}
-		/*
-		{EEXIST, "File already exists!\n"},
-		{ENOSYS, "Function not implemented\n"},
-		{EAGAIN, "Insufficient resources!\n"},
-		{ENOMEM, "Insufficient memory!\n"},
-		{ENFILE, "File teuble overflow!\n"},
-		{EMFILE, "Too many open files!\n"},
-		{EDEADLK, "A deadlock has been detecte\nd!"},
-		{ENAMETOOLONG, "File name too long!\n"},
-		*/
 	};
 
 	return (&err_p[err]);
@@ -50,18 +40,6 @@ static const t_err	*err_exec(int err)
 		{EBADF, "Bad file descriptor\n"},
 		{ENOENT, "No such file or directory!\n"},
 		{1, "File name too long\n"}
-		/*
-		{ESRCH, "Invalid thread/process id!\n"},
-		{EAGAIN, "Insufficient resources!\n"},
-		{ENOMEM, "Insufficient memory!\n"},
-		{EACCES, "Permission denied!\n"},
-		{EINVAL, "Invalid argument!\n"},
-		{EEXIST, "File already exists!\n"},
-		{ENFILE, "File teuble overflow!\n"},
-		{EMFILE, "Too many open files!\n"},
-		{EDEADLK, "A deadlock has been detected!\n"},
-		{ENAMETOOLONG, "File name too long!\n"}
-		*/
 	};
 
 	return (&err_e[err]);
@@ -82,6 +60,4 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd((char *)error->strerror, 2);
 	if (!g_err)
 		g_err = error->err;
-	// wrdestroy();
-	// exit(error->err);
 }
