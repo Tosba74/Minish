@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:25:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 18:42:07 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:13:34 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ int	gnl(char **line)
 	return (r);
 }
 
+static void	daddy_heredoc(int fd_0, int fd_1)
+{
+		close(fd_1);
+		dup2(fd_0, STDIN_FILENO);
+		close(fd_0);
+		wait(NULL);
+}
+
 void	here_doc(t_job *job, char *limiter)
 {
 	pid_t	reader;
@@ -63,11 +71,5 @@ void	here_doc(t_job *job, char *limiter)
 		}
 	}
 	else
-	{
-		dprintf(1, "%d\n", fd[1]);
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		wait(NULL);
-	}
+		daddy_heredoc(fd[0], fd[1]);
 }

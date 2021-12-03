@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 19:33:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:13:33 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	child_process(t_pipe *p, t_global *g, const int prev, size_t i)
 	if (p->job->is_cmd)
 	{
 		g_err = execve(p->job->job, p->job->av,
-			get_env_teub(*get_var_env(), 1));
+				get_env_teub(*get_var_env(), 1));
 		ft_err("EXECVE ERROR: ", 5);
 		exit(g_err);
 	}

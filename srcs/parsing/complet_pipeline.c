@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complet_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/03 16:26:11 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 19:52:29by bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/12/03 20:05:51 by astucky           #+#    #+#             */
+/*   Updated: 2021/12/03 20:05:55 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
