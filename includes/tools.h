@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/29 01:04:10 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 12:42:37 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct s_pipe
 	int				fd_out;
 	bool			in;
 	bool			out;
+	char			*heredoc;
 	t_job			*job;
 	struct s_pipe	*next;
 }	t_pipe;

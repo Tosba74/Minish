@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/01 16:49:28 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 14:15:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	egal_exp(t_token *tok)
 		before = before->prev;
 		if (before && before->type == SPC)
 			before = before->prev;
-		if (before && ft_strcmp(before->value, "export"))
+		if (before && !ft_strncmp(before->value, "export", ft_strlen("export")))
 			get_pid_exec()->no_job = false;
 	}
 }

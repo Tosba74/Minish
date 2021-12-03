@@ -6,7 +6,7 @@
 #    By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/22 12:45:19 by bmangin           #+#    #+#              #
-#    Updated: 2021/11/17 23:31:37 by bmangin          ###   ########lyon.fr    #
+#    Updated: 2021/12/03 13:49:41 by bmangin          ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ FILES	= ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_strcpy.c ft_ulltoa_base.c ft_lstadd_back.c ft_lstadd_front.c \
 		ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c \
 		ft_lstnew.c ft_lstsize.c ft_strtolower.c ft_putbytes.c ft_uswap.c \
-		ft_strsjoin.c ft_strslen.c ft_free_all.c ft_atoi_ov.c \
+		ft_strsjoin.c ft_strslen.c ft_free_all.c ft_atoi_ov.c get_next_line.c \
 		wrdestroy.c get_color.c check_extention.c select_env_path.c	ft_vswap.c \
 		ft_iscapital.c ft_isdefine.c ft_sort_integer_teub.c \
 		ft_skip_space.c

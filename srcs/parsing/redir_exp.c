@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 21:35:09 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 13:57:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ static int	try_open(t_token *tok, char *path)
 				return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
 			if (tok->type == REDIR_L)
 				return (open(path, O_RDONLY));
+			if (tok->type == REDIR_LD)
+				return (0);
 		}
 	}
 	return (-1);
@@ -121,7 +123,7 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 	while (tok && tok->type != PIPE)
 	{
 		if (tok->type == REDIR_RD || tok->type == REDIR_L
-			|| tok->type == REDIR_R)
+			|| tok->type == REDIR_R || tok->type == REDIR_LD)
 		{
 			new_fd = try_open(tok, tok->value);
 			if (new_fd == -1)
@@ -129,9 +131,11 @@ int	skip_redir(t_pipe *pipe, t_token *tok)
 				close_all_fd(pipe);
 				return (-1);
 			}
-			if (tok->type == REDIR_RD || tok->type == REDIR_R)
+			if (tok->type == REDIR_LD)
+				pipe->heredoc = ft_strdup(tok->value);
+			else if (tok->type == REDIR_RD || tok->type == REDIR_R)
 				replace_fd(&pipe->fd_out, new_fd, 1, &pipe->out);
-			else
+			else if (tok->type == REDIR_L)
 				replace_fd(&pipe->fd_in, new_fd, 0, &pipe->in);
 			remove_redir_tok(&tok);
 		}
