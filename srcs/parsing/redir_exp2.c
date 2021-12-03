@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_exp2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:31:51 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 17:02:17 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:27:45 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	open_redir(t_type type, char *path)
 		return (open(path, O_CREAT | O_RDWR | O_APPEND, 0644));
 	else if (type == REDIR_L)
 		return (open(path, O_RDONLY));
-	else
-		return (1);
+	else if (type == REDIR_LD)
+		return (0);
+	return (-1);
 }

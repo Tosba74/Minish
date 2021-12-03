@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 17:02:18 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 18:51:18 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_pipe
 	bool			in;
 	bool			out;
 	char			*heredoc;
+	pid_t			save_in;
 	t_job			*job;
 	struct s_pipe	*next;
 }	t_pipe;
@@ -166,7 +167,7 @@ char		**complet_av(t_token *tok);
 
 void		check_quotes(t_token *token);
 void		egal_exp(t_token *tok);
-void		check_expansion(t_token *tok);
+void		check_expansion(t_token **tok);
 char		*join_all_tok(t_token *tok);
 void		complet_pipeline(t_pipe **pipe, t_token *tok);
 int			skip_redir(t_pipe *pipe, t_token *tok);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complet_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:26:11 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 16:26:12 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 19:52:29by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,15 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 		new = new_cell_pipe(tok);
 		if (have_redir(tok))
 			ret = skip_redir(new, tok);
-		if (ret != -1)
-			new->job->av = complet_av(tok);
-		if (ret == 1 && new->heredoc && ft_strslen(new->job->av) == 1)
+		if (ret == -1)
+			get_pid_exec()->no_job = false;
+		else if (!ret && new->heredoc && ft_strslen(new->job->av) == 1)
+		{
+			new->save_in = dup(STDIN_FILENO);
 			here_doc(new->job, new->heredoc);
+		}
+		else
+			new->job->av = complet_av(tok);
 		addback_cell_pipe(pipe, new);
 		next_pipe(&tok);
 	}

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 17:21:52 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 18:51:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,16 @@ void	lexer(t_token **tok, char *input)
 	}
 }
 
-void	check_expansion(t_token *tok)
+void	check_expansion(t_token **tok)
 {
-	check_quotes(tok);
-	join_cell_tok(tok);
-	egal_exp(tok);
+	check_quotes(*tok);
+	join_cell_tok(*tok);
+	egal_exp(*tok);
 	if (get_pid_exec()->no_job == true)
-		clear_tok(tok);
+	{
+		clear_tok(*tok);
+		*tok = NULL;
+	}
 }
 
 void	parser(t_pipe **pipe, char *input, unsigned int *i)
@@ -83,7 +86,7 @@ void	parser(t_pipe **pipe, char *input, unsigned int *i)
 	if (!find_error(tok))
 	{
 		print_token(tok);
-		check_expansion(tok);
+		check_expansion(&tok);
 		if (tok)
 			complet_pipeline(pipe, tok);
 	}

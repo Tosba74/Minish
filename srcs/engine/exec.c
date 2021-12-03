@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 17:07:00 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 19:33:23 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static void	child_process(t_pipe *p, t_global *g, const int prev, size_t i)
 		last_child(p, g, prev);
 	if (p->job->is_cmd)
 	{
-		execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
+		g_err = execve(p->job->job, p->job->av,
+			get_env_teub(*get_var_env(), 1));
 		ft_err("EXECVE ERROR: ", 5);
-		exit(1);
+		exit(g_err);
 	}
 	else if (p->job->is_built)
 	{
@@ -42,6 +43,11 @@ static void	daddy_process(t_pipe *p, t_global *g, const int prev, size_t i)
 		close(p->fd_in);
 	if (p->out)
 		close(p->fd_out);
+	if (p->heredoc)
+	{
+		dup2(p->save_in, STDIN_FILENO);
+		close(p->save_in);
+	}
 }
 
 static void	exec_jobs(t_pipe *p, t_global *g, size_t i)

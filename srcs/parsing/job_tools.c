@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 21:31:47 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 19:56:29 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_job	*new_job(t_token *tok)
 	{
 		if (is_builtin(new->av[0]) == -1)
 		{
-			new->job = select_path(new->av[0]);
+			if (new->av[0][0] == '/')
+				new->job = ft_strdup(new->av[0]);
+			else
+				new->job = select_path(new->av[0]);
 			if (new->job)
 				new->is_cmd = true;
 			else
@@ -51,6 +54,7 @@ t_job	*new_job(t_token *tok)
 		else
 			built_job(new, new->av[0]);
 	}
+	free_all(new->av, 0);
 	return (new);
 }
 

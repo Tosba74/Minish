@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 17:02:12 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 18:18:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	try_open(t_token *tok, char *path)
 
 int	skip_redir(t_pipe *pipe, t_token *tok)
 {
-	int			new_fd;
+	int	new_fd;
 
 	while (tok && tok->type != PIPE)
 	{
