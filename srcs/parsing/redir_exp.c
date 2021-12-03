@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 16:10:42 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 13:57:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 14:22:55 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static int	try_open(t_token *tok, char *path)
 			if (tok->type == REDIR_L)
 				return (open(path, O_RDONLY));
 			if (tok->type == REDIR_LD)
-				return (0);
+				return (1);
 		}
 	}
 	return (-1);
