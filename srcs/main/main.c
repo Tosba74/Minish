@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 16:39:26 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:24:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ static void	init_global(t_global *g, int ac, char **av, char **env)
 		}
 	}
 	init_env(env);
-	debug(g, 0);
-	debug(g, 1);
 }
 
 static void	loop(t_global *g)

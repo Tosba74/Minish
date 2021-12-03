@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 20:05:28 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:20:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	b_exec(t_pipe *p)
 
 	pid = fork();
 	if (pid < 0)
-		ft_err("ExecJobs: ", 11);
+		ft_err("ExecJobs: ", 12);
 	if (pid == 0)
 	{
 		if (p->in)

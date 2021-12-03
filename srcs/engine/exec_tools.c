@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 19:31:32 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:32:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int	is_builtin(char *s)
 
 int	select_built(t_pipe *p)
 {
-	int				index;
-	static int		(*pf_built[8])(t_job *j, int out);
+	int		index;
+	int		(*pf_built[8])(t_job *j, int out);
 
 	pf_built[0] = do_echo;
 	pf_built[1] = do_cd;
@@ -84,11 +84,4 @@ int	waiting_pid(void)
 			ret = (unsigned char)WTERMSIG(wstatus) + 128;
 	}
 	return (ret);
-}
-
-t_pids	*get_pid_exec(void)
-{
-	static t_pids	p;
-
-	return (&p);
 }

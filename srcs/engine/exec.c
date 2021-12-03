@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 18:46:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 20:13:33 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:16:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	child_process(t_pipe *p, t_global *g, const int prev, size_t i)
 	{
 		g_err = execve(p->job->job, p->job->av,
 				get_env_teub(*get_var_env(), 1));
-		ft_err("EXECVE ERROR: ", 5);
+		ft_err("EXECVE ERROR: ", 11);
 		exit(g_err);
 	}
 	else if (p->job->is_built)
@@ -57,10 +57,10 @@ static void	exec_jobs(t_pipe *p, t_global *g, size_t i)
 
 	if (i < g->nb_proc - 1 && !p->out)
 		if (pipe(g->pipe_fd) < 0)
-			ft_err("ExecJobs: ", 3);
+			ft_err("ExecJobs: ", 10);
 	pid = fork();
 	if (pid < 0)
-		ft_err("ExecJobs: ", 4);
+		ft_err("ExecJobs: ", 12);
 	if (pid == 0)
 		child_process(p, g, prev_in, i);
 	else

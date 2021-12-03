@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 18:51:29 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 19:56:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:27:11 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,7 @@ t_job	*new_job(t_token *tok)
 	if (new->av[0])
 	{
 		if (is_builtin(new->av[0]) == -1)
-		{
-			if (new->av[0][0] == '/')
-				new->job = ft_strdup(new->av[0]);
-			else
-				new->job = select_path(new->av[0]);
-			if (new->job)
-				new->is_cmd = true;
-			else
-			{
-				get_pid_exec()->no_job = true;
-				ft_err(new->av[0], 13);
-			}
-			new->is_built = false;
-		}
+			get_road(new);
 		else
 			built_job(new, new->av[0]);
 	}
@@ -74,18 +61,18 @@ int	count_cell_tok(t_token *tok)
 	return (count);
 }
 
-void	print_pipe(t_pipe *p)
+void	get_road(t_job *new)
 {
-	t_pipe	*cpy;
-	int		i;
-
-	cpy = p;
-	i = -1;
-	printf("|  cmd = %28s |\n", cpy->job->job);
-	while (cpy->job->av[++i])
-		printf("| av[%d]  %28s |\n", i, cpy->job->av[i]);
-	printf("| is_cmd = %3d      is_built = %3d    |\n",
-		cpy->job->is_cmd, cpy->job->is_built);
-	printf("| bool_in = %3d     bool_ out = %3d   |\n", cpy->in, cpy->out);
-	printf("| fd_in = %3d       fd_ out = %3d     |\n", cpy->fd_in, cpy->fd_out);
+	if (new->av[0][0] == '/')
+		new->job = ft_strdup(new->av[0]);
+	else
+		new->job = select_path(new->av[0]);
+	if (new->job)
+		new->is_cmd = true;
+	else
+	{
+		get_pid_exec()->no_job = true;
+		ft_err(new->av[0], 13);
+	}
+	new->is_built = false;
 }

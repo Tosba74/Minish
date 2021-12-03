@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/26 22:25:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 20:23:49 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ void	print_token(t_token *tok)
 
 	cpy = tok;
 	if (!cpy)
-		dprintf(STDERR_FILENO, "\033[31mg->token is NULL, Bro!\033[0m\n");
+		printf("\033[31mg->token is NULL, Bro!\033[0m\n");
 	while (cpy != NULL)
 	{
 		if (cpy->type < 1)
-			dprintf(STDERR_FILENO, "\033[32m%s|\033[0m", cpy->value);
+			printf("\033[32m%s|\033[0m", cpy->value);
 		else if (cpy->type == 6)
-			dprintf(STDERR_FILENO, "\033[36m%s|\033[0m", cpy->value);
+			printf("\033[36m%s|\033[0m", cpy->value);
 		else if (cpy->type < 8)
-			dprintf(STDERR_FILENO, "\033[34m%s|\033[0m", cpy->value);
+			printf("\033[34m%s|\033[0m", cpy->value);
 		else if (cpy->type > 9 && cpy->type < 14)
-			dprintf(STDERR_FILENO, "\033[36m%s|\033[0m", cpy->value);
+			printf("\033[36m%s|\033[0m", cpy->value);
 		else if (cpy->type == 14)
-			dprintf(STDERR_FILENO, "\033[93m%s|\033[0m", cpy->value);
+			printf("\033[93m%s|\033[0m", cpy->value);
 		else
-			dprintf(STDERR_FILENO, "\033[31m%s|\033[0m", cpy->value);
+			printf("\033[31m%s|\033[0m", cpy->value);
 		cpy = cpy->next;
 	}
 	ft_putchar('\n');
