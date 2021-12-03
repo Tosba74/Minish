@@ -6,7 +6,7 @@
 /*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:05:51 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 20:05:55 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 21:19:42 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 		new = new_cell_pipe(tok);
 		if (have_redir(tok))
 			ret = skip_redir(new, tok);
+		new->job = new_job(tok);
 		if (ret == -1)
-			get_pid_exec()->no_job = false;
-		else if (!ret && new->heredoc && ft_strslen(new->job->av) == 1)
+			get_pid_exec()->no_job = true;
+		else if (!ret && new->heredoc)
 		{
 			new->save_in = dup(STDIN_FILENO);
 			here_doc(new->job, new->heredoc);
 		}
-		else
-			new->job->av = complet_av(tok);
+		print_pipe(new);
 		addback_cell_pipe(pipe, new);
 		next_pipe(&tok);
 	}

@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:25:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 20:21:20 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 21:50:44 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	here_doc(t_job *job, char *limiter)
 				close(fd[1]);
 				exit(0);
 			}
-			job->av = ft_strsjoin(job->av, line);
+			(void)job;
 			write(fd[1], line, ft_strlen(line));
 		}
 	}
