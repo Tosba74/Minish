@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 22:30:17 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/02 18:29:55 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:14:21 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static void	daddy_exec(pid_t pid, t_pipe *p)
 int	b_exec(t_pipe *p)
 {
 	pid_t	pid;
+	int 	ret;
 
 	pid = fork();
+	ret = 0;
 	if (pid < 0)
 		ft_err("ExecJobs: ", 11);
 	if (pid == 0)
@@ -37,9 +39,9 @@ int	b_exec(t_pipe *p)
 			dup2(p->fd_in, STDIN_FILENO);
 		if (p->out)
 			dup2(p->fd_out, STDOUT_FILENO);
-		execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
+		ret = execve(p->job->job, p->job->av, get_env_teub(*get_var_env(), 1));
 		ft_err("EXECVE ERROR: ", 11);
-		exit(pid);
+		exit(ret);
 	}
 	else
 		daddy_exec(pid, p);

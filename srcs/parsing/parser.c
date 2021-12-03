@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 14:17:36 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 15:52:48 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	parser(t_pipe **pipe, char *input, unsigned int *i)
 	{
 		print_token(tok);
 		check_expansion(tok);
+		printf("%p\n", tok);
 		// print_token(tok);
 		if (tok)
 			complet_pipeline(pipe, tok);

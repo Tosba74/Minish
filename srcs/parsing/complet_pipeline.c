@@ -58,7 +58,6 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 	if (!tok)
 		return ;
 	ret = 0;
-	printf("Apparament tok est pas null");
 	while (tok)
 	{
 		new = new_cell_pipe(tok);
@@ -66,7 +65,7 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 			ret = skip_redir(new, tok);
 		if (ret != -1)
 			new->job->av = complet_av(tok);
-		if (new->heredoc && ft_strslen(new->job->av) == 1)
+		if (ret == 1 && new->heredoc && ft_strslen(new->job->av) == 1)
 			here_doc(new->job, new->heredoc);
 		addback_cell_pipe(pipe, new);
 		next_pipe(&tok);
