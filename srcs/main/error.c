@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 18:33:12 by bmangin           #+#    #+#             */
-/*   Updated: 2021/07/11 21:27:31y bmangin          ###   ########lyon.fr   */
+/*   Created: 2021/12/03 16:24:58 by astucky           #+#    #+#             */
+/*   Updated: 2021/12/03 16:25:50 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 static const t_err	*err_pars(int err)
 {
 	static const t_err	err_p[] = {
-		{E2BIG, "Argument list too long\n"},
-		{EINVAL, "Invalid argument, Use -debug\n"},
-		{EAGAIN, "Insufficient resources!\n"},
-		{EINVAL, "Not a typewriter\n"},
-		{EINVAL, "quote isn't closed\n"},
-		{258, "near unexpected token "},
-		{1, "no such file or directory\n"},
-		{1, "Permission denied\n"},
-		{1, "Is a directory\n"},
-		{1, "ambigous redirect\n"}
+	{E2BIG, "Argument list too long\n"},
+	{EINVAL, "Invalid argument, Use -debug\n"},
+	{EAGAIN, "Insufficient resources!\n"},
+	{EINVAL, "Not a typewriter\n"},
+	{EINVAL, "quote isn't closed\n"},
+	{258, "near unexpected token "},
+	{1, "no such file or directory\n"},
+	{1, "Permission denied\n"},
+	{1, "Is a directory\n"},
+	{1, "ambigous redirect\n"}
 	};
 
 	return (&err_p[err]);
@@ -33,13 +33,13 @@ static const t_err	*err_pars(int err)
 static const t_err	*err_exec(int err)
 {
 	static const t_err	err_e[] = {
-		{EPIPE, "Broken pipe\n"},
-		{ENOEXEC, "Exec format error\n"},
-		{ECHILD, "No child processes\n"},
-		{127, "command not found\n"},
-		{EBADF, "Bad file descriptor\n"},
-		{ENOENT, "No such file or directory!\n"},
-		{1, "File name too long\n"}
+	{EPIPE, "Broken pipe\n"},
+	{ENOEXEC, "Exec format error\n"},
+	{ECHILD, "No child processes\n"},
+	{127, "command not found\n"},
+	{EBADF, "Bad file descriptor\n"},
+	{ENOENT, "No such file or directory!\n"},
+	{1, "File name too long\n"}
 	};
 
 	return (&err_e[err]);

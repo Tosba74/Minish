@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 15:25:08 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 13:55:38 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:14:56 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	here_doc(t_job *job, char *limiter)
 	int		fd[2];
 	char	*line;
 
+	write(1, "coucou\n", 7);
 	if (pipe(fd) == -1)
 		ft_err("Heredoc: ", 3);
 	reader = fork();

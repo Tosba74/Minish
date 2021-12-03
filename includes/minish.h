@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:10:35 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 13:44:47 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:08:53 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ void		skip_slash(char *av);
 /*********************************************************/
 
 void		exec(t_global *g, t_pipe *pipe);
+void		first_child(t_pipe *p, t_global *g);
+void		mid_child(t_pipe *p, t_global *g, const int prev);
+void		last_child(t_pipe *p, t_global *g, const int prev);
 int			waiting_pid(void);
 int			simple_cmd(t_global *g, t_pipe *pipe);
 void		dup_close(int src, int dst, char *s);

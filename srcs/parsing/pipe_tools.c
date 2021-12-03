@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:48:39 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/30 16:14:14 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 17:18:46 by astucky          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_pipe	*new_cell_pipe(t_token *tok)
 	new->out = false;
 	new->job = new_job(tok);
 	new->next = NULL;
+	new->heredoc = NULL;
 	return (new);
 }
 
