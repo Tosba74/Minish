@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 19:07:50 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 20:23:49 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 22:23:00 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	print_token(t_token *tok)
 			printf("\033[93m%s|\033[0m", cpy->value);
 		else
 			printf("\033[31m%s|\033[0m", cpy->value);
+		ft_putchar('\n');
 		cpy = cpy->next;
 	}
-	ft_putchar('\n');
 }
 
 void	debug(t_global *g, int i)

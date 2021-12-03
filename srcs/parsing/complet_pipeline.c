@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complet_pipeline.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 20:05:51 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 21:19:42 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 23:31:04 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	complet_pipeline(t_pipe **pipe, t_token *tok)
 			new->save_in = dup(STDIN_FILENO);
 			here_doc(new->job, new->heredoc);
 		}
-		print_pipe(new);
 		addback_cell_pipe(pipe, new);
 		next_pipe(&tok);
 	}

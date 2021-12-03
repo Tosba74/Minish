@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 10:56:40 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 14:15:23 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 23:29:34 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ static void	dollar_exp(t_token *tok)
 
 void	check_quotes(t_token *token)
 {
-	int		i;
 	t_token	*tok;
 
-	i = -1;
 	tok = token;
 	while (tok)
 	{
-		if (tok->type == DQUOTE || (9 < tok->type && tok->type < 14))
+		if (tok->type == DQUOTE)
 			while (ft_isinstr(tok->value, '$'))
 				dollar_exp(tok);
+		else if (9 < tok->type && tok->type < 14)
+			fucking_dollar(tok);
 		else if (tok->type == QUOTE)
 			tok->type = ARG;
 		tok = tok->next;

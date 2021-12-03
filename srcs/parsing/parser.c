@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 16:06:26 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 18:51:29 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 23:26:15 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void	parser(t_pipe **pipe, char *input, unsigned int *i)
 	lexer(&tok, skip_space(input));
 	if (!find_error(tok))
 	{
-		print_token(tok);
 		check_expansion(&tok);
 		if (tok)
 			complet_pipeline(pipe, tok);

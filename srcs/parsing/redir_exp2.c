@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:31:51 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 17:27:45 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 23:28:32 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,22 @@ int	open_redir(t_type type, char *path)
 	else if (type == REDIR_LD)
 		return (0);
 	return (-1);
+}
+
+void	fucking_dollar(t_token *tok)
+{
+	if (tok->value[0] == '$')
+	{
+		if (!env_find_cell(get_var_env(), tok->value + 1)
+			&& (!tok->next || tok->next->type > 2))
+			ft_err(tok->value, 9);
+		else if (env_find_cell(get_var_env(), tok->value + 1))
+			tok->value = ft_strdup(env_find_cell(get_var_env(),
+						tok->value + 1)->value);
+		else
+		{
+			wrfree(tok->value);
+			tok->value = ft_strdup("");
+		}
+	}
 }

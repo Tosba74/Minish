@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 01:55:22 by bmangin           #+#    #+#             */
-/*   Updated: 2021/12/03 18:51:18 by bmangin          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 23:30:08 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ t_token		*new_cell_tok(char *content, t_type t);
 t_token		*last_cell_tok(t_token *tok);
 void		remove_cell_tok(t_token *tok);
 void		addback_cell_tok(t_token **tok, t_token *new);
+void		fucking_dollar(t_token *tok);
 void		join_cell_tok(t_token *tok);
 void		clear_tok(t_token *tok);
 int			find_error(t_token *tok);

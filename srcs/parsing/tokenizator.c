@@ -6,7 +6,7 @@
 /*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:22:31 by bmangin           #+#    #+#             */
-/*   Updated: 2021/11/27 14:59:59 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 22:03:10 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static char	*get_redir_value(char *input, int *i, t_type *type)
 {
 	char	*tmp;
 
+	if (input[*i] == '$')
+		(*i)++;
 	while (input[*i] && is_spec_char(input[*i]) == -1)
 		(*i)++;
 	tmp = ft_substr(input, 0, (*i));

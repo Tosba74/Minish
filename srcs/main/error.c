@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: astucky <astucky@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: bmangin <bmangin@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 16:24:58 by astucky           #+#    #+#             */
-/*   Updated: 2021/12/03 16:25:50 by astucky          ###   ########lyon.fr   */
+/*   Updated: 2021/12/03 22:51:28 by bmangin          ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	ft_err(char *s, int err)
 	ft_putstr_fd((char *)error->strerror, 2);
 	if (!g_err)
 		g_err = error->err;
+	get_pid_exec()->no_job = true;
 }
